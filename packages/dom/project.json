@@ -1,0 +1,32 @@
+{
+  "name": "dom",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/dom/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/vite:build",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/packages/dom",
+        "main": "packages/dom/src/index.ts",
+        "tsConfig": "packages/dom/tsconfig.lib.json",
+        "assets": ["packages/dom/*.md"]
+      }
+    },
+    "nx-release-publish": {
+      "options": {
+        "packageRoot": "dist\\{projectRoot}"
+      }
+    }
+  },
+  "tags": [],
+  "release": {
+    "version": {
+      "generatorOptions": {
+        "packageRoot": "dist\\{projectRoot}",
+        "currentVersionResolver": "git-tag"
+      }
+    }
+  }
+}
