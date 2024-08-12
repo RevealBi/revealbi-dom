@@ -5,11 +5,11 @@ import { DimensionDataField, NumberDataField } from "./Primitives";
 import { DimensionColumn } from "./Primitives/DimensionColumn";
 import { MeasureColumn } from "./Primitives/MeasureColumn";
 import { BubbleVisualizationSettings } from "./Settings/BubbleVisualizationSettings";
-import { TabularVisualizationBase } from "./TabularVisualizationBase";
+import { Visualization } from "./Visualization";
 import { ColumnUtilities } from "./Utilities/ColumnUtilities";
 import { BubbleVisualizationDataSpec } from "./VisualizationSpecs/BubbleVisualizationDataSpec";
 
-export class BubbleVisualization extends TabularVisualizationBase<BubbleVisualizationSettings> {
+export class BubbleVisualization extends Visualization<BubbleVisualizationSettings> {
 
     constructor(title: string, dataSourceItem: DataSourceItem) {
         super(title, dataSourceItem)

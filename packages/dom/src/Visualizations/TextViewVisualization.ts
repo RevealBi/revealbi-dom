@@ -3,11 +3,11 @@ import { DataSourceItem } from "../Data/DataSourceItem";
 import { ChartType } from "./Enums";
 import { TabularColumn } from "./Primitives/TabularColumn";
 import { SingleRowVisualizationSettings } from "./Settings/SingleRowVisualizationSettings";
-import { TabularVisualizationBase } from "./TabularVisualizationBase";
+import { Visualization } from "./Visualization";
 import { ColumnUtilities } from "./Utilities/ColumnUtilities";
 import { GridVisualizationDataSpec } from "./VisualizationSpecs/GridVisualizationDataSpec";
 
-export class TextViewVisualization extends TabularVisualizationBase<SingleRowVisualizationSettings> {
+export class TextViewVisualization extends Visualization<SingleRowVisualizationSettings> {
 
     constructor(title: string, dataSourceItem: DataSourceItem) {
         super(title, dataSourceItem)

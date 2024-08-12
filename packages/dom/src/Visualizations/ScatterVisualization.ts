@@ -5,11 +5,11 @@ import { DimensionDataField, NumberDataField } from "./Primitives";
 import { DimensionColumn } from "./Primitives/DimensionColumn";
 import { MeasureColumn } from "./Primitives/MeasureColumn";
 import { ScatterVisualizationSettings } from "./Settings/ScatterVisualizationSettings";
-import { TabularVisualizationBase } from "./TabularVisualizationBase";
+import { Visualization } from "./Visualization";
 import { ColumnUtilities } from "./Utilities/ColumnUtilities";
 import { ScatterVisualizationDataSpec } from "./VisualizationSpecs/ScatterVisualizationDataSpec";
 
-export class ScatterVisualization extends TabularVisualizationBase<ScatterVisualizationSettings> {
+export class ScatterVisualization extends Visualization<ScatterVisualizationSettings> {
 
     constructor(title: string, dataSourceItem: DataSourceItem) {
         super(title, dataSourceItem)

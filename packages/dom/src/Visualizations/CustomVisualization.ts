@@ -3,12 +3,12 @@ import { DataSourceItem } from "../Data";
 import { ChartType } from "./Enums";
 import { DimensionColumn, MeasureColumn, DimensionDataField, NumberDataField } from "./Primitives";
 import { CustomVisualizationSettings } from "./Settings";
-import { TabularVisualizationBase } from "./TabularVisualizationBase";
+import { Visualization } from "./Visualization";
 import { ColumnUtilities } from "./Utilities/ColumnUtilities";
 import { PivotVisualizationDataSpec } from "./VisualizationSpecs/PivotVisualizationDataSpec";
 
 
-export class CustomVisualization extends TabularVisualizationBase<CustomVisualizationSettings> {
+export class CustomVisualization extends Visualization<CustomVisualizationSettings> {
 
     constructor(title: string, dataSourceItem: DataSourceItem) {
         super(title, dataSourceItem)

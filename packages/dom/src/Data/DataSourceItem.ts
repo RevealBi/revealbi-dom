@@ -40,6 +40,8 @@ export class DataSourceItem extends SchemaType {
     @JsonProperty("ResourceItem", { type: ResourceItem })
     resourceItem?: ResourceItem;
 
+    IsXmla: boolean = !this.hasTabularData && !this.hasAsset;
+
     fields: IField[] = [];
 
     dataSource?: DataSource;

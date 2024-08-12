@@ -15,10 +15,10 @@ export class ConditionalFormatting extends ConditionalFormattingBase<Conditional
         this.maximum.valueType = BoundValueType.HighestValue;
     }
 
-    @JsonProperty("Minimum")
+    @JsonProperty("Minimum", { type: Bound })
     minimum: Bound;
 
-    @JsonProperty("Maximum")
+    @JsonProperty("Maximum", { type: Bound })
     maximum: Bound;
 
     protected createBand(): ConditionalFormattingBand {

@@ -1,22 +1,19 @@
-import { dataSpecConverter } from "../Core/Serialization/Converters/DataSpecConverter";
 import { settingConverter } from "../Core/Serialization/Converters/SettingsConverter";
 import { JsonProperty } from "../Core/Serialization/Decorators/JsonProperty";
-import { DataDefinitionBase } from "./DataDefinitions/DataDefinitionBase";
+import { DataSourceItem } from "../Data";
+import { IFilterBindings } from "./Interfaces/IFilterBindings";
 import { VisualizationLinker } from "./Primitives/VisualizationLinker";
 import { VisualizationSettings } from "./Settings/VisualizationSettings";
 import { VisualizationBase } from "./VisualizationBase";
 
-export abstract class Visualization<TSettings extends VisualizationSettings, TDataDefinition extends DataDefinitionBase> extends VisualizationBase {
+export abstract class Visualization<TSettings extends VisualizationSettings> extends VisualizationBase implements IFilterBindings {
 
-    constructor(title?: string) {
-        super(title);
+    constructor(title: string, dataSourceItem: DataSourceItem | null) {
+        super(title, dataSourceItem);
     }
 
     @JsonProperty("ActionsModel")
     linker?: VisualizationLinker;
-
-    @JsonProperty("DataSpec", { converter: dataSpecConverter })
-    dataDefinition!: TDataDefinition;
 
     get filterBindings() {
         return this.dataDefinition?.bindings?.bindings;
@@ -24,5 +21,10 @@ export abstract class Visualization<TSettings extends VisualizationSettings, TDa
 
     @JsonProperty("VisualizationSettings", { converter: settingConverter })
     settings!: TSettings;
+
+    //todo: is it possible to create a Filters property that can properly handle both Tabular and Xmla data specs?
+    // get filters(): VisualizationFilter[] {
+    //     return this.dataDefinition.quickFilters;
+    // }
 }
 

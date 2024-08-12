@@ -1,3 +1,4 @@
+import { SchemaType } from "../../Core/SchemaType";
 import { JsonProperty } from "../../Core/Serialization/Decorators/JsonProperty";
 import { PrimitiveArray } from "../../Core/Serialization/Interfaces/PrimitiveArray";
 import { XmlaFilter } from "../../Filters/XmlaFilter";
@@ -6,7 +7,7 @@ import { SortingType } from "../Enums/SortingType";
 import { XmlaDimensionType } from "../Enums/XmlaDimensionType";
 import { XmlaMember } from "./XmlaMember";
 
-export class XmlaDimensionElement {
+export class XmlaDimensionElement extends SchemaType {
 
     @JsonProperty("UniqueName")
     uniqueName?: string;
@@ -32,7 +33,7 @@ export class XmlaDimensionElement {
     @JsonProperty("FieldSortingByLabel")
     fieldSortingByLabel: boolean = false;
 
-    @JsonProperty("XmlaFilter")
+    @JsonProperty("XmlaFilter", { type: XmlaFilter })
     xmlaFilter?: XmlaFilter;
 
     @JsonProperty("FullyExpandedLevels")
@@ -47,6 +48,6 @@ export class XmlaDimensionElement {
     @JsonProperty("DateFiscalYearStartMonth")
     dateFiscalYearStartMonth: number = 0;
 
-    @JsonProperty("DrillDownMembers")
+    @JsonProperty("DrillDownMembers", { type: XmlaMember })
     drillDownMembers: XmlaMember[] = [];
 }

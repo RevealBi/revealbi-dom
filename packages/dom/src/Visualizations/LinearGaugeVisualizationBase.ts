@@ -3,11 +3,11 @@ import { DimensionDataField, NumberDataField } from "./Primitives";
 import { DimensionColumn } from "./Primitives/DimensionColumn";
 import { MeasureColumn } from "./Primitives/MeasureColumn";
 import { GaugeVisualizationSettings } from "./Settings/GaugeVisualizationSettings";
-import { TabularVisualizationBase } from "./TabularVisualizationBase";
+import { Visualization } from "./Visualization";
 import { ColumnUtilities } from "./Utilities/ColumnUtilities";
 import { LinearGaugeVisualizationDataSpec } from "./VisualizationSpecs/LinearGaugeVisualizationDataSpec";
 
-export abstract class LinearGaugeVisualizationBase<TSettings extends GaugeVisualizationSettings> extends TabularVisualizationBase<TSettings> {  
+export abstract class LinearGaugeVisualizationBase<TSettings extends GaugeVisualizationSettings> extends Visualization<TSettings> {  
     
     @JsonProperty("VisualizationDataSpec", { type: LinearGaugeVisualizationDataSpec })
     protected visualizationDataSpec: LinearGaugeVisualizationDataSpec = new LinearGaugeVisualizationDataSpec();

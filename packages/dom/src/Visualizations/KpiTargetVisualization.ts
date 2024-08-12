@@ -5,11 +5,11 @@ import { DateDataField, DimensionDataField, NumberDataField } from "./Primitives
 import { DimensionColumn } from "./Primitives/DimensionColumn";
 import { MeasureColumn } from "./Primitives/MeasureColumn";
 import { KpiTargetVisualizationSettings } from "./Settings/KpiTargetVisualizationSettings";
-import { TabularVisualizationBase } from "./TabularVisualizationBase";
+import { Visualization } from "./Visualization";
 import { ColumnUtilities } from "./Utilities/ColumnUtilities";
 import { IndicatorTargetVisualizationDataSpec } from "./VisualizationSpecs/IndicatorTargetVisualizationDataSpec";
 
-export class KpiTargetVisualization extends TabularVisualizationBase<KpiTargetVisualizationSettings> {
+export class KpiTargetVisualization extends Visualization<KpiTargetVisualizationSettings> {
 
     constructor(title: string, dataSourceItem: DataSourceItem) {
         super(title, dataSourceItem)

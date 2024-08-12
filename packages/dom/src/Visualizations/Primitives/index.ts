@@ -48,3 +48,7 @@ export { VisualizationLinker } from './VisualizationLinker';
 export { XmlaDimensionElement } from './XmlaDimensionElement';
 export { XmlaMeasure } from './XmlaMeasure';
 export { XmlaMember } from './XmlaMember';
+export { XmlaSet } from './XmlaSet';
+export { XmlaHierarchy } from './XmlaHierarchy';
+export { XmlaHierarchyLevel } from './XmlaHierarchyLevel';
+export { XmlaDimension } from './XmlaDimension';

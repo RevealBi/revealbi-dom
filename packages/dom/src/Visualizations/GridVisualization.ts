@@ -3,11 +3,11 @@ import { DataSourceItem } from "../Data/DataSourceItem";
 import { ChartType } from "./Enums";
 import { TabularColumn } from "./Primitives/TabularColumn";
 import { GridVisualizationSettings } from "./Settings/GridVisualizationSettings";
-import { TabularVisualizationBase } from "./TabularVisualizationBase";
+import { Visualization } from "./Visualization";
 import { ColumnUtilities } from "./Utilities/ColumnUtilities";
 import { GridVisualizationDataSpec } from "./VisualizationSpecs/GridVisualizationDataSpec";
 
-export class GridVisualization extends TabularVisualizationBase<GridVisualizationSettings> {
+export class GridVisualization extends Visualization<GridVisualizationSettings> {
 
     constructor(title: string, dataSourceItem: DataSourceItem) {
         super(title, dataSourceItem)

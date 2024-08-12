@@ -33,6 +33,6 @@ export class TabularDataDefinition extends DataDefinitionBase {
     @JsonProperty("AdditionalTables", { type: AdditionalTable })
     additionalTables: AdditionalTable[] = [];
 
-    @JsonProperty("ServiceAdditionalTables")
+    @JsonProperty("ServiceAdditionalTables", { type: ServiceAdditionalTable })
     serviceAdditionalTables: ServiceAdditionalTable[] = [];
 }

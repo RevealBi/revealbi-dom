@@ -67,6 +67,12 @@ export abstract class SchemaTypeNames {
     static readonly TextBoxDataSpecType = "TextBoxDataSpecType";
     static readonly XmlaDataSpecType = "XmlaDataSpecType";
 
+    //******************* XMLA *****************
+    static readonly XmlaDimensionType = "XmlaDimensionType";
+    static readonly XmlaHierarchyLevelType = "XmlaHierarchyLevelType";
+    static readonly XmlaHierarchyType = "XmlaHierarchyType";
+    static readonly XmlaSetType = "XmlaSetType";
+
     //******* not sure how these should be classified yet *****************
     static readonly FieldBindingSourceType = "FieldBindingSourceType";
     static readonly ParameterBindingSourceType = "ParameterBindingSourceType";

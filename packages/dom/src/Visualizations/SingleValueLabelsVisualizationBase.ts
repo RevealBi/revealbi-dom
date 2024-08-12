@@ -3,11 +3,11 @@ import { DimensionDataField, NumberDataField } from "./Primitives";
 import { DimensionColumn } from "./Primitives/DimensionColumn";
 import { MeasureColumn } from "./Primitives/MeasureColumn";
 import { VisualizationSettings } from "./Settings/VisualizationSettings";
-import { TabularVisualizationBase } from "./TabularVisualizationBase";
+import { Visualization } from "./Visualization";
 import { ColumnUtilities } from "./Utilities/ColumnUtilities";
 import { SingleValueLabelsVisualizationDataSpec } from "./VisualizationSpecs/SingleValueLabelsVisualizationDataSpec";
 
-export abstract class SingleValueLabelsVisualizationBase<TSettings extends VisualizationSettings> extends TabularVisualizationBase<TSettings> {
+export abstract class SingleValueLabelsVisualizationBase<TSettings extends VisualizationSettings> extends Visualization<TSettings> {
     @JsonProperty("VisualizationDataSpec", { type: SingleValueLabelsVisualizationDataSpec })
     private visualizationDataSpec: SingleValueLabelsVisualizationDataSpec = new SingleValueLabelsVisualizationDataSpec();
 
