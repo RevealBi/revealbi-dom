@@ -3,11 +3,11 @@ import { DataSourceItem } from "../Data/DataSourceItem";
 import { ChartType } from "./Enums";
 import { DateDataField, DimensionColumn, DimensionDataField, MeasureColumn, NumberDataField } from "./Primitives";
 import { TimeSeriesVisualizationSettings } from "./Settings/TimeSeriesVisualizationSettings";
-import { TabularVisualizationBase } from "./TabularVisualizationBase";
 import { ColumnUtilities } from "./Utilities/ColumnUtilities";
+import { Visualization } from "./Visualization";
 import { TimeSeriesVisualizationDataSpec } from "./VisualizationSpecs/TimeSeriesVisualizationDataSpec";
 
-export class TimeSeriesVisualization extends TabularVisualizationBase<TimeSeriesVisualizationSettings> {
+export class TimeSeriesVisualization extends Visualization<TimeSeriesVisualizationSettings> {
     
     constructor(title: string, dataSourceItem: DataSourceItem) {
         super(title, dataSourceItem)

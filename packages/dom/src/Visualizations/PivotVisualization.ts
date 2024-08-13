@@ -5,11 +5,11 @@ import { DimensionDataField, NumberDataField } from "./Primitives";
 import { DimensionColumn } from "./Primitives/DimensionColumn";
 import { MeasureColumn } from "./Primitives/MeasureColumn";
 import { PivotVisualizationSettings } from "./Settings/PivotVisualizationSettings";
-import { TabularVisualizationBase } from "./TabularVisualizationBase";
+import { Visualization } from "./Visualization";
 import { ColumnUtilities } from "./Utilities/ColumnUtilities";
 import { PivotVisualizationDataSpec } from "./VisualizationSpecs/PivotVisualizationDataSpec";
 
-export class PivotVisualization extends TabularVisualizationBase<PivotVisualizationSettings> {
+export class PivotVisualization extends Visualization<PivotVisualizationSettings> {
 
     constructor(title: string, dataSourceItem: DataSourceItem) {
         super(title, dataSourceItem)

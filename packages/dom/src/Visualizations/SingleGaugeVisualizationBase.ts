@@ -3,11 +3,11 @@ import { DimensionDataField, NumberDataField } from "./Primitives";
 import { DimensionColumn } from "./Primitives/DimensionColumn";
 import { MeasureColumn } from "./Primitives/MeasureColumn";
 import { VisualizationSettings } from "./Settings/VisualizationSettings"
-import { TabularVisualizationBase } from "./TabularVisualizationBase"
 import { ColumnUtilities } from "./Utilities/ColumnUtilities";
+import { Visualization } from "./Visualization";
 import { SingleGaugeVisualizationDataSpec } from "./VisualizationSpecs/SingleGaugeVisualizationDataSpec";
 
-export abstract class SingleGaugeVisualizationBase<TSettings extends VisualizationSettings> extends TabularVisualizationBase<TSettings> {
+export abstract class SingleGaugeVisualizationBase<TSettings extends VisualizationSettings> extends Visualization<TSettings> {
 
     public get label(): DimensionColumn | undefined {
         return this.visualizationDataSpec.label;

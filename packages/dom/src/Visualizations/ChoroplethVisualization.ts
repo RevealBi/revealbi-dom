@@ -5,11 +5,11 @@ import { DimensionDataField, NumberDataField } from "./Primitives";
 import { DimensionColumn } from "./Primitives/DimensionColumn";
 import { MeasureColumn } from "./Primitives/MeasureColumn";
 import { ChoroplethVisualizationSettings } from "./Settings/ChoroplethVisualizationSettings";
-import { TabularVisualizationBase } from "./TabularVisualizationBase";
+import { Visualization } from "./Visualization";
 import { ColumnUtilities } from "./Utilities/ColumnUtilities";
 import { ChoroplethVisualizationDataSpec } from "./VisualizationSpecs/ChoroplethVisualizationDataSpec";
 
-export class ChoroplethVisualization extends TabularVisualizationBase<ChoroplethVisualizationSettings> {
+export class ChoroplethVisualization extends Visualization<ChoroplethVisualizationSettings> {
 
     constructor(title: string, dataSourceItem: DataSourceItem) {
         super(title, dataSourceItem)

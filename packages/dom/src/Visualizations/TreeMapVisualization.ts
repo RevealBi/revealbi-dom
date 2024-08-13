@@ -5,11 +5,11 @@ import { DimensionDataField, NumberDataField } from "./Primitives";
 import { DimensionColumn } from "./Primitives/DimensionColumn";
 import { MeasureColumn } from "./Primitives/MeasureColumn";
 import { TreeMapVisualizationSettings } from "./Settings/TreeMapVisualizationSettings";
-import { TabularVisualizationBase } from "./TabularVisualizationBase";
 import { ColumnUtilities } from "./Utilities/ColumnUtilities";
+import { Visualization } from "./Visualization";
 import { TreeMapVisualizationDataSpec } from "./VisualizationSpecs/TreeMapVisualizationDataSpec";
 
-export class TreeMapVisualization extends TabularVisualizationBase<TreeMapVisualizationSettings> {
+export class TreeMapVisualization extends Visualization<TreeMapVisualizationSettings> {
     constructor(title: string, dataSourceItem: DataSourceItem) {
         super(title, dataSourceItem)
         this.settings = new TreeMapVisualizationSettings();

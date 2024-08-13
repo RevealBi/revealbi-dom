@@ -5,11 +5,11 @@ import { DimensionDataField, NumberDataField } from "./Primitives";
 import { DimensionColumn } from "./Primitives/DimensionColumn";
 import { MeasureColumn } from "./Primitives/MeasureColumn";
 import { ComboChartVisualizationSettings } from "./Settings/ComboChartVisualizationSettings";
-import { TabularVisualizationBase } from "./TabularVisualizationBase";
+import { Visualization } from "./Visualization";
 import { ColumnUtilities } from "./Utilities/ColumnUtilities";
 import { CompositeChartVisualizationDataSpec } from "./VisualizationSpecs/CompositeChartVisualizationDataSpec";
 
-export class ComboChartVisualization extends TabularVisualizationBase<ComboChartVisualizationSettings> {
+export class ComboChartVisualization extends Visualization<ComboChartVisualizationSettings> {
     constructor(title: string, dataSourceItem: DataSourceItem) {
         super(title, dataSourceItem)
         this.settings = new ComboChartVisualizationSettings();

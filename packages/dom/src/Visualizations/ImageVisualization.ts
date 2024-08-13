@@ -3,10 +3,10 @@ import { DataSourceItem } from "../Data/DataSourceItem";
 import { ChartType } from "./Enums";
 import { TabularColumn } from "./Primitives/TabularColumn";
 import { AssetVisualizationSettings } from "./Settings/AssetVisualizationSettings";
-import { TabularVisualizationBase } from "./TabularVisualizationBase";
+import { Visualization } from "./Visualization";
 import { AssetVisualizationDataSpec } from "./VisualizationSpecs/AssetVisualizationDataSpec";
 
-export class ImageVisualization extends TabularVisualizationBase<AssetVisualizationSettings> {
+export class ImageVisualization extends Visualization<AssetVisualizationSettings> {
 
     constructor(title: string, dataSourceItem: DataSourceItem) {
         super(title, dataSourceItem)

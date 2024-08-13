@@ -32,7 +32,7 @@ export class XmlaMeasure {
     @JsonProperty("Formatting")
     formatting?: FormattingBase;
 
-    @JsonProperty("ConditionalFormatting")
+    @JsonProperty("ConditionalFormatting", { type: ConditionalFormatting })
     conditionalFormatting?: ConditionalFormatting;
 
     @JsonProperty("Description")

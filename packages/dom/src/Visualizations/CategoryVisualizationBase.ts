@@ -4,11 +4,11 @@ import { DimensionColumn } from "./Primitives/DimensionColumn";
 import { DimensionDataField } from "./Primitives/DimensionDataField";
 import { MeasureColumn } from "./Primitives/MeasureColumn";
 import { VisualizationSettings } from "./Settings/VisualizationSettings"
-import { TabularVisualizationBase } from "./TabularVisualizationBase"
 import { ColumnUtilities } from "./Utilities/ColumnUtilities";
+import { Visualization } from "./Visualization";
 import { CategoryVisualizationDataSpec } from "./VisualizationSpecs/CategoryVisualizationDataSpec";
 
-export abstract class CategoryVisualizationBase<TSettings extends VisualizationSettings> extends TabularVisualizationBase<TSettings>
+export abstract class CategoryVisualizationBase<TSettings extends VisualizationSettings> extends Visualization<TSettings>
     {
         @JsonProperty("VisualizationDataSpec", { type: CategoryVisualizationDataSpec })
         private visualizationDataSpec: CategoryVisualizationDataSpec = new CategoryVisualizationDataSpec();

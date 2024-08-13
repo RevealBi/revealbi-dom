@@ -10,6 +10,6 @@ export class AdditionalTable
     alias?: string;
     @JsonProperty("DataSpec", { converter: dataSpecConverter })
     dataDefinition?: DataDefinitionBase;
-    @JsonProperty("JoinConditions")
+    @JsonProperty("JoinConditions", { type: JoinCondition })
     joinConditions: JoinCondition[] = [];
 }

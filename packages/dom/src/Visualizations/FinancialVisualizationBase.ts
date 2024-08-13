@@ -1,11 +1,11 @@
 import { JsonProperty } from "../Core/Serialization/Decorators/JsonProperty";
 import { DimensionColumn, MeasureColumn, DimensionDataField, NumberDataField, NumberFormatting } from "./Primitives";
 import { FinancialVisualizationSettingsBase } from "./Settings/FinancialVisualizationSettingsBase";
-import { TabularVisualizationBase } from "./TabularVisualizationBase";
+import { Visualization } from "./Visualization";
 import { ColumnUtilities } from "./Utilities/ColumnUtilities";
 import { FinancialVisualizationDataSpec } from "./VisualizationSpecs/FinancialVisualizationDataSpec";
 
-export abstract class FinancialVisualizationBase<TSettings extends FinancialVisualizationSettingsBase> extends TabularVisualizationBase<TSettings> {
+export abstract class FinancialVisualizationBase<TSettings extends FinancialVisualizationSettingsBase> extends Visualization<TSettings> {
 
     @JsonProperty("VisualizationDataSpec", { type: FinancialVisualizationDataSpec })
     private visualizationDataSpec: FinancialVisualizationDataSpec = new FinancialVisualizationDataSpec();

@@ -5,11 +5,11 @@ import { DateDataField, DimensionDataField, NumberDataField } from "./Primitives
 import { DimensionColumn } from "./Primitives/DimensionColumn";
 import { MeasureColumn } from "./Primitives/MeasureColumn";
 import { SparklineVisualizationSettings } from "./Settings/SparklineVisualizationSettings";
-import { TabularVisualizationBase } from "./TabularVisualizationBase";
+import { Visualization } from "./Visualization";
 import { ColumnUtilities } from "./Utilities/ColumnUtilities";
 import { SparklineVisualizationDataSpec } from "./VisualizationSpecs/SparklineVisualizationDataSpec";
 
-export class SparklineVisualization extends TabularVisualizationBase<SparklineVisualizationSettings> {
+export class SparklineVisualization extends Visualization<SparklineVisualizationSettings> {
     constructor(title: string, dataSourceItem: DataSourceItem) {
         super(title, dataSourceItem)
         this.settings = new SparklineVisualizationSettings();
