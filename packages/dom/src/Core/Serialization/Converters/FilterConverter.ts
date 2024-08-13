@@ -1,9 +1,9 @@
-import { DateTimeFilter, NumberFilter, TextFilter, TimeFilter } from "../../../Filters";
+import { DateTimeFilter, NumberFilter, TextFilter, TimeFilter, XmlaDateFilter, XmlaRegularFilter } from "../../../Filters";
 import { SchemaTypeNames } from "../../Constants/SchemaTypeNames";
 
 export function filterConverter(json: any) {
-    const bandType = json["_type"];
-    switch (bandType) {
+    const filterType = json["_type"];
+    switch (filterType) {
         case SchemaTypeNames.NumberFilterType:
             return NumberFilter;
         case SchemaTypeNames.StringFilterType:
@@ -12,7 +12,11 @@ export function filterConverter(json: any) {
             return DateTimeFilter;
         case SchemaTypeNames.TimeFilterType:
             return TimeFilter;
+        case SchemaTypeNames.XmlaDateFilterType:
+            return XmlaDateFilter;
+        case SchemaTypeNames.XmlaRegularFilterType:
+            return XmlaRegularFilter;
         default:
-            throw new Error(`Band not supported: ${bandType}`); 
+            throw new Error(`Filter not supported: ${filterType}`);
     }
 }

@@ -13,22 +13,23 @@ export class DashboardLinkingDashboard {
 
         const linkedDocument = await RdashDocument.load("Campaigns");
         const filter = linkedDocument.filters.find(f => f.title === "CampaignID");
+        if (!filter) throw new Error("Filter not found");
 
         const linker = new VisualizationLinker();
-        // linker.links = [
-        //     new UrlLink("Open URL", "https://www.brianlagunas.com/[CampaignID]"),
-        //     new DashboardLink("Open Dashboard", "Campaigns", 
-        //         [ 
-        //             new LinkFilter("Campaigns Filter", filter.id, filter.title),  
-        //             new DateLinkFilter() 
-        //         ])
-        // ]
-        // funnel.linker = linker;
+        linker.links = [
+            new UrlLink("Open URL", "https://www.brianlagunas.com/[CampaignID]"),
+            new DashboardLink("Open Dashboard", "Campaigns", 
+                [ 
+                    new LinkFilter("Campaigns Filter", filter.id, filter.title),  
+                    new DateLinkFilter() 
+                ])
+        ]
+        funnel.linker = linker;
 
         const pivot = new PivotVisualization("New Seats by Campaign ID", excelDataSourceItem).setRow("CampaignID").setValues("CTR", "Avg. CPC", "New Seats");
-        // pivot.linker = new VisualizationLinker()
-        //     .addUrl("Open URL", "https://www.brianlagunas.com/[CampaignID]")
-        //     .addDashboard("Open Dashboard", "Campaigns", [ new LinkFilter("Campaigns Filter", filter.id, filter.title),  new DateLinkFilter() ]);
+        pivot.linker = new VisualizationLinker()
+            .addUrl("Open URL", "https://www.brianlagunas.com/[CampaignID]")
+            .addDashboard("Open Dashboard", "Campaigns", [ new LinkFilter("Campaigns Filter", filter.id, filter.title),  new DateLinkFilter() ]);
         
         document.visualizations = [funnel, pivot];
 
