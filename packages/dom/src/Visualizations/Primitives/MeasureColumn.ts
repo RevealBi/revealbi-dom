@@ -11,15 +11,15 @@ export class MeasureColumn extends ColumnBase
     constructor(dataField?: NumberDataField) {
         super();
         this.schemaTypeName = SchemaTypeNames.MeasureColumnSpecType;
-        this.dataField = dataField || new NumberDataField();
+        this.dataField = dataField;
     }
 
     /**
      * Gets or sets the <see cref="DataField"/>.
      */
     @JsonProperty("SummarizationField", { type: NumberDataField })
-    dataField: NumberDataField;
+    dataField?: NumberDataField;
 
     @JsonProperty("XmlaMeasure", { type: XmlaMeasure })
-    private xmlaMeasure?: XmlaMeasure;
+    xmlaMeasure?: XmlaMeasure;
 }
