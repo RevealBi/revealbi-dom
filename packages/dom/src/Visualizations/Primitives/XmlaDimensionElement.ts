@@ -50,7 +50,4 @@ export class XmlaDimensionElement extends SchemaType {
 
     @JsonProperty("DrillDownMembers", { type: XmlaMember })
     drillDownMembers: XmlaMember[] = [];
-
-    @JsonProperty("HierarchyUniqueName")
-    hierarchyUniqueName?: string;
 }
