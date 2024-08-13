@@ -230,20 +230,20 @@ export class CustomDashboard {
         const candleStick = new CandleStickVisualization("Candlestick", financialDataSourceItem).setLabel(dateDayLabel).setOpen("Open").setHigh("High").setLow("Low").setClose("Close");
 
 
-        document.visualizations = [
-            grid, textView, pivot, column, 
-            bar, pie, doughnut, funnel, 
-            combo, stackedColumn, stackedBar, stackedArea, 
-            area, line, stepArea, stepLine, 
-            splineArea, spline, linearGauge, circularGauge, 
-            text, kpiTarget, kpiTime, bulletGraph,
-            choroplethMap, scatterMap, treeMap, bubble,
-            scatter, timeSeries, radial, image,
-            sparkline, textbox, ohlc,
-            candleStick, //custom
-        ];
+        // document.visualizations = [
+        //     grid, textView, pivot, column, 
+        //     bar, pie, doughnut, funnel, 
+        //     combo, stackedColumn, stackedBar, stackedArea, 
+        //     area, line, stepArea, stepLine, 
+        //     splineArea, spline, linearGauge, circularGauge, 
+        //     text, kpiTarget, kpiTime, bulletGraph,
+        //     choroplethMap, scatterMap, treeMap, bubble,
+        //     scatter, timeSeries, radial, image,
+        //     sparkline, textbox, ohlc,
+        //     candleStick, //custom
+        // ];
 
-        //document.visualizations = [ column ];
+        document.visualizations = [ combo ];
 
         return document;
     }

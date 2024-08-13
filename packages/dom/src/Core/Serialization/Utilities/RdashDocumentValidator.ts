@@ -1,16 +1,15 @@
 import { DataSourceItem } from "packages/dom/src/Data";
 import { DataSource } from "../../../Data/DataSource";
 import { RdashDocument } from "../../../RdashDocument";
-import { TabularDataDefinition } from "packages/dom/src/Visualizations/DataDefinitions/TabularDataDefinition";
+import { TabularDataDefinition } from "../../../Visualizations/DataDefinitions/TabularDataDefinition";
 
 export class RdashDocumentValidator {
 
-    static FixDocument(document: RdashDocument): void {
-        this.FixDataSources(document);
+    static validate(document: RdashDocument): void {
+        this.fixVisualizations(document);
     }
 
-    private static FixDataSources(document: RdashDocument): void {
-
+    private static fixVisualizations(document: RdashDocument): void {
         const dataSources: Record<string, DataSource> = {};
 
         for (const visualization of document.visualizations) {
@@ -22,36 +21,9 @@ export class RdashDocumentValidator {
                 }
 
                 this.fixFields(tdd);
-
                 this.fixDataSources(document, tdd.dataSourceItem, dataSources);
-
-                // const dsi = visualization.dataDefinition.dataSourceItem;
-                // if (dsi) {
-                //     if (dsi.dataSource instanceof DataSource && !dataSources[dsi.dataSource.id]) {
-                //         dataSources[dsi.dataSource.id] = dsi.dataSource;
-                //     } else if (typeof dsi.dataSource === 'object') {
-                //         const newDataSource = new DataSource();
-                //         Object.assign(newDataSource, dsi.dataSource);
-                //         newDataSource.properties = { ...dsi.dataSource.properties }; // Perform a deep copy of the properties
-                //         dataSources[newDataSource.id] = newDataSource;
-                //     }
-
-                //     if (dsi.resourceItemDataSource instanceof DataSource && !dataSources[dsi.resourceItemDataSource.id]) {
-                //         dataSources[dsi.resourceItemDataSource.id] = dsi.resourceItemDataSource;
-                //     } else if(typeof dsi.resourceItemDataSource === 'object') {
-                //         const newDataSource = new DataSource();
-                //         Object.assign(newDataSource, dsi.resourceItemDataSource);
-                //         newDataSource.properties = { ...dsi.resourceItemDataSource.properties }; // Perform a deep copy of the properties
-                //         dataSources[newDataSource.id] = newDataSource;
-                //     }
-                // }
             }
-
             // TODO: handle XmlaDataDefinition
-
-            
-
-            
         }
 
         this.updateDocumentDataSources(document, dataSources);

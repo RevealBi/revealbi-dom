@@ -16,7 +16,7 @@ export class RdashSerializer {
      }
 
     static serialize(document: RdashDocument) {
-        RdashDocumentValidator.FixDocument(document);
+        RdashDocumentValidator.validate(document);
         return JsonConvert.serialize(document);
     }
 
