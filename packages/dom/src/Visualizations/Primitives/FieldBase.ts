@@ -8,12 +8,12 @@ import { IFieldDataType } from "../Interfaces/IFieldDataType";
 
 export abstract class FieldBase<TFilter extends IFilter> implements IField, IFieldDataType {
     constructor(fieldName?: string) {
-        this.fieldName = fieldName;
+        this.fieldName = fieldName || "";
         this.fieldLabel = fieldName;
     }
 
     @JsonProperty("FieldName")
-    fieldName?: string;
+    fieldName: string;
 
     @JsonProperty("FieldLabel")
     fieldLabel?: string;

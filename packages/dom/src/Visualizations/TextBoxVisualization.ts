@@ -9,7 +9,6 @@ export class TextBoxVisualization extends Visualization<TextBoxVisualizationSett
         super(title, null);
         this.settings = new TextBoxVisualizationSettings();
         this.chartType = ChartType.TextBox;
-        this.initializeDataDefinition(null);
     }
 
     get alignment(): Alignment {

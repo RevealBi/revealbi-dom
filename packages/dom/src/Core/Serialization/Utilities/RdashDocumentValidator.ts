@@ -1,7 +1,7 @@
 import { DataSourceItem } from "packages/dom/src/Data";
 import { DataSource } from "../../../Data/DataSource";
 import { RdashDocument } from "../../../RdashDocument";
-import { TabularDataDefinition } from "../../../Visualizations/DataDefinitions/TabularDataDefinition";
+import { TabularDataDefinition } from "packages/dom/src/Visualizations/DataDefinitions/TabularDataDefinition";
 
 export class RdashDocumentValidator {
 
@@ -21,57 +21,85 @@ export class RdashDocumentValidator {
                     throw new Error(`DataSourceItem for visualization ${visualization.title} is null.`);
                 }
 
-                //this.fixFields(tdd);
-                //this.fixJoinedTables(tdd);
+                this.fixFields(tdd);
+
                 this.fixDataSources(document, tdd.dataSourceItem, dataSources);
+
+                // const dsi = visualization.dataDefinition.dataSourceItem;
+                // if (dsi) {
+                //     if (dsi.dataSource instanceof DataSource && !dataSources[dsi.dataSource.id]) {
+                //         dataSources[dsi.dataSource.id] = dsi.dataSource;
+                //     } else if (typeof dsi.dataSource === 'object') {
+                //         const newDataSource = new DataSource();
+                //         Object.assign(newDataSource, dsi.dataSource);
+                //         newDataSource.properties = { ...dsi.dataSource.properties }; // Perform a deep copy of the properties
+                //         dataSources[newDataSource.id] = newDataSource;
+                //     }
+
+                //     if (dsi.resourceItemDataSource instanceof DataSource && !dataSources[dsi.resourceItemDataSource.id]) {
+                //         dataSources[dsi.resourceItemDataSource.id] = dsi.resourceItemDataSource;
+                //     } else if(typeof dsi.resourceItemDataSource === 'object') {
+                //         const newDataSource = new DataSource();
+                //         Object.assign(newDataSource, dsi.resourceItemDataSource);
+                //         newDataSource.properties = { ...dsi.resourceItemDataSource.properties }; // Perform a deep copy of the properties
+                //         dataSources[newDataSource.id] = newDataSource;
+                //     }
+                // }
             }
 
             // TODO: handle XmlaDataDefinition
+
+            
+
+            
         }
 
         this.updateDocumentDataSources(document, dataSources);
     }
 
-    // private static fixFields(tdd: TabularDataDefinition): void {
-    //     if (tdd.dataSourceItem?.fields?.length !== 0) {
-    //         const fieldNames: Set<string> = new Set(tdd.fields.map(f => f.fieldName));
-
-    //         for (const field of tdd.dataSourceItem.fields.clone()) {
-    //             if (!field) {
-    //                 throw new Error(`Field for DataSourceItem ${tdd.dataSourceItem.title} is null.`);
-    //             }
-
-    //             // Prevent adding duplicate fields
-    //             if (!fieldNames.has(field.fieldName)) {
-    //                 tdd.fields.push(field);
-    //                 fieldNames.add(field.fieldName);
-    //             }
-    //         }
-    //     }
-
-    //     if (!tdd.fields || tdd.fields.length === 0) {
-    //         throw new Error(`Fields for DataSourceItem ${tdd.dataSourceItem.title} is null.`);
-    //     }
-    // }
-
-    // private static fixJoinedTables(tdd: TabularDataDefinition): void {
-    //     if (tdd.dataSourceItem?.joinTables) {
-    //         tdd.joinTables.push(...tdd.dataSourceItem.joinTables.clone());
-    //     }
-    // }
+    private static fixFields(tdd: TabularDataDefinition): void {
+        if (tdd.dataSourceItem && tdd.dataSourceItem.fields?.length !== 0) {
+            const fieldNames: Set<string> = new Set(tdd.fields.map(f => f.fieldName));
+    
+            for (const field of [...tdd.dataSourceItem.fields]) {  // Directly copy the collection
+                if (!field) {
+                    throw new Error(`Field for DataSourceItem ${tdd.dataSourceItem.title} is null.`);
+                }
+    
+                // Prevent adding duplicate fields
+                if (!fieldNames.has(field.fieldName)) {
+                    tdd.fields.push(field);
+                    fieldNames.add(field.fieldName);
+                }
+            }
+        }
+    
+        if (!tdd.fields || tdd.fields.length === 0) {
+            throw new Error(`Fields for DataSourceItem ${tdd.dataSourceItem?.title} is null.`);
+        }
+    }
 
     private static fixDataSources(document: RdashDocument, dataSourceItem: DataSourceItem, dataSources: Record<string, DataSource>): void {
-        if (dataSourceItem.dataSource) {
-            if (!dataSources[dataSourceItem.dataSource.id]) {
-                dataSources[dataSourceItem.dataSource.id] = dataSourceItem.dataSource;
+        const handleDataSource = (dataSource: DataSource | object | undefined) => {
+            if (!dataSource) return;
+    
+            if (dataSource instanceof DataSource && !dataSources[dataSource.id]) {
+                dataSources[dataSource.id] = dataSource;
+            } else if (typeof dataSource === 'object') {
+                const newDataSource = new DataSource();
+                Object.assign(newDataSource, dataSource);
+                newDataSource.properties = { ...(dataSource as DataSource).properties }; // Perform a deep copy of the properties
+                dataSources[newDataSource.id] = newDataSource;
             }
-
-            if (dataSourceItem.resourceItemDataSource && !dataSources[dataSourceItem.resourceItemDataSource.id]) {
-                dataSources[dataSourceItem.resourceItemDataSource.id] = dataSourceItem.resourceItemDataSource;
-            }
-        } else {
+        };
+    
+        handleDataSource(dataSourceItem.dataSource);
+    
+        if (!dataSourceItem.dataSource) {
             this.validateManuallyAddedDataSourceItem(document, dataSourceItem);
         }
+    
+        handleDataSource(dataSourceItem.resourceItemDataSource);
     }
 
     private static validateManuallyAddedDataSourceItem(document: RdashDocument, dsi: DataSourceItem): void {

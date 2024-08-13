@@ -8,7 +8,7 @@ export interface IField
     /// <summary>
     /// Gets or sets the field name. It must match the name as it exists in the data source.
     /// </summary>
-    fieldName?: string;
+    fieldName: string;
 
     /// <summary>
     /// Gets or sets the field label. This is the friendly name and will be displayed in the UI.
