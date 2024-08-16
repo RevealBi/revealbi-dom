@@ -15,7 +15,7 @@ export class DataSource extends SchemaType {
     id: string = Guid.newGuid();
 
     @JsonProperty("Provider") 
-    provider: DataSourceProvider = DataSourceProvider.Excel;
+    provider: DataSourceProvider = DataSourceProvider.MicrosoftExcel;
 
     @JsonProperty("Description")    
     title?: string;
@@ -24,5 +24,12 @@ export class DataSource extends SchemaType {
     subtitle?: string;
 
     @JsonProperty("Properties", { type: JsonRecord })
-    properties?: Record<string, any> = {};
+    properties: Record<string, any> = {};
+
+    get defaultRefreshRate(): number {
+        return this.properties["DefaultRefreshRate"];
+    }
+    set defaultRefreshRate(value: number) {
+        this.properties["DefaultRefreshRate"] = value;
+    }
 }

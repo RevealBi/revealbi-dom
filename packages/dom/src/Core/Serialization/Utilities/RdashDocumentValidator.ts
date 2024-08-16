@@ -52,7 +52,7 @@ export class RdashDocumentValidator {
     }
 
     private static fixDataSources(document: RdashDocument, dataSourceItem: DataSourceItem, dataSources: Record<string, DataSource>): void {
-        const handleDataSource = (dataSource: DataSource | object | undefined) => {
+        const handleDataSource = (dataSource: DataSource | null | undefined) => {
             if (!dataSource) return;
     
             if (dataSource instanceof DataSource && !dataSources[dataSource.id]) {

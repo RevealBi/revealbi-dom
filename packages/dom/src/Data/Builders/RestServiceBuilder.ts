@@ -12,9 +12,9 @@ import { ColumnConfig } from "../Primitives/ColumnConfig";
 
 export class RestServiceBuilder {
 
-    private readonly _dataSource: DataSource = { id: DataSourceIds.JSON, provider: DataSourceProvider.JSON };
+    private readonly _dataSource: DataSource = { id: DataSourceIds.JSON, provider: DataSourceProvider.JSON, properties: {}, defaultRefreshRate: 0 };
     private readonly _dataSourceItem: DataSourceItem = new DataSourceItem();
-    private readonly _resourceItemDataSource: DataSource = { id: Guid.newGuid(), provider: DataSourceProvider.REST };
+    private readonly _resourceItemDataSource: DataSource = { id: Guid.newGuid(), provider: DataSourceProvider.REST, properties: {}, defaultRefreshRate: 0 };
     private readonly _resourceItem: DataSourceItem = new DataSourceItem();
 
     constructor(uri: string) {
@@ -100,7 +100,7 @@ export class RestServiceBuilder {
         this.clearJsonConfig();
     
         this._dataSource.id = DataSourceIds.Excel;
-        this._dataSource.provider = DataSourceProvider.Excel;
+        this._dataSource.provider = DataSourceProvider.MicrosoftExcel;
     
         const fileExt = fileType === ExcelFileType.Xlsx;
         this._resourceItemDataSource.properties!["Result-Type"] = fileExt;
