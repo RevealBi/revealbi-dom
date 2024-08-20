@@ -42,8 +42,7 @@ export class RestDataSourceDashboards {
                 settings.zoom.degreesLatitude = 0.39;
             });
 
-        // document.visualizations = [jsonChart, excelChart, csvChart];
-        document.visualizations = [jsonChart];
+        document.visualizations = [jsonChart, excelChart, csvChart];
         return document;
     }
 }

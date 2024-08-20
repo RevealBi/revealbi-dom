@@ -5,9 +5,18 @@ import { IProcessDataOnServer } from "../Interfaces/IProcessDataOnServer";
 
 export class MicrosoftSqlServerDataSourceItem extends ProcedureDataSourceItem implements IProcessDataOnServer {
 
-    constructor(title: string, table?: string, dataSource?: MicrosoftSqlServerDataSource | DataSource) {
-        super(title, dataSource as DataSource);
-        if (table) this.table = table;
+    constructor(title: string);
+    constructor(title: string, table: string);
+    constructor(title: string, table: string, dataSource: DataSource);
+    constructor(title: string, dataSource: DataSource);
+    constructor(title: string, tableOrDataSource?: string | DataSource, dataSource?: DataSource) 
+    {
+        if (typeof tableOrDataSource === 'string') {
+            super(title, dataSource);
+            this.table = tableOrDataSource;
+        } else {
+            super(title, tableOrDataSource);
+        }
     }
 
     get processDataOnServer(): boolean {

@@ -12,7 +12,7 @@ export class DataSourceItemFactory {
 
         switch (dataSourceType) {
             case DataSourceType.MicrosoftSqlServer:
-                dataSourceItem = new MicrosoftSqlServerDataSourceItem(title, undefined, dataSource);
+                dataSourceItem = new MicrosoftSqlServerDataSourceItem(title, dataSource);
                 break;
             case DataSourceType.REST:
                 dataSourceItem = new RestDataSourceItem(title, dataSource)

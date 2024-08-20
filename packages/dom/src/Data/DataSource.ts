@@ -10,8 +10,7 @@ export class DataSource extends SchemaType {
     constructor()
     constructor(title: string)
     constructor(title: string, subtitle: string)
-    constructor(title: string, subtitle: string)
-    constructor(title?: string, subtitle?: string) {
+    constructor(title: string = "", subtitle: string = "") {
         super();
         this.schemaTypeName = SchemaTypeNames.DataSourceType;
         this.title = title;
@@ -25,10 +24,10 @@ export class DataSource extends SchemaType {
     provider: DataSourceProvider = DataSourceProvider.MicrosoftExcel;
 
     @JsonProperty("Description")    
-    title?: string;
+    title: string;
 
     @JsonProperty("Subtitle") 
-    subtitle?: string;
+    subtitle: string;
 
     @JsonProperty("Properties", { type: JsonRecord })
     properties: Record<string, any> = {};

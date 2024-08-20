@@ -2,6 +2,13 @@ import { DatabaseDataSource } from "./DatabaseDataSource";
 
 export abstract class HostDataSource extends DatabaseDataSource {
 
+    constructor()
+    constructor(title: string)
+    constructor(title: string, subtitle: string)
+    constructor(title: string = "", subtitle: string = "") {
+        super(title, subtitle);
+    }
+
     get host(): string {
         return this.properties["Host"];
     }

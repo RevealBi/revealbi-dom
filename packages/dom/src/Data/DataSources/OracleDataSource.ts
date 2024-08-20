@@ -2,8 +2,11 @@ import { DataSourceProvider } from "../../Core/Constants/DataSourceProvider";
 import { HostDataSource } from "../HostDataSource";
 
 export class OracleDataSource extends HostDataSource {
-    constructor() {
-        super();
+    constructor()
+    constructor(title: string)
+    constructor(title: string, subtitle: string)
+    constructor(title: string = "", subtitle: string = "") {
+        super(title, subtitle);
         this.provider = DataSourceProvider.Oracle;
     }
 

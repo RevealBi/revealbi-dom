@@ -6,9 +6,7 @@ export class SqlServerDataSourceDashboard {
 
         const document = new RdashDocument("Sql Server Dashboard");
 
-        const ds = new MicrosoftSqlServerDataSource();
-        ds.title = "Northwind";
-        ds.subtitle = "Northwind Subtitle";
+        const ds = new MicrosoftSqlServerDataSource("Northwind", "Northwind Subtitle");
 
         const customers = new MicrosoftSqlServerDataSourceItem("Customers", "Customers", ds);
         //const customers = DataSourceItemFactory.create(DataSourceType.MicrosoftSqlServer, "table-customers", "Customers Title", "Customers Subtitle");

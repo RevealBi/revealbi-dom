@@ -2,8 +2,11 @@ import { DataSourceProvider } from "../../Core/Constants/DataSourceProvider";
 import { MicrosoftAnalysisServicesDataSource } from "./MicrosoftAnalysisServicesDataSource";
 
 export class MicrosoftAzureAnalysisServicesDataSource extends MicrosoftAnalysisServicesDataSource {
-    constructor() {
-        super();
+    constructor()
+    constructor(title: string)
+    constructor(title: string, subtitle: string)
+    constructor(title: string = "", subtitle: string = "") {
+        super(title, subtitle);
         this.provider = DataSourceProvider.MicrosoftAzureAnalysisServices;
     }
 

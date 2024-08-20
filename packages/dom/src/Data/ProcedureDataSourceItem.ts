@@ -3,7 +3,7 @@ import { DataSource } from "./DataSource";
 
 export abstract class ProcedureDataSourceItem extends DatabaseDataSourceItem {
 
-    constructor(title: string, dataSource: DataSource) {
+    constructor(title: string, dataSource?: DataSource) {
         super(title, dataSource);
     }
 

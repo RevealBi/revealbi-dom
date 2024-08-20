@@ -3,8 +3,11 @@ import { SchemaDataSource } from "../SchemaDataSource";
 
 export class MicrosoftSqlServerDataSource extends SchemaDataSource {
 
-    constructor() {
-        super();
+    constructor()
+    constructor(title: string)
+    constructor(title: string, subtitle: string)
+    constructor(title: string = "", subtitle: string = "") {
+        super(title, subtitle);
         this.provider = DataSourceProvider.MicrosoftSqlServer;
     }
 

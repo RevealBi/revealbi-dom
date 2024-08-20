@@ -2,7 +2,7 @@ import { DataSource } from "./DataSource";
 import { TableDataSourceItem } from "./TableDataSourceItem";
 
 export abstract class DatabaseDataSourceItem extends TableDataSourceItem {
-    constructor(title: string, dataSource: DataSource) {
+    constructor(title: string, dataSource?: DataSource) {
         super(title, dataSource);
     }
 

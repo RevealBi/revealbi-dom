@@ -2,8 +2,11 @@ import { DataSourceProvider } from "../../Core/Constants/DataSourceProvider";
 import { ODataDataSource } from "./ODataDataSource";
 
 export class RestDataSource extends ODataDataSource {
-    constructor() {
-        super();
+    constructor()
+    constructor(title: string)
+    constructor(title: string, subtitle: string)
+    constructor(title: string = "", subtitle: string = "") {
+        super(title, subtitle);
         this.provider = DataSourceProvider.REST;
     }
 

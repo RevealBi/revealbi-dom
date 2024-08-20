@@ -1,8 +1,11 @@
 import { MicrosoftAnalysisServicesDataSource } from "./MicrosoftAnalysisServicesDataSource";
 
 export class HttpAnalysisServicesDataSource extends MicrosoftAnalysisServicesDataSource {
-    constructor() {
-        super();
+    constructor()
+    constructor(title: string)
+    constructor(title: string, subtitle: string)
+    constructor(title: string = "", subtitle: string = "") {
+        super(title, subtitle);
         this.properties["Mode"] = "HTTP";
     }
 

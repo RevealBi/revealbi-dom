@@ -2,8 +2,11 @@ import { DataSourceProvider } from "../../Core/Constants/DataSourceProvider";
 import { MicrosoftSqlServerDataSource } from "./MicrosoftSqlServerDataSource";
 
 export class MicrosoftAzureSqlServerDataSource extends MicrosoftSqlServerDataSource {
-    constructor() {
-        super();
+    constructor()
+    constructor(title: string)
+    constructor(title: string, subtitle: string)
+    constructor(title: string = "", subtitle: string = "") {
+        super(title, subtitle);
         this.provider = DataSourceProvider.MicrosoftAzureSqlServer;
     }
 
