@@ -59,8 +59,8 @@ export class DataSourceItem extends SchemaType {
     @JsonProperty("Parameters", { type: JsonRecord })
     parameters?: Record<string, any> = {};
 
-    @JsonProperty("ResourceItem", { type: ResourceItem })
-    resourceItem?: ResourceItem;
+    @JsonProperty("ResourceItem", { type: DataSourceItem })
+    resourceItem?: DataSourceItem; //this was ResourceItem because of a problem in React, but I'm hoping that's no longer a problem, if it is we need to change it back
 
     IsXmla: boolean = !this.hasTabularData && !this.hasAsset;
 
