@@ -8,19 +8,41 @@ import { DataSource } from "./DataSource";
 import { ResourceItem } from "./ResourceItem";
 
 export class DataSourceItem extends SchemaType {
-    constructor() {
+    private _id: string = Guid.newGuid();
+    private _subtitle?: string;
+    private _dataSource: DataSource | null = null;
+    private _fields: IField[] = [];
+
+    constructor(title?: string, dataSource?: DataSource) {
         super();
         this.schemaTypeName = SchemaTypeNames.DataSourceItemType;
+        this.initialize(dataSource ?? new DataSource, title ?? "");
     }
 
     @JsonProperty("Id")
-    id: string = Guid.newGuid();
+    get id(): string {
+        return this._id;
+    }
+    set id(value: string) {
+        this._id = value ? value : Guid.newGuid();
+        if (this.resourceItem) { //if we are dealing with a resource item, set the id on the resource item to be the same
+            this.resourceItem.id = this._id;
+        }
+    }
 
     @JsonProperty("Title")
     title?: string;
 
     @JsonProperty("Subtitle")
-    subtitle?: string;
+    get subtitle(): string | undefined {
+        return this._subtitle;
+    }
+    set subtitle(value: string | undefined) {
+        this._subtitle = value;
+        if (this.resourceItem) {
+            this.resourceItem.subtitle = value;
+        }
+    }
 
     @JsonProperty("DataSourceId")
     dataSourceId?: string;
@@ -32,19 +54,72 @@ export class DataSourceItem extends SchemaType {
     hasAsset: boolean = false;
 
     @JsonProperty("Properties", { type: JsonRecord })
-    properties?: Record<string, any> = {};
+    properties: Record<string, any> = {};
 
     @JsonProperty("Parameters", { type: JsonRecord })
     parameters?: Record<string, any> = {};
 
-    @JsonProperty("ResourceItem", { type: ResourceItem })
-    resourceItem?: ResourceItem;
+    @JsonProperty("ResourceItem", { type: DataSourceItem })
+    resourceItem?: DataSourceItem; //this was ResourceItem because of a problem in React, but I'm hoping that's no longer a problem, if it is we need to change it back
 
     IsXmla: boolean = !this.hasTabularData && !this.hasAsset;
 
-    fields: IField[] = [];
+    get fields(): IField[] {
+        return this._fields;
+    }
+    set fields(value: IField[]) {
+        this._fields = value;
+        this.onFieldsPropertyChanged(this._fields);
+    }
 
-    dataSource?: DataSource;
+    protected onFieldsPropertyChanged(fields: IField[]) {
+        // Implement logic if needed when fields change
+    }
+
+    get dataSource(): DataSource | null {
+        return this._dataSource;
+    }
+    set dataSource(value: DataSource | null) {
+        this._dataSource = value;
+        this.dataSourceId = value?.id;
+    }
 
     resourceItemDataSource?: DataSource;
+
+
+    private initialize(dataSource: DataSource, title: string) {
+        this.dataSource = this.createDataSourceInstance(dataSource);
+        this.initializeDataSource(this.dataSource, title);
+        this.initializeDataSourceItem(title);
+    }
+
+    protected createDataSourceInstance(dataSource: DataSource): DataSource {
+        return dataSource;
+    }
+
+    protected initializeDataSource(dataSource: DataSource, title: string) {
+        this.dataSource = dataSource;
+        this.dataSourceId = dataSource.id;
+
+        if (!dataSource.title) {
+            dataSource.title = title;
+        }
+    }
+
+    protected initializeDataSourceItem(title: string) {
+        this.title = title;
+    }
+
+    protected create<T extends DataSource>(ctor: new () => T, dataSource: DataSource): T {
+        if (dataSource instanceof ctor) {
+            return dataSource as T;
+        }
+
+        const newDataSource = new ctor();
+        newDataSource.id = dataSource.id;
+        newDataSource.title = dataSource.title;
+        newDataSource.subtitle = dataSource.subtitle;
+        newDataSource.defaultRefreshRate = dataSource.defaultRefreshRate;
+        return newDataSource;
+    }
 }

@@ -31,7 +31,7 @@ export class ResourceItem extends SchemaType {
     hasAsset: boolean = false;
 
     @JsonProperty("Properties", { type: JsonRecord })
-    properties?: Record<string, any> = {};
+    properties: Record<string, any> = {};
 
     @JsonProperty("Parameters", { type: JsonRecord })
     parameters?: Record<string, any> = {};
