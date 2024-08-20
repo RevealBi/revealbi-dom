@@ -19,11 +19,11 @@ export { MicrosoftAzureSynapseAnalyticsDataSource } from './MicrosoftAzureSynaps
 export { MicrosoftOneDriveDataSource } from './MicrosoftOneDriveDataSource';
 export { MicrosoftSharePointDataSource } from './MicrosoftSharePointDataSource';
 export { MicrosoftSqlServerDataSource } from './MicrosoftSqlServerDataSource';
-export { MySQLDataSource } from './MySQLDataSource';
+export { MySqlDataSource } from './MySqlDataSource';
 export { ODataDataSource } from './ODataDataSource';
 export { OracleDataSource } from './OracleDataSource';
-export { PostgreSQLDataSource } from './PostgreSQLDataSource';
+export { PostgreSqlDataSource } from './PostgreSqlDataSource';
 export { RestDataSource } from './RestDataSource';
 export { SnowflakeDataSource } from './SnowflakeDataSource';
 export { WebServiceDataSource } from './WebServiceDataSource';
-export { MongoDBDataSource } from './MongoDBDataSource';
+export { MongoDbDataSource } from './MongoDbDataSource';

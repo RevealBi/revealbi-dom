@@ -1,5 +1,6 @@
 import { DataSource } from "../DataSource";
 import { DataSourceItem } from "../DataSourceItem";
+import { WebServiceDataSource } from "../DataSources";
 
 
 export class WebServiceDataSourceItem extends DataSourceItem {
@@ -13,5 +14,9 @@ export class WebServiceDataSourceItem extends DataSourceItem {
 
     set url(value: string) {
         this.properties["Url"] = value;
+    }
+
+    protected override createDataSourceInstance(dataSource: DataSource): DataSource {
+        return this.create(WebServiceDataSource, dataSource);
     }
 }

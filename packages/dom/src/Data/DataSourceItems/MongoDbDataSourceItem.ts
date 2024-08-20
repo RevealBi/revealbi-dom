@@ -1,5 +1,6 @@
 import { DataSource } from "../DataSource";
 import { DataSourceItem } from "../DataSourceItem";
+import { MongoDbDataSource } from "../DataSources";
 import { IProcessDataOnServer } from "../Interfaces/IProcessDataOnServer";
 
 
@@ -22,5 +23,9 @@ export class MongoDbDataSourceItem extends DataSourceItem implements IProcessDat
 
     set processDataOnServer(value: boolean) {
         this.properties["ServerAggregation"] = value;
+    }
+
+    protected override createDataSourceInstance(dataSource: DataSource): DataSource {
+        return this.create(MongoDbDataSource, dataSource);
     }
 }

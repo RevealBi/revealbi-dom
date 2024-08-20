@@ -1,7 +1,7 @@
 import { DataSourceProvider } from "../../Core/Constants/DataSourceProvider";
 import { DatabaseDataSource } from "../DatabaseDataSource";
 
-export class MongoDBDataSource extends DatabaseDataSource {
+export class MongoDbDataSource extends DatabaseDataSource {
     constructor()
     constructor(title: string)
     constructor(title: string, subtitle: string)

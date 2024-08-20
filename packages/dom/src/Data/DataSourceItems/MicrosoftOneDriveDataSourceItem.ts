@@ -1,5 +1,6 @@
 import { DataSource } from "../DataSource";
 import { DataSourceItem } from "../DataSourceItem";
+import { MicrosoftOneDriveDataSource } from "../DataSources";
 
 
 export class MicrosoftOneDriveDataSourceItem extends DataSourceItem {
@@ -13,5 +14,9 @@ export class MicrosoftOneDriveDataSourceItem extends DataSourceItem {
 
     set identifier(value: string) {
         this.properties["Identifier"] = value;
+    }
+
+    protected override createDataSourceInstance(dataSource: DataSource): DataSource {
+        return this.create(MicrosoftOneDriveDataSource, dataSource);
     }
 }

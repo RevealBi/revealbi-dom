@@ -1,7 +1,7 @@
 import { DataSourceProvider } from "../../Core/Constants/DataSourceProvider";
 import { SchemaDataSource } from "../SchemaDataSource";
 
-export class PostgreSQLDataSource extends SchemaDataSource {
+export class PostgreSqlDataSource extends SchemaDataSource {
     constructor()
     constructor(title: string)
     constructor(title: string, subtitle: string)

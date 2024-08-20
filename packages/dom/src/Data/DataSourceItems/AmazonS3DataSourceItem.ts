@@ -1,5 +1,6 @@
 import { DataSource } from "../DataSource";
 import { DataSourceItem } from "../DataSourceItem";
+import { AmazonS3DataSource } from "../DataSources";
 
 
 export class AmazonS3DataSourceItem extends DataSourceItem {
@@ -13,5 +14,9 @@ export class AmazonS3DataSourceItem extends DataSourceItem {
 
     set path(value: string) {
         this.properties["Path"] = value;
+    }
+
+    protected override createDataSourceInstance(dataSource: DataSource): DataSource {
+        return this.create(AmazonS3DataSource, dataSource);
     }
 }

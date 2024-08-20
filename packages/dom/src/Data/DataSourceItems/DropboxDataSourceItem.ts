@@ -1,5 +1,6 @@
 import { DataSource } from "../DataSource";
 import { DataSourceItem } from "../DataSourceItem";
+import { DropboxDataSource } from "../DataSources";
 
 
 export class DropboxDataSourceItem extends DataSourceItem {
@@ -13,5 +14,9 @@ export class DropboxDataSourceItem extends DataSourceItem {
 
     set path(value: string) {
         this.properties["Path"] = value;
+    }
+
+    protected override createDataSourceInstance(dataSource: DataSource): DataSource {
+        return this.create(DropboxDataSource, dataSource);
     }
 }

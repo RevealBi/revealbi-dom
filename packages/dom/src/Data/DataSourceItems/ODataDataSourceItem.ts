@@ -1,5 +1,6 @@
 import { DataSource } from "../DataSource";
 import { DataSourceItem } from "../DataSourceItem";
+import { ODataDataSource } from "../DataSources";
 
 
 export class ODataDataSourceItem extends DataSourceItem {
@@ -29,5 +30,9 @@ export class ODataDataSourceItem extends DataSourceItem {
 
     set url(value: string) {
         this.properties["Url"] = value;
+    }
+
+    protected override createDataSourceInstance(dataSource: DataSource): DataSource {
+        return this.create(ODataDataSource, dataSource);
     }
 }

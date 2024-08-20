@@ -1,5 +1,6 @@
 import { DataSource } from "../DataSource";
 import { DataSourceItem } from "../DataSourceItem";
+import { GoogleSheetsDataSource } from "../DataSources";
 
 
 export class GoogleSheetsDataSourceItem extends DataSourceItem {
@@ -37,5 +38,9 @@ export class GoogleSheetsDataSourceItem extends DataSourceItem {
 
     set sheet(value: string) {
         this.properties["Sheet"] = value;
+    }
+
+    protected override createDataSourceInstance(dataSource: DataSource): DataSource {
+        return this.create(GoogleSheetsDataSource, dataSource);
     }
 }

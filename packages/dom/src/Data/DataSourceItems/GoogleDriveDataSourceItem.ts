@@ -1,5 +1,6 @@
 import { DataSource } from "../DataSource";
 import { DataSourceItem } from "../DataSourceItem";
+import { GoogleDriveDataSource } from "../DataSources";
 
 
 export class GoogleDriveDataSourceItem extends DataSourceItem {
@@ -13,5 +14,9 @@ export class GoogleDriveDataSourceItem extends DataSourceItem {
 
     set identifier(value: string) {
         this.properties["Identitifer"] = value;
+    }
+
+    protected override createDataSourceInstance(dataSource: DataSource): DataSource {
+        return this.create(GoogleDriveDataSource, dataSource);
     }
 }

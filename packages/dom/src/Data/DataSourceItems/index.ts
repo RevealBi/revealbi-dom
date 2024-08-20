@@ -10,7 +10,7 @@ export { GoogleDriveDataSourceItem } from './GoogleDriveDataSourceItem';
 export { GoogleSheetsDataSourceItem } from './GoogleSheetsDataSourceItem';
 export { MicrosoftAnalysisServicesDataSourceItem } from './MicrosoftAnalysisServicesDataSourceItem';
 export { MicrosoftAzureAnalysisServicesDataSourceItem } from './MicrosoftAzureAnalysisServicesDataSourceItem';
-export { MicrosoftAzureSqlDatabaseDataSourceItem } from './MicrosoftAzureSqlDatabaseDataSourceItem';
+export { MicrosoftAzureSqlServerDataSourceItem } from './MicrosoftAzureSqlServerDataSourceItem';
 export { MicrosoftAzureSynapseAnalyticsDataSourceItem } from './MicrosoftAzureSynapseAnalyticsDataSourceItem';
 export { MicrosoftOneDriveDataSourceItem } from './MicrosoftOneDriveDataSourceItem';
 export { MicrosoftSharePointDataSourceItem } from './MicrosoftSharePointDataSourceItem';
