@@ -1,8 +1,8 @@
 // import './app/app.element';
 import { RdashDocument } from "@revealbi/dom";
-import { DashboardFactory } from "./dashboards/DashboardFactory";
 import { SqlServerDataSourceDashboard } from "./dashboards/SqlServerDataSourceDashboard";
 import { RestDataSourceDashboards } from "./dashboards/RestDataSourceDashboards";
+import { CustomDashboard } from "./dashboards/CustomDashboard";
 
 declare const $: any;
 
@@ -19,10 +19,10 @@ const loadDashboard = async () => {
         // const document = await RdashDocument.load("Sales");
         // const dashboard = await document.toRVDashboard();
 
-        //const dashboard = await DashboardFactory.createCustomDashboard().toRVDashboard();
+        const dashboard = await CustomDashboard.createDashboard().toRVDashboard();
 
         //const dashboard = await SqlServerDataSourceDashboard.createDashboard().toRVDashboard();
-        const dashboard = await RestDataSourceDashboards.createDashboard().toRVDashboard();
+        //const dashboard = await RestDataSourceDashboards.createDashboard().toRVDashboard();
 
         const revealView = new $.ig.RevealView(viewer);
         revealView.dashboard = dashboard;

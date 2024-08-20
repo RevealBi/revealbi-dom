@@ -1,36 +1,28 @@
-import { AggregationType, AreaChartVisualization, BarChartVisualization, BubbleVisualization, BulletGraphVisualization, CandleStickVisualization, ChoroplethVisualization, CircularGaugeVisualization, ColumnChartVisualization, ComboChartType, ComboChartVisualization, CustomVisualization, DateAggregationType, DateDataField, DoughnutChartVisualization, FontSize, FunnelChartVisualization, GridVisualization, ImageVisualization, IndicatorDifferenceMode, KpiGoalPeriod, KpiTargetVisualization, KpiTimePeriod, KpiTimeVisualization, LabelDisplayMode, LineChartVisualization, LinearGaugeVisualization, MapColorMode, MapColorStyle, MapLabelStyle, Maps, NumberDataField, OHLCVisualization, PieChartVisualization, PivotVisualization, RadialVisualization, RdashDocument, RestServiceBuilder, ScatterMapVisualization, ScatterVisualization, ShapeType, SparklineAggregationType, SparklineVisualization, SplineAreaChartVisualization, SplineChartVisualization, StackedAreaChartVisualization, StackedBarChartVisualization, StackedColumnChartVisualization, StepAreaChartVisualization, StepLineChartVisualization, TextBoxVisualization, TextViewVisualization, TextVisualization, Theme, TimeSeriesVisualization, TreeMapVisualization, ValueComparisonType } from "@revealbi/dom";
+import { AggregationType, AreaChartVisualization, BarChartVisualization, BubbleVisualization, BulletGraphVisualization, CandleStickVisualization, ChoroplethVisualization, CircularGaugeVisualization, ColumnChartVisualization, ComboChartType, ComboChartVisualization, CustomVisualization, DateAggregationType, DateDataField, DoughnutChartVisualization, FontSize, FunnelChartVisualization, GridVisualization, ImageVisualization, IndicatorDifferenceMode, KpiGoalPeriod, KpiTargetVisualization, KpiTimePeriod, KpiTimeVisualization, LabelDisplayMode, LineChartVisualization, LinearGaugeVisualization, MapColorMode, MapColorStyle, MapLabelStyle, Maps, NumberDataField, OHLCVisualization, PieChartVisualization, PivotVisualization, RadialVisualization, RdashDocument, RestDataSourceItem, ScatterMapVisualization, ScatterVisualization, ShapeType, SparklineAggregationType, SparklineVisualization, SplineAreaChartVisualization, SplineChartVisualization, StackedAreaChartVisualization, StackedBarChartVisualization, StackedColumnChartVisualization, StepAreaChartVisualization, StepLineChartVisualization, TextBoxVisualization, TextViewVisualization, TextVisualization, Theme, TimeSeriesVisualization, TreeMapVisualization, ValueComparisonType } from "@revealbi/dom";
 import { DataSourceFactory } from "./DataSourceFactory";
 
 
 export class CustomDashboard {
 
-    static createDasboard(): RdashDocument {
+    static createDashboard(): RdashDocument {
 
-        const excelDataSourceItem = new RestServiceBuilder("http://dl.infragistics.com/reportplus/reveal/samples/Samples.xlsx")
-        .setTitle("Excel Data Source")
-        .setSubtitle("Marketing Sheet")
-        .useExcel("Marketing")
-        .setFields(DataSourceFactory.getMarketingDataSourceFields())
-        .build();
-        
-        const csvDataSourceItem = new RestServiceBuilder("https://query.data.world/s/y32gtgblzpemyyvtig47dz7tedgkto")
-        .useCsv()
-        .setTitle("CSV Data Source")
-        .setSubtitle("Illinois School Info")
-        .setFields(DataSourceFactory.getCsvDataSourceFields())
-        .build();
-        
-        const financialDataSourceItem = new RestServiceBuilder("https://excel2json.io/api/share/8bb2cd78-1b87-4142-00a2-08da188ec9ab")
-        .setTitle("Finance Data Source")
-        .setSubtitle("OHLC")
-        .setFields(DataSourceFactory.getOHLCDataSourceFields())
-        .build();
-        
-        const revenueDataSourceItem = new RestServiceBuilder("https://excel2json.io/api/share/818e7b9a-f463-4565-435d-08da496bf5f2")
-        .setTitle("Choropleth Data Source")
-        .setSubtitle("Revenue")
-        .setFields(DataSourceFactory.getRevenueDataSourceFields())
-        .build();
+        const excelDataSourceItem = DataSourceFactory.getMarketingDataSourceItem();
+
+        const csvDataSourceItem = new RestDataSourceItem("Illinois School Info", "https://query.data.world/s/y32gtgblzpemyyvtig47dz7tedgkto");
+        csvDataSourceItem.isAnonymous = true;
+        csvDataSourceItem.subtitle = "CSV Data Source Item";
+        csvDataSourceItem.fields = DataSourceFactory.getCsvDataSourceFields();
+        csvDataSourceItem.useCsv();
+
+        const financialDataSourceItem = new RestDataSourceItem("OHLC", "https://excel2json.io/api/share/8bb2cd78-1b87-4142-00a2-08da188ec9ab");
+        financialDataSourceItem.isAnonymous = true;
+        financialDataSourceItem.subtitle = "Finance Data Source";
+        financialDataSourceItem.fields = DataSourceFactory.getOHLCDataSourceFields();
+
+        const revenueDataSourceItem = new RestDataSourceItem("Revenue", "https://excel2json.io/api/share/818e7b9a-f463-4565-435d-08da496bf5f2");
+        revenueDataSourceItem.isAnonymous = true;
+        revenueDataSourceItem.subtitle = "Choropleth Data Source";
+        revenueDataSourceItem.fields = DataSourceFactory.getRevenueDataSourceFields();
 
         const document = new RdashDocument("Custom Dashboard");
         document.theme = Theme.Ocean;
@@ -230,20 +222,20 @@ export class CustomDashboard {
         const candleStick = new CandleStickVisualization("Candlestick", financialDataSourceItem).setLabel(dateDayLabel).setOpen("Open").setHigh("High").setLow("Low").setClose("Close");
 
 
-        // document.visualizations = [
-        //     grid, textView, pivot, column, 
-        //     bar, pie, doughnut, funnel, 
-        //     combo, stackedColumn, stackedBar, stackedArea, 
-        //     area, line, stepArea, stepLine, 
-        //     splineArea, spline, linearGauge, circularGauge, 
-        //     text, kpiTarget, kpiTime, bulletGraph,
-        //     choroplethMap, scatterMap, treeMap, bubble,
-        //     scatter, timeSeries, radial, image,
-        //     sparkline, textbox, ohlc,
-        //     candleStick, //custom
-        // ];
+        document.visualizations = [
+            grid, textView, pivot, column, 
+            bar, pie, doughnut, funnel, 
+            combo, stackedColumn, stackedBar, stackedArea, 
+            area, line, stepArea, stepLine, 
+            splineArea, spline, linearGauge, circularGauge, 
+            text, kpiTarget, kpiTime, bulletGraph,
+            choroplethMap, scatterMap, treeMap, bubble,
+            scatter, timeSeries, radial, image,
+            sparkline, textbox, ohlc,
+            candleStick, //custom
+        ];
 
-        document.visualizations = [ combo ];
+        //document.visualizations = [ candleStick ];
 
         return document;
     }

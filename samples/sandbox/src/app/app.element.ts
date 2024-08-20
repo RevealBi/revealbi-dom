@@ -1,6 +1,5 @@
 import { RdashDocument } from '@revealbi/dom';
 import './app.element.css';
-import { DashboardFactory } from '../dashboards/DashboardFactory';
 
 declare const $: any;
 
@@ -22,19 +21,11 @@ export class AppElement extends HTMLElement {
 
       //const dashboard = await $.ig.RVDashboard.loadDashboard("Sales");
 
-      const dashboard = await DashboardFactory.createCustomDashboard().toRVDashboard();
-      const revealView = new $.ig.RevealView(viewer);
-      revealView.dashboard = dashboard;
+      // const dashboard = await 
+      // const revealView = new $.ig.RevealView(viewer);
+      // revealView.dashboard = dashboard;
 
     }
-  }
-
-  createDashboardViewerWithRVDashboard = async (name: string) => {
-    const dashboard = await $.ig.RVDashboard.loadDashboard(name);
-  }
-
-  createCustomDashboard = async () => {
-    const document = await DashboardFactory.createCustomDashboard();
   }
 }
 customElements.define('app-root', AppElement);

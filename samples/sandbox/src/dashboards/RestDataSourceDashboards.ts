@@ -1,4 +1,5 @@
 import { DataSource, Maps, NumberField, PieChartVisualization, RdashDocument, RestDataSourceItem, ScatterMapVisualization, TextField } from "@revealbi/dom";
+import { DataSourceFactory } from "./DataSourceFactory";
 
 export class RestDataSourceDashboards {
     static createDashboard() {
@@ -9,16 +10,10 @@ export class RestDataSourceDashboards {
         dataSource.title = "JSON DS";
         dataSource.subtitle = "JSON DS Subtitle";
 
-        const jsonDataSourceItem = new RestDataSourceItem("Sales by Category", dataSource);
+        const jsonDataSourceItem = new RestDataSourceItem("Sales by Category", "https://excel2json.io/api/share/6e0f06b3-72d3-4fec-7984-08da43f56bb9");
         jsonDataSourceItem.subtitle = "JSON Data Source Item";
-        jsonDataSourceItem.uri = "https://excel2json.io/api/share/6e0f06b3-72d3-4fec-7984-08da43f56bb9";
         jsonDataSourceItem.isAnonymous = true;
-        jsonDataSourceItem.fields = [
-            new NumberField("CategoryID"),
-            new TextField("CategoryName"),
-            new TextField("ProductName"),
-            new NumberField("ProductSales"),
-        ]
+        jsonDataSourceItem.fields = DataSourceFactory.getSalesByCategoryFields();
 
         const jsonChart = new PieChartVisualization("JSON", jsonDataSourceItem).setLabel("CategoryName").setValue("ProductSales");
 
@@ -27,15 +22,10 @@ export class RestDataSourceDashboards {
         excelDS.title = "Excel DS";
         excelDS.subtitle = "Excel DS Subtitle";
 
-        const excelDSI = new RestDataSourceItem("Marketing", excelDS);
+        const excelDSI = new RestDataSourceItem("Marketing", "http://dl.infragistics.com/reportplus/reveal/samples/Samples.xlsx", excelDS);
         excelDSI.subtitle = "Excel Data Source Item";
-        excelDSI.uri = "http://dl.infragistics.com/reportplus/reveal/samples/Samples.xlsx";
         excelDSI.isAnonymous = true;
-        excelDSI.fields = [
-            new TextField("CampaignID"),
-            new TextField("Territory"),
-            new NumberField("Conversions"),
-        ]
+        excelDSI.fields = DataSourceFactory.getMarketingDataSourceFields();
         excelDSI.useExcel("Marketing");
 
         const excelChart = new PieChartVisualization("Excel", excelDSI).setLabel("Territory").setValue("Conversions")
@@ -45,16 +35,10 @@ export class RestDataSourceDashboards {
         csvDS.title = "CSV DS";
         csvDS.subtitle = "CSV DS Subtitle";
 
-        const csvDSI = new RestDataSourceItem("Illinois School Info", csvDS);
+        const csvDSI = new RestDataSourceItem("Illinois School Info", "https://query.data.world/s/y32gtgblzpemyyvtig47dz7tedgkto", csvDS);
         csvDSI.subtitle = "CSV Data Source Item";
-        csvDSI.uri = "https://query.data.world/s/y32gtgblzpemyyvtig47dz7tedgkto";
         csvDSI.isAnonymous = true;
-        csvDSI.fields = [
-            new TextField("School_ID"),
-            new TextField("School_Nm"),
-            new NumberField("X"),
-            new NumberField("Y"),
-        ]
+        csvDSI.fields = DataSourceFactory.getCsvDataSourceFields();
         csvDSI.useCsv();
 
         const csvChart = new ScatterMapVisualization("Excel", csvDSI).setMap(Maps.NorthAmerica.UnitedStates.States.Illinois)

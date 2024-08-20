@@ -1,50 +1,56 @@
-import { DataSourceItem, DateField, IField, NumberField, RestServiceBuilder, TextField } from "@revealbi/dom";
+import { DataSource, DataSourceItem, DateField, IField, NumberField, RestDataSourceItem, TextField } from "@revealbi/dom";
 
 export class DataSourceFactory {
 
+    static _excelUri = "http://dl.infragistics.com/reportplus/reveal/samples/Samples.xlsx";
+
     static getMarketingDataSourceItem(): DataSourceItem {
-        const excelDataSourceItem = new RestServiceBuilder("http://dl.infragistics.com/reportplus/reveal/samples/Samples.xlsx")
-            .setTitle("Excel Data Source")
-            .setSubtitle("Marketing Sheet")
-            .useExcel("Marketing")
-            .setFields(this.getMarketingDataSourceFields())
-            .build();
+        const dataSource = new DataSource();
+        dataSource.title = "Excel Data Source";
+        dataSource.subtitle = "The Data Source for Excel via REST";
+
+        const excelDataSourceItem = new RestDataSourceItem("Marketing", dataSource);
+        excelDataSourceItem.subtitle = "Excel Data Source Item";
+        excelDataSourceItem.isAnonymous = true;
+        excelDataSourceItem.uri = this._excelUri;
+        excelDataSourceItem.fields = this.getMarketingDataSourceFields();
+        excelDataSourceItem.useExcel("Marketing");
 
         return excelDataSourceItem;
     }
 
-    static getHealthcareDataSourceItem(): DataSourceItem {
-        const excelDataSourceItem = new RestServiceBuilder("http://dl.infragistics.com/reportplus/reveal/samples/Samples.xlsx")
-            .setTitle("Excel Data Source")
-            .setSubtitle("Healthcare Sheet")
-            .useExcel("Healthcare")
-            .setFields(this.getHealthcareDataSourceFields())
-            .build();
+    // static getHealthcareDataSourceItem(): DataSourceItem {
+    //     const excelDataSourceItem = new RestServiceBuilder("http://dl.infragistics.com/reportplus/reveal/samples/Samples.xlsx")
+    //         .setTitle("Excel Data Source")
+    //         .setSubtitle("Healthcare Sheet")
+    //         .useExcel("Healthcare")
+    //         .setFields(this.getHealthcareDataSourceFields())
+    //         .build();
 
-        return excelDataSourceItem;
-    }
+    //     return excelDataSourceItem;
+    // }
 
-    static getManufacturingDataSourceItem(): DataSourceItem {
-        const excelDataSourceItem = new RestServiceBuilder("http://dl.infragistics.com/reportplus/reveal/samples/Samples.xlsx")
-            .setTitle("Excel Data Source")
-            .setSubtitle("Manufacturing Sheet")
-            .useExcel("Manufacturing")
-            .setFields(this.getManufacturingDataSourceFields())
-            .build();
+    // static getManufacturingDataSourceItem(): DataSourceItem {
+    //     const excelDataSourceItem = new RestServiceBuilder("http://dl.infragistics.com/reportplus/reveal/samples/Samples.xlsx")
+    //         .setTitle("Excel Data Source")
+    //         .setSubtitle("Manufacturing Sheet")
+    //         .useExcel("Manufacturing")
+    //         .setFields(this.getManufacturingDataSourceFields())
+    //         .build();
 
-        return excelDataSourceItem;
-    }
+    //     return excelDataSourceItem;
+    // }
 
-    static getSalesDataSourceItem(): DataSourceItem {
-        const excelDataSourceItem = new RestServiceBuilder("http://dl.infragistics.com/reportplus/reveal/samples/Samples.xlsx")
-            .setTitle("Excel Data Source")
-            .setSubtitle("Sales Sheet")
-            .useExcel("Sales")
-            .setFields(this.getSalesDataSourceFields())
-            .build();
+    // static getSalesDataSourceItem(): DataSourceItem {
+    //     const excelDataSourceItem = new RestServiceBuilder("http://dl.infragistics.com/reportplus/reveal/samples/Samples.xlsx")
+    //         .setTitle("Excel Data Source")
+    //         .setSubtitle("Sales Sheet")
+    //         .useExcel("Sales")
+    //         .setFields(this.getSalesDataSourceFields())
+    //         .build();
 
-        return excelDataSourceItem;
-    }
+    //     return excelDataSourceItem;
+    // }
 
     static getRevenueDataSourceFields(): IField[] {
         return [

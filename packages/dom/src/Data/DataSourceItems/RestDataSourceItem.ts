@@ -4,7 +4,7 @@ import { IField, IFieldDataType } from "../../Visualizations";
 import { DataSource } from "../DataSource";
 import { DataSourceItem } from "../DataSourceItem";
 import { CsvDataSource, ExcelDataSource, JsonDataSource } from "../DataSources";
-import { ExcelFileType } from "../Enums";
+import { ExcelFileType, HeaderType } from "../Enums";
 import { ColumnConfig } from "../Primitives";
 
 export class RestDataSourceItem extends DataSourceItem {
@@ -15,15 +15,14 @@ export class RestDataSourceItem extends DataSourceItem {
     constructor(title: string, uri: string, dataSource: DataSource);
     constructor(title: string, dataSource: DataSource);
     constructor(title: string, uriOrDataSource?: string | DataSource, dataSource?: DataSource) {
+        super(title, new JsonDataSource());
+        this.initializeResourceItem(title);
         if (typeof uriOrDataSource === 'string') {
-            super(title, new JsonDataSource());
             this._internalDataSource = dataSource ?? new DataSource();
             this.uri = uriOrDataSource;
         } else {
-            super(title, new JsonDataSource());
             this._internalDataSource = uriOrDataSource ?? new DataSource();
         }
-        this.initializeResourceItem(title);
         this.updateResourceItemDataSource(this._internalDataSource);
     }
 
@@ -42,17 +41,19 @@ export class RestDataSourceItem extends DataSourceItem {
         if (this.resourceItemDataSource) this.resourceItemDataSource.properties["Url"] = value;
     }
 
-    // addHeader(headerType: HeaderType, value: string): void {
-    //     const propertyKey = "Headers";
-    //     const headerValue = `${this.addDashesToEnumName(HeaderType[headerType])}=${value}`;
+    addHeader(headerType: HeaderType, value: string): void {
+        if (!this.resourceItemDataSource) return;
 
-    //     if (!this.resourceItemDataSource.properties[propertyKey]) {
-    //         this.resourceItemDataSource.properties[propertyKey] = [headerValue];
-    //     } else {
-    //         const headers = this.resourceItemDataSource.properties[propertyKey] as string[];
-    //         headers.push(headerValue);
-    //     }
-    // }
+        const propertyKey = "Headers";
+        const headerValue = `${this.addDashesToEnumName(HeaderType[headerType])}=${value}`;
+
+        if (!this.resourceItemDataSource.properties[propertyKey]) {
+            this.resourceItemDataSource.properties[propertyKey] = [headerValue];
+        } else {
+            const headers = this.resourceItemDataSource.properties[propertyKey] as string[];
+            headers.push(headerValue);
+        }
+    }
 
     useCsv(): void {
         this.clearJsonConfig();
