@@ -6,9 +6,16 @@ import { JsonProperty } from "../Core/Serialization/Decorators/JsonProperty";
 import { JsonRecord } from "../Core/Serialization/Interfaces/JsonRecord";
 
 export class DataSource extends SchemaType {
-    constructor() {
+
+    constructor()
+    constructor(title: string)
+    constructor(title: string, subtitle: string)
+    constructor(title: string, subtitle: string)
+    constructor(title?: string, subtitle?: string) {
         super();
         this.schemaTypeName = SchemaTypeNames.DataSourceType;
+        this.title = title;
+        this.subtitle = subtitle;
     }
 
     @JsonProperty("Id") 

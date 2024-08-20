@@ -1,6 +1,6 @@
 import { DataSourceProvider } from "../../Core/Constants/DataSourceProvider";
 import { DataType } from "../../Enums";
-import { IField, IFieldDataType } from "../../Visualizations";
+import { IField } from "../../Visualizations";
 import { DataSource } from "../DataSource";
 import { DataSourceItem } from "../DataSourceItem";
 import { CsvDataSource, ExcelDataSource, JsonDataSource } from "../DataSources";

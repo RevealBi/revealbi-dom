@@ -1,28 +1,24 @@
-import { DataSource, Maps, NumberField, PieChartVisualization, RdashDocument, RestDataSourceItem, ScatterMapVisualization, TextField } from "@revealbi/dom";
+import { DataSource, DataSourceItemFactory, Maps, NumberField, PieChartVisualization, RdashDocument, RestDataSourceItem, ScatterMapVisualization, TextField } from "@revealbi/dom";
 import { DataSourceFactory } from "./DataSourceFactory";
+import { DataSourceType } from "packages/dom/src/Data/Enums/DataSourceType";
 
 export class RestDataSourceDashboards {
     static createDashboard() {
         const document = new RdashDocument("REST Dashboard");
 
         //json - default
-        const dataSource = new DataSource();
-        dataSource.title = "JSON DS";
-        dataSource.subtitle = "JSON DS Subtitle";
+        // const jsonDataSourceItem = new RestDataSourceItem("Sales by Category", "https://excel2json.io/api/share/6e0f06b3-72d3-4fec-7984-08da43f56bb9", new DataSource("JSON DS", "JSON DS Subtitle"));
+        // jsonDataSourceItem.subtitle = "JSON Data Source Item";
+        // jsonDataSourceItem.isAnonymous = true;
+        // jsonDataSourceItem.fields = DataSourceFactory.getSalesByCategoryFields();
 
-        const jsonDataSourceItem = new RestDataSourceItem("Sales by Category", "https://excel2json.io/api/share/6e0f06b3-72d3-4fec-7984-08da43f56bb9");
-        jsonDataSourceItem.subtitle = "JSON Data Source Item";
-        jsonDataSourceItem.isAnonymous = true;
+        const jsonDataSourceItem = DataSourceItemFactory.create(DataSourceType.REST, "rest-json", "Sales by Category", "JSON DS Subtitle", new DataSource("JSON DS", "JSON DS Subtitle"));
         jsonDataSourceItem.fields = DataSourceFactory.getSalesByCategoryFields();
 
         const jsonChart = new PieChartVisualization("JSON", jsonDataSourceItem).setLabel("CategoryName").setValue("ProductSales");
 
         //excel
-        const excelDS = new DataSource();
-        excelDS.title = "Excel DS";
-        excelDS.subtitle = "Excel DS Subtitle";
-
-        const excelDSI = new RestDataSourceItem("Marketing", "http://dl.infragistics.com/reportplus/reveal/samples/Samples.xlsx", excelDS);
+        const excelDSI = new RestDataSourceItem("Marketing", "http://dl.infragistics.com/reportplus/reveal/samples/Samples.xlsx", new DataSource("Excel DS", "Excel DS Subtitle"));
         excelDSI.subtitle = "Excel Data Source Item";
         excelDSI.isAnonymous = true;
         excelDSI.fields = DataSourceFactory.getMarketingDataSourceFields();
@@ -31,11 +27,7 @@ export class RestDataSourceDashboards {
         const excelChart = new PieChartVisualization("Excel", excelDSI).setLabel("Territory").setValue("Conversions")
 
         //csv
-        const csvDS = new DataSource();
-        csvDS.title = "CSV DS";
-        csvDS.subtitle = "CSV DS Subtitle";
-
-        const csvDSI = new RestDataSourceItem("Illinois School Info", "https://query.data.world/s/y32gtgblzpemyyvtig47dz7tedgkto", csvDS);
+        const csvDSI = new RestDataSourceItem("Illinois School Info", "https://query.data.world/s/y32gtgblzpemyyvtig47dz7tedgkto", new DataSource("CSV DS", "CSV DS Subtitle"));
         csvDSI.subtitle = "CSV Data Source Item";
         csvDSI.isAnonymous = true;
         csvDSI.fields = DataSourceFactory.getCsvDataSourceFields();
@@ -50,7 +42,8 @@ export class RestDataSourceDashboards {
                 settings.zoom.degreesLatitude = 0.39;
             });
 
-        document.visualizations = [jsonChart, excelChart, csvChart];
+        // document.visualizations = [jsonChart, excelChart, csvChart];
+        document.visualizations = [jsonChart];
         return document;
     }
 }
