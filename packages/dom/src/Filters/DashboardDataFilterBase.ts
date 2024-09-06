@@ -8,10 +8,10 @@ import { FilterItem } from "./FilterItem";
         isDynamic: boolean = true;
 
         @JsonProperty("AllowMultipleSelection")
-        allowMultipleSelection: boolean = false;
+        allowMultipleSelection: boolean = true;
 
         @JsonProperty("AllowEmptySelection")
-        allowEmptySelection: boolean = false;
+        allowEmptySelection: boolean = true;
 
         @JsonProperty("SortByLabel")
         sortByLabel: boolean = true;

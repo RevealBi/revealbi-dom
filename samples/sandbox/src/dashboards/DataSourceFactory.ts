@@ -41,16 +41,20 @@ export class DataSourceFactory {
     //     return excelDataSourceItem;
     // }
 
-    // static getSalesDataSourceItem(): DataSourceItem {
-    //     const excelDataSourceItem = new RestServiceBuilder("http://dl.infragistics.com/reportplus/reveal/samples/Samples.xlsx")
-    //         .setTitle("Excel Data Source")
-    //         .setSubtitle("Sales Sheet")
-    //         .useExcel("Sales")
-    //         .setFields(this.getSalesDataSourceFields())
-    //         .build();
+    static getSalesDataSourceItem(): DataSourceItem {
+        const dataSource = new DataSource();
+        dataSource.title = "Excel Data Source";
+        dataSource.subtitle = "The Data Source for Excel via REST";
 
-    //     return excelDataSourceItem;
-    // }
+        const excelDataSourceItem = new RestDataSourceItem("Sales", dataSource);
+        excelDataSourceItem.subtitle = "Sales Sheet";
+        excelDataSourceItem.isAnonymous = true;
+        excelDataSourceItem.uri = this._excelUri;
+        excelDataSourceItem.fields = this.getSalesDataSourceFields();
+        excelDataSourceItem.useExcel("Sales");
+
+        return excelDataSourceItem;
+    }
 
     static getRevenueDataSourceFields(): IField[] {
         return [

@@ -1,29 +1,46 @@
 import { SchemaTypeNames } from "../Core/Constants/SchemaTypeNames";
-import { dataSpecConverter } from "../Core/Serialization/Converters/DataSpecConverter";
 import { JsonProperty } from "../Core/Serialization/Decorators/JsonProperty";
+import { CloneUtility } from "../Core/Utilities/CloneUtility";
 import { DataSourceItem } from "../Data/DataSourceItem";
-import { DataDefinitionBase } from "../Visualizations/DataDefinitions/DataDefinitionBase";
 import { TabularDataDefinition } from "../Visualizations/DataDefinitions/TabularDataDefinition";
 import { DashboardDataFilterBase } from "./DashboardDataFilterBase";
+import { FilterItem } from "./FilterItem";
 
 export class DashboardDataFilter extends DashboardDataFilterBase {
     constructor()
-    constructor(dataSourceItem: DataSourceItem)
-    constructor(dataSourceItem?: DataSourceItem) {
+    constructor(fieldName: string, dataSourceItem: DataSourceItem)
+    constructor(fieldName: string, title: string, dataSourceItem: DataSourceItem)
+    constructor(fieldName?: string, title?: string | DataSourceItem, dataSourceItem?: DataSourceItem) {
         super();
         this.schemaTypeName = SchemaTypeNames.TabularGlobalFilterType;
 
+        // Handle cases where `title` is actually a DataSourceItem (when two parameters are passed)
+        if (title instanceof DataSourceItem) {
+            dataSourceItem = title;
+            title = fieldName;
+        }
+
+        this.fieldName = fieldName || "";
+        this.title = title || this.fieldName;
+
         if (dataSourceItem) {
-            this.dataSpec.dataSourceItem = dataSourceItem;
-            if (this.dataSpec instanceof TabularDataDefinition) {
-                this.dataSpec.fields = [...dataSourceItem.fields]; // copy fields instead of reference
+            this.dataDefinition.dataSourceItem = dataSourceItem;
+            if (this.dataDefinition instanceof TabularDataDefinition) {
+                this.dataDefinition.fields = dataSourceItem.fields.map(field => CloneUtility.clone(field));
             }
         }        
     }
 
-    @JsonProperty("DataSpec", { converter: dataSpecConverter })
-    readonly dataSpec!: DataDefinitionBase;
+    @JsonProperty("DataSpec", { type: TabularDataDefinition })
+    private readonly dataDefinition: TabularDataDefinition = new TabularDataDefinition();
 
     @JsonProperty("SelectedFieldName")
-    selectedFieldName?: string;
+    fieldName: string = "";
+
+    public selectValues(...values: any[]): void {
+        this.selectedItems = [];
+        values.forEach(value => {
+            this.selectedItems.push(new FilterItem(this.fieldName, value));
+        });
+    }
 }

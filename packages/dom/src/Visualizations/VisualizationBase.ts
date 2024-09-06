@@ -1,3 +1,4 @@
+import { JsonConvert } from "../Core";
 import { Guid } from "../Core/Guid";
 import { dataSpecConverter } from "../Core/Serialization/Converters/DataSpecConverter";
 import { JsonProperty } from "../Core/Serialization/Decorators/JsonProperty";
@@ -7,6 +8,9 @@ import { XmlaDataDefinition } from "./DataDefinitions/XmlaDataDefinition";
 import { ChartType } from "./Enums";
 import { IDataDefinition } from "./Interfaces/IDataDefinition";
 import { IVisualization } from "./Interfaces/IVisualization";
+import { IField } from "./Interfaces/IField";
+import { FieldBase } from "./Primitives";
+import { CloneUtility } from "../Core/Utilities/CloneUtility";
 
 
 export abstract class VisualizationBase implements IVisualization {
@@ -45,7 +49,7 @@ export abstract class VisualizationBase implements IVisualization {
         this._chartType = value;
     }
 
-    initializeDataDefinition(dataSourceItem: DataSourceItem | null) {
+    protected initializeDataDefinition(dataSourceItem: DataSourceItem | null) {
         if (dataSourceItem != null) {
             if (dataSourceItem.hasTabularData) {
                 this.dataDefinition = new TabularDataDefinition();
@@ -58,10 +62,19 @@ export abstract class VisualizationBase implements IVisualization {
         }
     }
 
-    updateDataSourceItem(dataSourceItem: DataSourceItem) {
+    private updateDataSourceItem(dataSourceItem: DataSourceItem) {
         if (this.dataDefinition == null || dataSourceItem == null)
             return;
 
         this.dataDefinition.dataSourceItem = dataSourceItem;
+        if (this.dataDefinition instanceof TabularDataDefinition) {
+            this.dataDefinition.fields = dataSourceItem.fields.map(field => CloneUtility.clone(field));
+        }
+    }
+
+    setPosition(rowSpan: number, columnSpan: number): this {
+        this.rowSpan = rowSpan;
+        this.columnSpan = columnSpan;
+        return this;
     }
 }

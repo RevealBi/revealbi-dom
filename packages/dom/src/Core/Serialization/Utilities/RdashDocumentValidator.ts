@@ -1,5 +1,5 @@
-import { DataSourceItem } from "packages/dom/src/Data";
 import { DataSource } from "../../../Data/DataSource";
+import { DataSourceItem } from "../../../Data/DataSourceItem";
 import { RdashDocument } from "../../../RdashDocument";
 import { TabularDataDefinition } from "../../../Visualizations/DataDefinitions/TabularDataDefinition";
 
@@ -29,26 +29,12 @@ export class RdashDocumentValidator {
         this.updateDocumentDataSources(document, dataSources);
     }
 
-    private static fixFields(tdd: TabularDataDefinition): void {
-        if (tdd.dataSourceItem && tdd.dataSourceItem.fields?.length !== 0) {
-            const fieldNames: Set<string> = new Set(tdd.fields.map(f => f.fieldName));
-    
-            for (const field of [...tdd.dataSourceItem.fields]) {  // Directly copy the collection
-                if (!field) {
-                    throw new Error(`Field for DataSourceItem ${tdd.dataSourceItem.title} is null.`);
-                }
-    
-                // Prevent adding duplicate fields
-                if (!fieldNames.has(field.fieldName)) {
-                    tdd.fields.push(field);
-                    fieldNames.add(field.fieldName);
-                }
-            }
-        }
-    
+    private static fixFields(tdd: TabularDataDefinition): void {    
         if (!tdd.fields || tdd.fields.length === 0) {
             throw new Error(`Fields for DataSourceItem ${tdd.dataSourceItem?.title} is null.`);
         }
+
+        //todo: remove duplicate fields
     }
 
     private static fixDataSources(document: RdashDocument, dataSourceItem: DataSourceItem, dataSources: Record<string, DataSource>): void {
@@ -60,7 +46,7 @@ export class RdashDocumentValidator {
             } else if (typeof dataSource === 'object') {
                 const newDataSource = new DataSource();
                 Object.assign(newDataSource, dataSource);
-                newDataSource.properties = { ...(dataSource as DataSource).properties }; // Perform a deep copy of the properties
+                newDataSource.properties = { ...(dataSource as DataSource).properties };
                 dataSources[newDataSource.id] = newDataSource;
             }
         };
