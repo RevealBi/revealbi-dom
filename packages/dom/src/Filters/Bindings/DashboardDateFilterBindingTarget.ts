@@ -10,6 +10,9 @@ export class DashboardDateFilterBindingTarget extends BindingTarget
         this.schemaTypeName = SchemaTypeNames.DateGlobalFilterBindingTargetType;
     }
 
+    @JsonProperty("GlobalFilterId")
+    dashboardFilterId: string = "_date";
+
     @JsonProperty("GlobalFilterFieldName")
     globalFilterFieldName?: string;
 }

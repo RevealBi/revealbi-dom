@@ -8,11 +8,12 @@ export class DashboardDataFilterBinding extends Binding<FieldBindingSource, Dash
 {
     constructor()
     constructor(dataFilter: DashboardDataFilter)
-    constructor(dataFilter?: DashboardDataFilter)
+    constructor(dataFilter: DashboardDataFilter, fieldName: string)
+    constructor(dataFilter?: DashboardDataFilter, fieldName?: string)
     {
         super()
         this.source = new FieldBindingSource() ;
-        this.source.fieldName = dataFilter?.fieldName;
+        this.source.fieldName = fieldName ?? dataFilter?.fieldName;
 
         this.operator = BindingOperatorType.Equals;
         this.target = new DashboardDataFilterBindingTarget();

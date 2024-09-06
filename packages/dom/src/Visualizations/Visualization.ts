@@ -31,7 +31,6 @@ export abstract class Visualization<TSettings extends VisualizationSettings> ext
     // }
 
     addDataFilter(fieldName: string, filter: IFilter): this {
-
         if (this.dataDefinition instanceof TabularDataDefinition) {
             const field = this.dataDefinition.fields.find(x => x.fieldName === fieldName);
             if (field) {               
@@ -40,17 +39,16 @@ export abstract class Visualization<TSettings extends VisualizationSettings> ext
                 filterField.dataFilter = filter;
                 console.log(field);
             }
-
         }
-
         return this;
     }
 
-    connectDashboardFilter(dashboardFilter: DashboardDateFilter | DashboardDataFilter): this {
+    connectDashboardFilter(dashboardFilter: DashboardDateFilter | DashboardDataFilter, fieldName?: string): this {
         if (dashboardFilter instanceof DashboardDateFilter) {
-            this.filterBindings?.push(new DashboardDateFilterBinding("Date"))
+            this.filterBindings?.push(new DashboardDateFilterBinding(fieldName ?? "Date"))
         } else {
-            this.filterBindings?.push(new DashboardDataFilterBinding(dashboardFilter))
+            const binding = fieldName ? new DashboardDataFilterBinding(dashboardFilter, fieldName) : new DashboardDataFilterBinding(dashboardFilter);
+            this.filterBindings?.push(binding)
         }
         return this;
     }
