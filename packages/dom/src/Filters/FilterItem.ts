@@ -4,6 +4,14 @@ import { PrimitiveArray } from "../Core/Serialization/Interfaces/PrimitiveArray"
 
 export class FilterItem {
 
+    constructor()
+    constructor(fieldName: string, value: any)
+    constructor(fieldName?: string, value?: any) {
+        if (fieldName && value) {
+            this.fieldValues = { [fieldName]: value };
+        }
+    }
+
     @JsonProperty("FieldValues", { type: JsonRecord })
     fieldValues?: Record<string, any>;
 

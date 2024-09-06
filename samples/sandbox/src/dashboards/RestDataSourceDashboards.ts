@@ -7,13 +7,13 @@ export class RestDataSourceDashboards {
         const document = new RdashDocument("REST Dashboard");
 
         //json - default
-        // const jsonDataSourceItem = new RestDataSourceItem("Sales by Category", "https://excel2json.io/api/share/6e0f06b3-72d3-4fec-7984-08da43f56bb9", new DataSource("JSON DS", "JSON DS Subtitle"));
-        // jsonDataSourceItem.subtitle = "JSON Data Source Item";
-        // jsonDataSourceItem.isAnonymous = true;
-        // jsonDataSourceItem.fields = DataSourceFactory.getSalesByCategoryFields();
-
-        const jsonDataSourceItem = DataSourceItemFactory.create(DataSourceType.REST, "rest-json", "Sales by Category", "JSON DS Subtitle", new DataSource("JSON DS", "JSON DS Subtitle"));
+        const jsonDataSourceItem = new RestDataSourceItem("Sales by Category", "https://excel2json.io/api/share/6e0f06b3-72d3-4fec-7984-08da43f56bb9", new DataSource("JSON DS", "JSON DS Subtitle"));
+        jsonDataSourceItem.subtitle = "JSON Data Source Item";
+        jsonDataSourceItem.isAnonymous = true;
         jsonDataSourceItem.fields = DataSourceFactory.getSalesByCategoryFields();
+
+        // const jsonDataSourceItem = DataSourceItemFactory.create(DataSourceType.REST, "rest-json", "Sales by Category", "JSON DS Subtitle", new DataSource("JSON DS", "JSON DS Subtitle"));
+        // jsonDataSourceItem.fields = DataSourceFactory.getSalesByCategoryFields();
 
         const jsonChart = new PieChartVisualization("JSON", jsonDataSourceItem).setLabel("CategoryName").setValue("ProductSales");
 
@@ -43,6 +43,7 @@ export class RestDataSourceDashboards {
             });
 
         document.visualizations = [jsonChart, excelChart, csvChart];
+        
         return document;
     }
 }

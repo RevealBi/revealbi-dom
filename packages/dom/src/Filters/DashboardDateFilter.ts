@@ -7,10 +7,12 @@ import { DateRuleType } from "./Enums/DateRuleType";
 export class DashboardDateFilter extends DashboardFilter
 {
     constructor()
+    constructor(title: string)
+    constructor(title?: string)
     {
         super();
         this.schemaTypeName = SchemaTypeNames.DateGlobalFilterType;
-        this.title = "Date Filter";
+        this.title = title ?? "Date Filter";
     }
 
     @JsonProperty("CustomDateRange")

@@ -12,11 +12,11 @@ export class DashboardDataFilterBinding extends Binding<FieldBindingSource, Dash
     {
         super()
         this.source = new FieldBindingSource() ;
-        this.source.fieldName = dataFilter?.selectedFieldName;
+        this.source.fieldName = dataFilter?.fieldName;
 
         this.operator = BindingOperatorType.Equals;
         this.target = new DashboardDataFilterBindingTarget();
         this.target.dashboardFilterId = dataFilter?.id;
-        this.target.dashboardFilterFieldName = dataFilter?.selectedFieldName;
+        this.target.dashboardFilterFieldName = dataFilter?.fieldName;
     }
 }
