@@ -10,6 +10,7 @@ export abstract class SchemaTypeNames {
     static readonly DateTimeFilterType = "DateTimeFilterType";
     static readonly StringFilterType = "StringFilterType";
     static readonly TimeFilterType = "TimeFilterType";
+    static readonly XmlaGlobalFilterType = "XmlaGlobalFilterType";
     static readonly XmlaDateFilterType = "XmlaDateFilterType";
     static readonly XmlaRegularFilterType = "XmlaRegularFilterType";
     static readonly XmlaStringFilterRuleType = "XmlaStringFilterRuleType";
