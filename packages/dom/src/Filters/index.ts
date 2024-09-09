@@ -6,6 +6,7 @@ export { DashboardDataFilter } from './DashboardDataFilter';
 export { DashboardDataFilterBase } from './DashboardDataFilterBase';
 export { DashboardDateFilter } from './DashboardDateFilter';
 export { DashboardFilter } from './DashboardFilter';
+export { DashboardXmlaFilter } from './DashboardXmlaFilter';
 export { DateTimeFilter } from './DateTimeFilter';
 export { FilterBase } from './FilterBase';
 export { FilterItem } from './FilterItem';
