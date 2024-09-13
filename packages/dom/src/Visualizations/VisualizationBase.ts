@@ -1,4 +1,3 @@
-import { JsonConvert } from "../Core";
 import { Guid } from "../Core/Guid";
 import { dataSpecConverter } from "../Core/Serialization/Converters/DataSpecConverter";
 import { JsonProperty } from "../Core/Serialization/Decorators/JsonProperty";
@@ -8,9 +7,9 @@ import { XmlaDataDefinition } from "./DataDefinitions/XmlaDataDefinition";
 import { ChartType } from "./Enums";
 import { IDataDefinition } from "./Interfaces/IDataDefinition";
 import { IVisualization } from "./Interfaces/IVisualization";
-import { IField } from "./Interfaces/IField";
 import { FieldBase } from "./Primitives";
 import { CloneUtility } from "../Core/Utilities/CloneUtility";
+import { IFilter, DashboardDateFilter, DashboardDataFilter, DashboardDateFilterBinding, DashboardDataFilterBinding, BindingBase } from "../Filters";
 
 
 export abstract class VisualizationBase implements IVisualization {
@@ -31,6 +30,20 @@ export abstract class VisualizationBase implements IVisualization {
 
     @JsonProperty("DataSpec", { converter: dataSpecConverter })
     dataDefinition!: IDataDefinition;
+
+    get filterBindings(): BindingBase[] | undefined {
+        return this.dataDefinition?.bindings?.bindings;
+    }
+    set filterBindings(value: BindingBase[]) {
+        if (this.dataDefinition.bindings) {
+            this.dataDefinition.bindings.bindings = value;
+        }
+    }
+
+    //todo: is it possible to create a Filters property that can properly handle both Tabular and Xmla data specs?
+    // get filters(): VisualizationFilter[] {
+    //     return this.dataDefinition.quickFilters;
+    // }
 
     @JsonProperty("IsTitleVisible")
     isTitleVisible: boolean = true;
@@ -75,6 +88,34 @@ export abstract class VisualizationBase implements IVisualization {
     setPosition(rowSpan: number, columnSpan: number): this {
         this.rowSpan = rowSpan;
         this.columnSpan = columnSpan;
+        return this;
+    }
+
+    addDataFilter(fieldName: string, filter: IFilter): this {
+        if (this.dataDefinition instanceof TabularDataDefinition) {
+            const field = this.dataDefinition.fields.find(x => x.fieldName === fieldName);
+            if (field) {               
+
+                const filterField = field as FieldBase<IFilter>;
+                filterField.dataFilter = filter;
+                console.log(field);
+            }
+        }
+        return this;
+    }
+
+    connectDashboardFilter(dashboardFilter: DashboardDateFilter | DashboardDataFilter, fieldName?: string): this {
+        if (dashboardFilter instanceof DashboardDateFilter) {
+            this.filterBindings?.push(new DashboardDateFilterBinding(fieldName ?? "Date"))
+        } else {
+            const binding = fieldName ? new DashboardDataFilterBinding(dashboardFilter, fieldName) : new DashboardDataFilterBinding(dashboardFilter);
+            this.filterBindings?.push(binding)
+        }
+        return this;
+    }
+
+    connectDashboardFilters(...dashboardFilters: (DashboardDateFilter | DashboardDataFilter)[]): this {
+        dashboardFilters.forEach(filter => this.connectDashboardFilter(filter));
         return this;
     }
 }

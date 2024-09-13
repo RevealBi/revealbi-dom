@@ -143,10 +143,10 @@ export class RdashDocument {
      */
     import(document: RdashDocument, visualization?: string | IVisualization): void {
         this.dataSources.push(...document.dataSources);
-
-        //todo: clear visualization's filter bindings before adding the viz
     
         if (!visualization) {
+            //this clears the filter bindings in the source document. This may not be the desired behavior, and we may need to switch to creating a copy of the visualization instead.
+            document.visualizations.forEach(viz => viz.filterBindings = []);
             this.visualizations.push(...document.visualizations);
             return;
         }
@@ -156,6 +156,8 @@ export class RdashDocument {
             : visualization;
     
         if (viz) {
+            //this clears the filter bindings of the source visualization. This may not be the desired behavior, and we may need to switch to creating a copy of the visualization instead.
+            viz.filterBindings = [];
             this.visualizations.push(viz);
         }
     }    
