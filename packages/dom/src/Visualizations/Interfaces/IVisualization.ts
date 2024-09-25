@@ -1,6 +1,5 @@
-import { DataDefinitionBase } from "../DataDefinitions/DataDefinitionBase";
+import { BindingBase } from "../../Filters";
 import { ChartType } from "../Enums";
-import { VisualizationSettings } from "../Settings/VisualizationSettings";
 import { IDataDefinition } from "./IDataDefinition";
 
 export interface IVisualization {
@@ -11,10 +10,5 @@ export interface IVisualization {
     columnSpan: number;
     rowSpan: number;
     get dataDefinition(): IDataDefinition;
-}
-
-export interface IVisualizationBase<TSettings extends VisualizationSettings, TDataSpec extends DataDefinitionBase>
-  extends IVisualization {
-  dataDefinition: TDataSpec;
-  settings: TSettings;
+    filterBindings?: BindingBase[];
 }
