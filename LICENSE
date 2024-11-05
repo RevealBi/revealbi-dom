@@ -1,22 +1,22 @@
 This software is provided as source-available under the following terms. By using or modifying this code, you agree to comply with the terms below.
 
-## 1. License Grant
-You are granted the right to view, modify, and use this code solely for enhancing, customizing, or integrating with **Reveal BI** products, provided that you hold a valid Reveal BI license. You may submit contributions (Pull Requests) to improve the software, which may be accepted into the project at the discretion of the maintainers.
+1. License Grant
+You are granted the right to view, modify, and use this code solely for enhancing, customizing, or integrating with Reveal BI products, provided that you hold a valid Reveal BI license. You may submit contributions (Pull Requests) to improve the software, which may be accepted into the project at the discretion of the maintainers.
 
-## 2. Usage Restrictions
+2. Usage Restrictions
 - This code is not open source. You may not use this code or any modified version to create, promote, or distribute a competing product or service.
 - Redistribution of modified or original versions of this code outside of a Reveal BI licensed environment is prohibited.
 
-## 3. Attribution and Contributions
+3. Attribution and Contributions
 - If modifications are made, you agree to attribute this project as the base software and indicate modifications where applicable.
 - Contributions made to this repository (Pull Requests) are licensed to the Reveal BI project under this same license.
 
-## 4. Termination
+4. Termination
 This license is valid only while you maintain a current Reveal BI license. If your Reveal BI license expires or is terminated, your right to use or modify this code also ends, except as permitted by standard repository view access.
 
-## 5. Disclaimer
+5. Disclaimer
 This code is provided "as-is," without warranty of any kind, express or implied. The maintainers and contributors are not liable for any damages or issues arising from its use.
 
 ---
 
-**This license is supplemental to the Reveal license agreement** you agreed to in your Reveal purchase agreement. You can review the full Reveal license agreement [here](https://www.revealbi.io/license-agreements/embedded-sdk).
+This license is supplemental to the Reveal license agreement you agreed to in your Reveal purchase agreement. You can review the full Reveal license agreement here https://www.revealbi.io/license-agreements/embedded-sdk.
