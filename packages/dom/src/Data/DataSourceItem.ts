@@ -5,7 +5,6 @@ import { JsonProperty } from "../Core/Serialization/Decorators/JsonProperty";
 import { JsonRecord } from "../Core/Serialization/Interfaces/JsonRecord";
 import { IField } from "../Visualizations/Interfaces/IField";
 import { DataSource } from "./DataSource";
-import { ResourceItem } from "./ResourceItem";
 
 export class DataSourceItem extends SchemaType {
     private _id: string = Guid.newGuid();
@@ -57,10 +56,10 @@ export class DataSourceItem extends SchemaType {
     properties: Record<string, any> = {};
 
     @JsonProperty("Parameters", { type: JsonRecord })
-    parameters?: Record<string, any> = {};
+    parameters: Record<string, any> = {};
 
     @JsonProperty("ResourceItem", { type: DataSourceItem })
-    resourceItem?: DataSourceItem; //this was ResourceItem because of a problem in React, but I'm hoping that's no longer a problem, if it is we need to change it back
+    resourceItem?: DataSourceItem;
 
     IsXmla: boolean = !this.hasTabularData && !this.hasAsset;
 

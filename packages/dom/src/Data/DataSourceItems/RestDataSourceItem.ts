@@ -78,12 +78,8 @@ export class RestDataSourceItem extends DataSourceItem {
         this.resourceItemDataSource.provider = DataSourceProvider.REST;
 
         this.resourceItem = new DataSourceItem();
-        this.resourceItem.dataSource = this.resourceItemDataSource,
-        this.resourceItem.dataSourceId = this.resourceItemDataSource.id,
-        this.resourceItem.title = title,
-
-        this.resourceItemDataSource = this.resourceItemDataSource;
-        this.resourceItem = this.resourceItem;
+        this.resourceItem.dataSource = this.resourceItemDataSource;
+        this.resourceItem.title = title;
     }
 
     protected override onFieldsPropertyChanged(fields: IField[]): void {

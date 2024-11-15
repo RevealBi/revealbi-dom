@@ -6,7 +6,6 @@ export * from "./Primitives";
 export { DataSource } from "./DataSource";
 export { DataSourceItem } from "./DataSourceItem";
 export { DataSourceItemFactory } from "./DataSourceItemFactory";
-export { ResourceItem } from "./ResourceItem"; 
 
 export { DatabaseDataSource } from "./DatabaseDataSource";
 export { HostDataSource } from "./HostDataSource";

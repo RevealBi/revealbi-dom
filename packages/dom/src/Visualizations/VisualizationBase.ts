@@ -95,10 +95,8 @@ export abstract class VisualizationBase implements IVisualization {
         if (this.dataDefinition instanceof TabularDataDefinition) {
             const field = this.dataDefinition.fields.find(x => x.fieldName === fieldName);
             if (field) {               
-
                 const filterField = field as FieldBase<IFilter>;
                 filterField.dataFilter = filter;
-                console.log(field);
             }
         }
         return this;
