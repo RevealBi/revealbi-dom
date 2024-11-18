@@ -16,7 +16,7 @@ export class GridVisualizationSettings extends GridVisualizationSettingsBase {
      * Supported data sources include: Athena, BigQuery, MySQL, Oracle, PostgreSQL, SQL Server, and SyBase.
      */
     @JsonProperty("PagedRows")
-    isPagingEnabled: boolean = true;
+    isPagingEnabled: boolean = false;
 
     /**
      * Gets or sets the number of rows to display in the grid.
