@@ -7,6 +7,8 @@ import { IField } from "../Interfaces/IField";
 import { IFieldDataType } from "../Interfaces/IFieldDataType";
 
 export abstract class FieldBase<TFilter extends IFilter> implements IField, IFieldDataType {
+    private _fieldLabel?: string;
+
     constructor(fieldName?: string) {
         this.fieldName = fieldName || "";
         this.fieldLabel = fieldName;
@@ -16,10 +18,26 @@ export abstract class FieldBase<TFilter extends IFilter> implements IField, IFie
     fieldName: string;
 
     @JsonProperty("FieldLabel")
-    fieldLabel?: string;
+    get fieldLabel(): string | undefined {
+        return this._fieldLabel;
+    }
+
+    set fieldLabel(value: string | undefined) {
+        this._fieldLabel = value;
+        this.userCaption = value;
+    }
+
+    /**
+     * The userCaption is used to display a custom label in the UI.
+     * However, the FieldLabel is also used to display a custom label in the UI and is generated from the data provides if it exists.
+     * To simplify the API, we are using the FieldLabel as the primary label and hiding UserCaption from the public API.
+     * We may want to switch to the @internal tag in the future - https://www.typescriptlang.org/tsconfig/#stripInternal
+     */
+    @JsonProperty("UserCaption")
+    private userCaption?: string; //this property is used by slingshot and is not meant to be used by the DOM directly. It is here for backwards compatibility.
 
     @JsonProperty("FieldType")
-    dataType: DataType = DataType.String; //todo: in .net this is internal. maybe make it a getter only? Do we event need the IFieldDataType interface now?
+    dataType: DataType = DataType.String; //todo: in .net this is internal. maybe make it a getter only? Do we even need the IFieldDataType interface now?
 
     @JsonProperty("IsCalculated")
     isCalculated: boolean = false;
