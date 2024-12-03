@@ -8,17 +8,34 @@ import { DataField } from "./DataField";
 import { NumberFormatting } from "./NumberFormatting";
 
 export class NumberDataField extends DataField {
+    private _fieldLabel?: string;
 
     constructor()
     constructor(fieldName: string)
-    constructor(fieldName?: string){
+    constructor(fieldName?: string) {
         super(fieldName);
         this.schemaTypeName = SchemaTypeNames.SummarizationValueFieldType;
         this.fieldLabel = fieldName;
     }
 
     @JsonProperty("FieldLabel")
-    fieldLabel?: string;
+    get fieldLabel(): string | undefined {
+        return this._fieldLabel;
+    }
+
+    set fieldLabel(value: string | undefined) {
+        this._fieldLabel = value;
+        this.userCaption = value;
+    }
+
+    /**
+     * The userCaption is used to display a custom label in the UI.
+     * However, the FieldLabel is also used to display a custom label in the UI and is generated from the data provides if it exists.
+     * To simplify the API, we are using the FieldLabel as the primary label and hiding UserCaption from the public API.
+     * We may want to switch to the @internal tag in the future - https://www.typescriptlang.org/tsconfig/#stripInternal
+     */
+    @JsonProperty("UserCaption")
+    private userCaption?: string; //this property is used by slingshot and is not meant to be used by the DOM directly. It is here for backwards compatibility.
 
     @JsonProperty("IsHidden")
     isHidden?: boolean = false;
@@ -38,9 +55,9 @@ export class NumberDataField extends DataField {
     @JsonProperty("Formatting", { type: NumberFormatting })
     formatting?: NumberFormatting;
 
-    @JsonProperty("ConditionalFormatting", { type: ConditionalFormatting })    
+    @JsonProperty("ConditionalFormatting", { type: ConditionalFormatting })
     conditionalFormatting?: ConditionalFormatting;
 
-    @JsonProperty("Filter", { type: NumberFilter }) 
+    @JsonProperty("Filter", { type: NumberFilter })
     private filter?: NumberFilter;
 }
