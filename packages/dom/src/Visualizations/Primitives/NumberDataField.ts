@@ -35,7 +35,7 @@ export class NumberDataField extends DataField {
      * We may want to switch to the @internal tag in the future - https://www.typescriptlang.org/tsconfig/#stripInternal
      */
     @JsonProperty("UserCaption")
-    private userCaption?: string; //this property is used by slingshot and is not meant to be used by the DOM directly. It is here for backwards compatibility.
+    private userCaption?: string;
 
     @JsonProperty("IsHidden")
     isHidden?: boolean = false;
