@@ -1,4 +1,5 @@
 import { RdashDocument } from "../../RdashDocument";
+import { RdashSerializer } from "../Serialization/RdashSerializer";
 
 declare let $: any;
 
@@ -26,15 +27,24 @@ export class DashboardLoader {
     }
 
     private static async loadRVDashboard(input: string | Blob): Promise<unknown> {
-        const revealSdkSettings = (window as any).$?.ig?.RevealSdkSettings;
-        if (revealSdkSettings) {
-            if (typeof input === 'string') {
-                return await $.ig.RVDashboard.loadDashboard(input);
-            } else {
-                return await $.ig.RVDashboard.loadDashboardFromContainer(input);
-            }
+        this.ensureRevealSdkLoaded();
+        if (typeof input === 'string') {
+            return await $.ig.RVDashboard.loadDashboard(input);
+        } else {
+            const json = await RdashSerializer.blobToJson(input);
+            return await this.loadFromJson(json);
         }
-        else {
+    }
+
+    static async loadFromJson(json: string): Promise<unknown> {
+        this.ensureRevealSdkLoaded();
+        const parsedJson = JSON.parse(json);
+        const dashboard = await $.ig.RevealUtility.createDashboardFromJsonObject(parsedJson);
+        return dashboard;
+    }
+
+    private static ensureRevealSdkLoaded(): void {
+        if (!(window as any).$?.ig?.RevealSdkSettings) {
             throw new Error("Reveal SDK is not loaded. Please make sure to include the Reveal SDK in your project.");
         }
     }

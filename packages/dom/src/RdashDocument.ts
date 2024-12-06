@@ -183,6 +183,6 @@ export class RdashDocument {
      * @returns An RVDashboard object.
      */
     toRVDashboard(): Promise<any> {
-        return DashboardLoader.load(this.toBlob());
+        return DashboardLoader.loadFromJson(this.toJsonString());
     }
 }
