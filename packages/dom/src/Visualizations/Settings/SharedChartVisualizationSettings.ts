@@ -10,7 +10,7 @@ export abstract class SharedChartVisualizationSettings extends YAxisVisualizatio
     /// Gets or sets a value that determines if the chart will automatcially rotate labels
     /// </summary>
     @JsonProperty("AutomaticLabelRotation")
-    automaticLabelRotation: boolean = false;
+    automaticLabelRotation: boolean = true;
 
     /// <summary>
     /// Gets or sets a values that will sync the axis to the visible range.
