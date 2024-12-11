@@ -3,8 +3,7 @@ import { dashboardFilterConverter } from "./Core/Serialization/Converters/Dashbo
 import { visualizationConverter } from "./Core/Serialization/Converters/VisualizationConverter";
 import { JsonProperty } from "./Core/Serialization/Decorators/JsonProperty";
 import { RdashSerializer } from "./Core/Serialization/RdashSerializer";
-import { RdashDocumentValidator } from "./Core/Serialization/Utilities/RdashDocumentValidator";
-import { DashboardLoader } from "./Core/Utilities";
+import { RvDashboardLoader } from "./Core/Utilities";
 import { DataSource } from "./Data/DataSource";
 import { Theme } from "./Enums";
 import { DashboardFilter } from "./Filters/DashboardFilter";
@@ -117,7 +116,7 @@ export class RdashDocument {
         if (dashboard instanceof Blob) {
             dashboardJson = await RdashSerializer.blobToJson(dashboard);
         } else {
-            const loadedDashboard = await DashboardLoader.load(dashboard);
+            const loadedDashboard = await RvDashboardLoader.load(dashboard);
             if (!loadedDashboard) {
                 throw new Error("Could not load dashboard");
             }
@@ -183,6 +182,6 @@ export class RdashDocument {
      * @returns An RVDashboard object.
      */
     toRVDashboard(): Promise<any> {
-        return DashboardLoader.loadFromJson(this.toJsonString());
+        return RvDashboardLoader.loadFromJson(this.toJsonString());
     }
 }

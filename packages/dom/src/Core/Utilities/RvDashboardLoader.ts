@@ -3,7 +3,7 @@ import { RdashSerializer } from "../Serialization/RdashSerializer";
 
 declare let $: any;
 
-export class DashboardLoader {
+export class RvDashboardLoader {
 
     static async load(dashboard?: string | Blob | RdashDocument | unknown): Promise<any | null> {
 

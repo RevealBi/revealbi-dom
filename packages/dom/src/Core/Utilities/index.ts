@@ -1,2 +1,2 @@
-export { DashboardLoader } from "./DashboardLoader";
+export { RvDashboardLoader } from "./RvDashboardLoader";
 export * from "./Environment";
