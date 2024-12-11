@@ -76,7 +76,7 @@ export class RdashDocument {
     /**
      * Gets or sets the collection of dashboard filters that can bound to any visualization using the visualization's FilterBindings property.
      */
-    @JsonProperty("GlobalFilters", { converter:  dashboardFilterConverter})
+    @JsonProperty("GlobalFilters", { converter: dashboardFilterConverter })
     filters: DashboardFilter[] = [];
 
     /**
@@ -122,7 +122,19 @@ export class RdashDocument {
             }
             dashboardJson = loadedDashboard._dashboardModel.__dashboardModel.toJson(); //todo: improve this in SDK
         }
-        
+
+        return RdashSerializer.deserialize(dashboardJson);
+    }
+
+    /**
+     * Loads an RdashDocument from a binary buffer.
+     * This function accepts a binary buffer (ArrayBuffer or Node.js Buffer) that represents an RDASH file.
+     * @param buffer - The binary buffer containing the RDASH data.
+     * @returns A promise that resolves to an RdashDocument instance.
+     * @throws An error if the buffer cannot be processed or deserialized.
+     */
+    static async loadFromBuffer(buffer: ArrayBuffer | Buffer): Promise<RdashDocument> {
+        const dashboardJson = await RdashSerializer.bufferToJson(buffer);
         return RdashSerializer.deserialize(dashboardJson);
     }
 
@@ -142,24 +154,24 @@ export class RdashDocument {
      */
     import(document: RdashDocument, visualization?: string | IVisualization): void {
         this.dataSources.push(...document.dataSources);
-    
+
         if (!visualization) {
             //this clears the filter bindings in the source document. This may not be the desired behavior, and we may need to switch to creating a copy of the visualization instead.
             document.visualizations.forEach(viz => viz.filterBindings = []);
             this.visualizations.push(...document.visualizations);
             return;
         }
-    
-        const viz = typeof visualization === "string" 
+
+        const viz = typeof visualization === "string"
             ? document.visualizations.find(viz => viz.id === visualization)
             : visualization;
-    
+
         if (viz) {
             //this clears the filter bindings of the source visualization. This may not be the desired behavior, and we may need to switch to creating a copy of the visualization instead.
             viz.filterBindings = [];
             this.visualizations.push(viz);
         }
-    }    
+    }
 
     /**
      * Converts the RdashDocument to a Blob.
@@ -176,12 +188,12 @@ export class RdashDocument {
     toJsonString(): string {
         return RdashSerializer.serialize(this);
     }
-    
+
     /**
      * Converts the `RdashDocument` to an RVDashboard object.
      * @returns An RVDashboard object.
      */
     toRVDashboard(): Promise<any> {
-        return RvDashboardLoader.loadFromJson(this.toJsonString());
+        return RvDashboardLoader.loadRVDashboardFromJson(this.toJsonString());
     }
 }

@@ -1,5 +1,6 @@
 import { RdashDocument } from "../../RdashDocument";
 import { RdashSerializer } from "../Serialization/RdashSerializer";
+import { isBrowserEnvironment } from "./Environment";
 
 declare let $: any;
 
@@ -32,11 +33,11 @@ export class RvDashboardLoader {
             return await $.ig.RVDashboard.loadDashboard(input);
         } else {
             const json = await RdashSerializer.blobToJson(input);
-            return await this.loadFromJson(json);
+            return await this.loadRVDashboardFromJson(json);
         }
     }
 
-    static async loadFromJson(json: string): Promise<unknown> {
+    static async loadRVDashboardFromJson(json: string): Promise<unknown> {
         this.ensureRevealSdkLoaded();
         const parsedJson = JSON.parse(json);
         const dashboard = await $.ig.RevealUtility.createDashboardFromJsonObject(parsedJson);
@@ -44,6 +45,10 @@ export class RvDashboardLoader {
     }
 
     private static ensureRevealSdkLoaded(): void {
+        if (!isBrowserEnvironment) {
+            throw new Error("This function must be run in a browser environment.");
+        }
+    
         if (!(window as any).$?.ig?.RevealSdkSettings) {
             throw new Error("Reveal SDK is not loaded. Please make sure to include the Reveal SDK in your project.");
         }
