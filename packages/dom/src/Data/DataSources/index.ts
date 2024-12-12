@@ -1,12 +1,8 @@
 export { AmazonAthenaDataSource } from './AmazonAthenaDataSource';
 export { AmazonRedshiftDataSource } from './AmazonRedshiftDataSource';
-export { GoogleAnalytics4DataSource } from './GoogleAnalytics4DataSource';
 export { GoogleBigQueryDataSource } from './GoogleBigQueryDataSource';
-export { GoogleDriveDataSource } from './GoogleDriveDataSource';
 export { AmazonS3DataSource } from './AmazonS3DataSource';
-export { BoxDataSource } from './BoxDataSource';
 export { CsvDataSource } from './CsvDataSource';
-export { DropboxDataSource } from './DropboxDataSource';
 export { ExcelDataSource } from './ExcelDataSource';
 export { GoogleSheetsDataSource } from './GoogleSheetsDataSource';
 export { HttpAnalysisServicesDataSource } from './HttpAnalysisServicesDataSource';
@@ -16,8 +12,6 @@ export { MicrosoftAnalysisServicesDataSource } from './MicrosoftAnalysisServices
 export { MicrosoftAzureAnalysisServicesDataSource } from './MicrosoftAzureAnalysisServicesDataSource';
 export { MicrosoftAzureSqlServerDataSource } from './MicrosoftAzureSqlServerDataSource';
 export { MicrosoftAzureSynapseAnalyticsDataSource } from './MicrosoftAzureSynapseAnalyticsDataSource';
-export { MicrosoftOneDriveDataSource } from './MicrosoftOneDriveDataSource';
-export { MicrosoftSharePointDataSource } from './MicrosoftSharePointDataSource';
 export { MicrosoftSqlServerDataSource } from './MicrosoftSqlServerDataSource';
 export { MySqlDataSource } from './MySqlDataSource';
 export { ODataDataSource } from './ODataDataSource';
