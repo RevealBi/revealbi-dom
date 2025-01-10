@@ -7,6 +7,7 @@ import { IProcessDataOnServer } from "../Interfaces/IProcessDataOnServer";
 export class MongoDbDataSourceItem extends DataSourceItem implements IProcessDataOnServer {
     constructor(title: string, dataSource: DataSource) {
         super(title, dataSource);
+        this.processDataOnServer = true;
     }
 
     get collection(): string {

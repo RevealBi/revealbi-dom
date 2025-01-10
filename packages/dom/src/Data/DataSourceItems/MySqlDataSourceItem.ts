@@ -7,6 +7,7 @@ import { ProcedureDataSourceItem } from "../ProcedureDataSourceItem";
 export class MySqlDataSourceItem extends ProcedureDataSourceItem implements IProcessDataOnServer {
     constructor(title: string, dataSource: DataSource) {
         super(title, dataSource);
+        this.processDataOnServer = true;
     }
 
     get processDataOnServer(): boolean {

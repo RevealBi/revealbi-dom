@@ -7,6 +7,7 @@ import { SchemaDataSourceItem } from "../SchemaDataSourceItem";
 export class SnowflakeDataSourceItem extends SchemaDataSourceItem implements IProcessDataOnServer {
     constructor(title: string, dataSource: SnowflakeDataSource | DataSource) {
         super(title, dataSource);
+        this.processDataOnServer = true;
     }
 
     get processDataOnServer(): boolean {

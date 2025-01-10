@@ -17,6 +17,8 @@ export class MicrosoftSqlServerDataSourceItem extends ProcedureDataSourceItem im
         } else {
             super(title, tableOrDataSource);
         }
+
+        this.processDataOnServer = true;
     }
 
     get processDataOnServer(): boolean {
