@@ -11,7 +11,7 @@ export abstract class Visualization<TSettings extends VisualizationSettings> ext
         super(title, dataSourceItem);
     }
 
-    @JsonProperty("ActionsModel")
+    @JsonProperty("ActionsModel", { type: VisualizationLinker })
     linker?: VisualizationLinker;
 
     @JsonProperty("VisualizationSettings", { converter: settingConverter })
