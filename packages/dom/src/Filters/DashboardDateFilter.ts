@@ -12,6 +12,7 @@ export class DashboardDateFilter extends DashboardFilter
     {
         super();
         this.schemaTypeName = SchemaTypeNames.DateGlobalFilterType;
+        this.id = "_date";
         this.title = title ?? "Date Filter";
     }
 
