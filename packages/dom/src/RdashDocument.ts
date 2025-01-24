@@ -155,12 +155,12 @@ export class RdashDocument {
      * @param document The `RdashDocument` to import from.
      * @param visualization The visualization to import. If not specified, all visualizations are imported.
      */
-    import(document: RdashDocument, visualization?: string | IVisualization): void {
+    import(document: RdashDocument, visualization?: string | IVisualization, includeFiters?: boolean): void {
         //todo: provide options to import data sources and filters as well?
 
         //imports the entire document
         if (!visualization) {
-            document.visualizations.forEach(viz => this.import(document, viz));
+            document.visualizations.forEach(viz => this.importVisualization(document, viz));
             return;
         }
 
@@ -170,11 +170,7 @@ export class RdashDocument {
             return;
         }
 
-        const clonedViz = this.cloneVisualization(viz);
-        if (clonedViz.dataDefinition.dataSourceItem) {
-            this.processDataSourceItem(document, clonedViz.dataDefinition.dataSourceItem);
-        }
-        this.visualizations.push(clonedViz);
+        this.importVisualization(document, viz);
     }
 
     /**
@@ -201,11 +197,16 @@ export class RdashDocument {
         return RvDashboardLoader.loadRVDashboardFromJson(this.toJsonString());
     }
 
-    private cloneVisualization(viz: IVisualization): IVisualization {
+    private importVisualization(document: RdashDocument, viz: IVisualization) {
         const clonedViz = CloneUtility.clone(viz);
         clonedViz.id = Guid.newGuid();
         clonedViz.filterBindings = [];
-        return clonedViz;
+
+        if (clonedViz.dataDefinition.dataSourceItem) {
+            this.processDataSourceItem(document, clonedViz.dataDefinition.dataSourceItem);
+        }
+
+        this.visualizations.push(clonedViz);
     }
 
     private processDataSourceItem(document: RdashDocument, dataSourceItem: DataSourceItem): void {
