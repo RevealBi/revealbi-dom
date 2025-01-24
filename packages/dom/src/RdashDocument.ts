@@ -155,7 +155,7 @@ export class RdashDocument {
      * @param document The `RdashDocument` to import from.
      * @param visualization The visualization to import. If not specified, all visualizations are imported.
      */
-    import(document: RdashDocument, visualization?: string | IVisualization, includeFiters?: boolean): void {
+    import(document: RdashDocument, visualization?: string | IVisualization): void {
         //todo: provide options to import data sources and filters as well?
 
         //imports the entire document
