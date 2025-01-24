@@ -9,7 +9,7 @@ import { IDataDefinition } from "./Interfaces/IDataDefinition";
 import { IVisualization } from "./Interfaces/IVisualization";
 import { FieldBase } from "./Primitives";
 import { CloneUtility } from "../Core/Utilities/CloneUtility";
-import { IFilter, DashboardDateFilter, DashboardDataFilter, DashboardDateFilterBinding, DashboardDataFilterBinding, BindingBase } from "../Filters";
+import { IFilter, DashboardDateFilter, DashboardDataFilter, DashboardDateFilterBinding, DashboardDataFilterBinding, BindingBase, VisualizationFilter } from "../Filters";
 
 
 export abstract class VisualizationBase implements IVisualization {
@@ -41,9 +41,21 @@ export abstract class VisualizationBase implements IVisualization {
     }
 
     //todo: is it possible to create a Filters property that can properly handle both Tabular and Xmla data specs?
-    // get filters(): VisualizationFilter[] {
-    //     return this.dataDefinition.quickFilters;
-    // }
+    get filters(): VisualizationFilter[] {
+        if (this.dataDefinition instanceof TabularDataDefinition) {
+            return this.dataDefinition.quickFilters;
+        } else {
+            //todo: implement this for Xmla data specs
+            return [];
+        }
+    }
+    set filters(value: VisualizationFilter[]) {
+        if (this.dataDefinition instanceof TabularDataDefinition) {
+            this.dataDefinition.quickFilters = value;
+        } else {
+            //todo: implement this for Xmla data specs
+        }
+    }
 
     @JsonProperty("IsTitleVisible")
     isTitleVisible: boolean = true;
@@ -94,7 +106,7 @@ export abstract class VisualizationBase implements IVisualization {
     addDataFilter(fieldName: string, filter: IFilter): this {
         if (this.dataDefinition instanceof TabularDataDefinition) {
             const field = this.dataDefinition.fields.find(x => x.fieldName === fieldName);
-            if (field) {               
+            if (field) {
                 const filterField = field as FieldBase<IFilter>;
                 filterField.dataFilter = filter;
             }

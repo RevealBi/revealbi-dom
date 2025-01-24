@@ -1,4 +1,4 @@
-import { BindingBase } from "../../Filters";
+import { BindingBase, VisualizationFilter } from "../../Filters";
 import { ChartType } from "../Enums";
 import { IDataDefinition } from "./IDataDefinition";
 
@@ -10,5 +10,6 @@ export interface IVisualization {
     columnSpan: number;
     rowSpan: number;
     get dataDefinition(): IDataDefinition;
+    filters: VisualizationFilter[];
     filterBindings?: BindingBase[];
 }

@@ -12,6 +12,7 @@ import { Theme } from "./Enums";
 import { BindingBase, DashboardDataFilterBinding, DashboardDateFilterBinding } from "./Filters";
 import { DashboardFilter } from "./Filters/DashboardFilter";
 import { ImportOptions } from "./Primitives/Interfaces";
+import { TabularDataDefinition } from "./Visualizations/DataDefinitions/TabularDataDefinition";
 import { IVisualization } from "./Visualizations/Interfaces/IVisualization";
 
 /**
@@ -208,6 +209,10 @@ export class RdashDocument {
             this.processDashboardFilters(document, clonedViz);
         } else {
             clonedViz.filterBindings = undefined;
+        }
+
+        if (!options?.includeVisualizationFilters) {
+            clonedViz.filters = [];
         }
 
         this.visualizations.push(clonedViz);
