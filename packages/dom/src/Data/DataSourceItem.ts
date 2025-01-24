@@ -15,7 +15,10 @@ export class DataSourceItem extends SchemaType {
     constructor(title?: string, dataSource?: DataSource) {
         super();
         this.schemaTypeName = SchemaTypeNames.DataSourceItemType;
-        if (title) {
+
+        //if there is a title, then the end user created this DataSourceItem via the API (instead of the JSON parser)
+        //only in that case, we need to create a DataSource for the new DataSourceItem
+        if (title) { 
             this.initialize(dataSource ?? new DataSource, title ?? "");
         }
     }
