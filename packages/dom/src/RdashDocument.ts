@@ -1,9 +1,12 @@
 import { GlobalConstants } from "./Core/Constants/GlobalConstants";
+import { Guid } from "./Core/Guid";
 import { dashboardFilterConverter } from "./Core/Serialization/Converters/DashboardFilterConverter";
 import { visualizationConverter } from "./Core/Serialization/Converters/VisualizationConverter";
 import { JsonProperty } from "./Core/Serialization/Decorators/JsonProperty";
 import { RdashSerializer } from "./Core/Serialization/RdashSerializer";
 import { RvDashboardLoader } from "./Core/Utilities";
+import { CloneUtility } from "./Core/Utilities/CloneUtility";
+import { DataSourceItem } from "./Data";
 import { DataSource } from "./Data/DataSource";
 import { Theme } from "./Enums";
 import { DashboardFilter } from "./Filters/DashboardFilter";
@@ -153,24 +156,21 @@ export class RdashDocument {
      * @param visualization The visualization to import. If not specified, all visualizations are imported.
      */
     import(document: RdashDocument, visualization?: string | IVisualization): void {
-        this.dataSources.push(...document.dataSources);
+        //todo: provide options to import data sources and filters as well?
 
+        //imports the entire document
         if (!visualization) {
-            //this clears the filter bindings in the source document. This may not be the desired behavior, and we may need to switch to creating a copy of the visualization instead.
-            document.visualizations.forEach(viz => viz.filterBindings = []);
-            this.visualizations.push(...document.visualizations);
+            document.visualizations.forEach(viz => this.importVisualization(document, viz));
             return;
         }
 
-        const viz = typeof visualization === "string"
-            ? document.visualizations.find(viz => viz.id === visualization)
-            : visualization;
-
-        if (viz) {
-            //this clears the filter bindings of the source visualization. This may not be the desired behavior, and we may need to switch to creating a copy of the visualization instead.
-            viz.filterBindings = [];
-            this.visualizations.push(viz);
+        const viz = typeof visualization === "string" ? document.visualizations.find(v => v.id === visualization) : visualization;
+        if (!viz) {
+            console.warn("RdashDocument.import: Visualization not found in the document.");
+            return;
         }
+
+        this.importVisualization(document, viz);
     }
 
     /**
@@ -195,5 +195,42 @@ export class RdashDocument {
      */
     toRVDashboard(): Promise<any> {
         return RvDashboardLoader.loadRVDashboardFromJson(this.toJsonString());
+    }
+
+    private importVisualization(document: RdashDocument, viz: IVisualization) {
+        const clonedViz = CloneUtility.clone(viz);
+        clonedViz.id = Guid.newGuid();
+        clonedViz.filterBindings = [];
+
+        if (clonedViz.dataDefinition.dataSourceItem) {
+            this.processDataSourceItem(document, clonedViz.dataDefinition.dataSourceItem);
+        }
+
+        this.visualizations.push(clonedViz);
+    }
+
+    private processDataSourceItem(document: RdashDocument, dataSourceItem: DataSourceItem): void {
+        const dataSource = this.findAndCloneDataSource(document, dataSourceItem.dataSourceId);
+
+        if (dataSource) {
+            this.dataSources.push(dataSource);
+
+            if (dataSourceItem.resourceItem) {
+                const resourceDataSource = this.findAndCloneDataSource(document, dataSourceItem.resourceItem.dataSourceId);
+                if (resourceDataSource) {
+                    this.dataSources.push(resourceDataSource);
+                }
+            }
+        }
+    }
+
+    private findAndCloneDataSource(document: RdashDocument, dataSourceId: string | undefined): DataSource | undefined {
+        const existingDataSource = this.dataSources.find(ds => ds.id === dataSourceId);
+        if (existingDataSource) {
+            return undefined; // Data source already exists
+        }
+
+        const dataSource = document.dataSources.find(ds => ds.id === dataSourceId);
+        return dataSource ? CloneUtility.clone(dataSource) : undefined;
     }
 }
