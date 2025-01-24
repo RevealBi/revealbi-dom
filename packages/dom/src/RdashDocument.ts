@@ -1,18 +1,14 @@
 import { GlobalConstants } from "./Core/Constants/GlobalConstants";
-import { Guid } from "./Core/Guid";
 import { dashboardFilterConverter } from "./Core/Serialization/Converters/DashboardFilterConverter";
 import { visualizationConverter } from "./Core/Serialization/Converters/VisualizationConverter";
 import { JsonProperty } from "./Core/Serialization/Decorators/JsonProperty";
 import { RdashSerializer } from "./Core/Serialization/RdashSerializer";
 import { RvDashboardLoader } from "./Core/Utilities";
-import { CloneUtility } from "./Core/Utilities/CloneUtility";
-import { DataSourceItem } from "./Data";
+import { RdashDocumentImporter } from "./Core/Utilities/RdashDocumentImporter";
 import { DataSource } from "./Data/DataSource";
 import { Theme } from "./Enums";
-import { BindingBase, DashboardDataFilterBinding, DashboardDateFilterBinding } from "./Filters";
 import { DashboardFilter } from "./Filters/DashboardFilter";
 import { ImportOptions } from "./Primitives/Interfaces";
-import { TabularDataDefinition } from "./Visualizations/DataDefinitions/TabularDataDefinition";
 import { IVisualization } from "./Visualizations/Interfaces/IVisualization";
 
 /**
@@ -159,18 +155,7 @@ export class RdashDocument {
      * @param visualization The visualization to import. If not specified, all visualizations are imported.
      */
     import(document: RdashDocument, visualization?: string | IVisualization, options?: ImportOptions): void {
-        //imports the entire document
-        if (!visualization) {
-            document.visualizations.forEach(viz => this.importVisualization(document, viz, options));
-            return;
-        }
-
-        const viz = typeof visualization === "string" ? document.visualizations.find(v => v.id === visualization) : visualization;
-        if (!viz) {
-            console.warn("RdashDocument.import: Visualization not found in the document.");
-            return;
-        }
-        this.importVisualization(document, viz, options);
+        RdashDocumentImporter.import(this, document, visualization, options);
     }
 
     /**
@@ -195,72 +180,5 @@ export class RdashDocument {
      */
     toRVDashboard(): Promise<any> {
         return RvDashboardLoader.loadRVDashboardFromJson(this.toJsonString());
-    }
-
-    private importVisualization(document: RdashDocument, viz: IVisualization, options?: ImportOptions) {
-        const clonedViz = CloneUtility.clone(viz);
-        clonedViz.id = Guid.newGuid();
-
-        if (clonedViz.dataDefinition.dataSourceItem) {
-            this.processDataSourceItem(document, clonedViz.dataDefinition.dataSourceItem);
-        }
-
-        if (options?.includeDashboardFilters) {
-            this.processDashboardFilters(document, clonedViz);
-        } else {
-            clonedViz.filterBindings = undefined;
-        }
-
-        if (!options?.includeVisualizationFilters) {
-            clonedViz.filters = [];
-        }
-
-        this.visualizations.push(clonedViz);
-    }
-
-    private processDataSourceItem(document: RdashDocument, dataSourceItem: DataSourceItem): void {
-        const dataSource = this.findAndCloneDataSource(document, dataSourceItem.dataSourceId);
-
-        if (dataSource) {
-            this.dataSources.push(dataSource);
-
-            if (dataSourceItem.resourceItem) {
-                const resourceDataSource = this.findAndCloneDataSource(document, dataSourceItem.resourceItem.dataSourceId);
-                if (resourceDataSource) {
-                    this.dataSources.push(resourceDataSource);
-                }
-            }
-        }
-    }
-
-    private findAndCloneDataSource(document: RdashDocument, dataSourceId: string | undefined): DataSource | undefined {
-        const existingDataSource = this.dataSources.find(ds => ds.id === dataSourceId);
-        if (existingDataSource) {
-            return undefined; // Data source already exists
-        }
-
-        const dataSource = document.dataSources.find(ds => ds.id === dataSourceId);
-        return dataSource ? CloneUtility.clone(dataSource) : undefined;
-    }
-
-    private processDashboardFilters(document: RdashDocument, clonedViz: IVisualization): void {
-        clonedViz.filterBindings?.forEach(fb => {
-            const filterId = this.getFilterId(fb);
-            if (filterId && !this.filters.some(f => f.id === filterId)) {
-                const filter = document.filters.find(f => f.id === filterId);
-                if (filter) {
-                    this.filters.push(CloneUtility.clone(filter));
-                }
-            }
-        });
-    }
-
-    private getFilterId(fb: BindingBase): string | undefined {
-        if (fb instanceof DashboardDateFilterBinding) {
-            return "_date"; // "_date" is a special ID
-        } else if (fb instanceof DashboardDataFilterBinding) {
-            return fb.target?.dashboardFilterId;
-        }
-        return undefined;
     }
 }
