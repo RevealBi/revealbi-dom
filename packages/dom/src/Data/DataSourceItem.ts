@@ -15,7 +15,9 @@ export class DataSourceItem extends SchemaType {
     constructor(title?: string, dataSource?: DataSource) {
         super();
         this.schemaTypeName = SchemaTypeNames.DataSourceItemType;
-        this.initialize(dataSource ?? new DataSource, title ?? "");
+        if (title) {
+            this.initialize(dataSource ?? new DataSource, title ?? "");
+        }
     }
 
     @JsonProperty("Id")

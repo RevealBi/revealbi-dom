@@ -45,6 +45,6 @@ export abstract class GridVisualizationSettingsBase extends VisualizationSetting
         this.style.textAlignment = value;
     }
 
-    @JsonProperty("Style")
+    @JsonProperty("Style", { type: GridVisualizationStyle })
     protected style: GridVisualizationStyle = new GridVisualizationStyle();
 }
