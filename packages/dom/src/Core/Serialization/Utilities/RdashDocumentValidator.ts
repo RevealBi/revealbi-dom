@@ -2,11 +2,13 @@ import { DataSource } from "../../../Data/DataSource";
 import { DataSourceItem } from "../../../Data/DataSourceItem";
 import { RdashDocument } from "../../../RdashDocument";
 import { TabularDataDefinition } from "../../../Visualizations/DataDefinitions/TabularDataDefinition";
+import { DashboardDateFilter } from "../../../Filters/DashboardDateFilter";
 
 export class RdashDocumentValidator {
 
     static validate(document: RdashDocument): void {
         this.fixVisualizations(document);
+        this.reorderDashboardFilters(document);
     }
 
     private static fixVisualizations(document: RdashDocument): void {
@@ -77,5 +79,17 @@ export class RdashDocumentValidator {
     private static updateDocumentDataSources(document: RdashDocument, dataSources: Record<string, DataSource>): void {
         const allDataSources = document.dataSources ? [...document.dataSources, ...Object.values(dataSources)] : Object.values(dataSources);
         document.dataSources = allDataSources;
+    }
+
+    private static reorderDashboardFilters(document: RdashDocument): void {
+        // Make sure the DashboardDateFilter is the first item in the collection
+        const dashboardDateFilter = document.filters.find(f => f instanceof DashboardDateFilter);
+        if (dashboardDateFilter) {
+            const index = document.filters.indexOf(dashboardDateFilter);
+            if (index > -1) {
+                document.filters.splice(index, 1); // Remove the filter
+                document.filters.unshift(dashboardDateFilter); // Add it to the beginning
+            }
+        }
     }
 }
