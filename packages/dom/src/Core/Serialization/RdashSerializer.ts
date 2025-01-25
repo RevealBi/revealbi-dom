@@ -1,6 +1,6 @@
 import { RdashDocument } from "../../RdashDocument";
 import { JsonConvert } from "./JsonConvert";
-import { RdashDocumentValidator } from "./Utilities/RdashDocumentValidator";
+import { RdashDocumentValidator } from "../Utilities/RdashDocumentValidator";
 import { unzip, zipSync } from "fflate";
 
 export class RdashSerializer {
