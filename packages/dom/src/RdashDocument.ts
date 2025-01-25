@@ -5,6 +5,7 @@ import { JsonProperty } from "./Core/Serialization/Decorators/JsonProperty";
 import { RdashSerializer } from "./Core/Serialization/RdashSerializer";
 import { RvDashboardLoader } from "./Core/Utilities";
 import { RdashDocumentImporter } from "./Core/Utilities/RdashDocumentImporter";
+import { RdashDocumentValidator } from "./Core/Utilities/RdashDocumentValidator";
 import { DataSource } from "./Data/DataSource";
 import { Theme } from "./Enums";
 import { DashboardFilter } from "./Filters/DashboardFilter";
@@ -180,5 +181,12 @@ export class RdashDocument {
      */
     toRVDashboard(): Promise<any> {
         return RvDashboardLoader.loadRVDashboardFromJson(this.toJsonString());
+    }
+
+    /**
+     * Validates the RdashDocument to ensure it's in a valid state for serialization.
+    */
+    validate(): void {
+        RdashDocumentValidator.validate(this);
     }
 }
