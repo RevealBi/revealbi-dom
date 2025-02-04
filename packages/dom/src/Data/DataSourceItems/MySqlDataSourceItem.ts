@@ -1,13 +1,16 @@
 import { DataSource } from "../DataSource";
-import { MySqlDataSource } from "../DataSources";
+import { MySqlDataSource, MicrosoftSqlServerDataSource } from "../DataSources";
 import { IProcessDataOnServer } from "../Interfaces/IProcessDataOnServer";
 import { ProcedureDataSourceItem } from "../ProcedureDataSourceItem";
 
 
 export class MySqlDataSourceItem extends ProcedureDataSourceItem implements IProcessDataOnServer {
-    constructor(title: string, dataSource: DataSource) {
+    constructor(title: string, dataSource: DataSource, table?: string) {
         super(title, dataSource);
         this.processDataOnServer = true;
+        if(table){
+            this.table = table;
+        }
     }
 
     get processDataOnServer(): boolean {
