@@ -65,13 +65,13 @@ export class RdashDocumentValidator {
     private static validateManuallyAddedDataSourceItem(document: RdashDocument, dsi: DataSourceItem): void {
         const ds = document.dataSources?.find(x => x.id === dsi.dataSourceId);
         if (!ds) {
-            throw new Error(`Data source with id ${dsi.dataSourceId} not found in the RdashDocument.dataSources collection.`);
+            console.warn(`Data source with id ${dsi.dataSourceId} not found in the RdashDocument.dataSources collection.`);
         }
 
         if (dsi.resourceItem) {
             const rds = document.dataSources?.find(x => x.id === dsi.resourceItem?.dataSourceId);
             if (!rds) {
-                throw new Error(`ResourceItem with Data source id ${dsi.resourceItem.dataSourceId} not found in the RdashDocument.dataSources collection.`);
+                console.warn(`ResourceItem with data source id ${dsi.resourceItem.dataSourceId} not found in the RdashDocument.dataSources collection.`);
             }
         }
     }
