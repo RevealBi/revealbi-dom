@@ -8,8 +8,8 @@ import { SalesDashboard } from "./dashboards/SalesDashboard";
 
 declare const $: any;
 
-// $.ig.RevealSdkSettings.setBaseUrl("https://samples.revealbi.io/upmedia-backend/reveal-api/");
-$.ig.RevealSdkSettings.setBaseUrl("http://localhost:5289/");
+$.ig.RevealSdkSettings.setBaseUrl("https://samples.revealbi.io/upmedia-backend/reveal-api/");
+// $.ig.RevealSdkSettings.setBaseUrl("http://localhost:5111/");
 
 const loadDashboard = async () => {
     // List all Dashboard Creators that implement DashboardCreator interface here
