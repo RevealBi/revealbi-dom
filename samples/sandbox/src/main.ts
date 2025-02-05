@@ -23,8 +23,18 @@ const loadDashboard = async () => {
     const revealView = new $.ig.RevealView(viewer);
 
     if (header) {
-        header.innerHTML += "<input id='dashboard-name-input' type='text'></input> "
+
+        // Add a dropdown to select the dashboard
+        header.innerHTML += "<select id='dashboard-name-input'></select> "
         header.innerHTML += "<button id='dashboard-creator-btn'>Create Dashboard</button>"
+
+        const select = document.getElementById("dashboard-name-input") as HTMLSelectElement;
+        dashboardCreators.forEach(dashboardCreator => {
+            const option = document.createElement("option");
+            option.value = dashboardCreator.name;
+            option.text = dashboardCreator.name;
+            select.appendChild(option);
+        });
 
         const button = document.getElementById("dashboard-creator-btn") as HTMLButtonElement;
         const dashboardNameInput = document.getElementById("dashboard-name-input") as HTMLInputElement;
