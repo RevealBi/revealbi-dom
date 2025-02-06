@@ -1,8 +1,10 @@
-import { DataSourceItemFactory, GridVisualization, MicrosoftSqlServerDataSource, MicrosoftSqlServerDataSourceItem, NumberField, RdashDocument, TextField } from "@revealbi/dom";
-import { DataSourceType } from "packages/dom/src/Data/Enums/DataSourceType";
+import { GridVisualization, MicrosoftSqlServerDataSource, MicrosoftSqlServerDataSourceItem, NumberField, RdashDocument, TextField } from "@revealbi/dom";
+import { DashboardCreator } from "./IDashboardCreator";
 
-export class SqlServerDataSourceDashboard {
-    static createDashboard() {
+export class SqlServerDataSourceDashboard implements DashboardCreator {
+    name: string = "Sql Server Data Source Dashboard";
+
+    createDashboard() {
 
         const document = new RdashDocument("Sql Server Dashboard");
 

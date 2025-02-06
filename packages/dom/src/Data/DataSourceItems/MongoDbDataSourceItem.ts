@@ -11,11 +11,11 @@ export class MongoDbDataSourceItem extends DataSourceItem implements IProcessDat
     }
 
     get collection(): string {
-        return this.properties["Collection"];
+        return this.properties["Table"];
     }
 
     set collection(value: string) {
-        this.properties["Collection"] = value;
+        this.properties["Table"] = value;
     }
 
     get processDataOnServer(): boolean {

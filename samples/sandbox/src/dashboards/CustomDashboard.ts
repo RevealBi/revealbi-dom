@@ -1,10 +1,12 @@
 import { AggregationType, AreaChartVisualization, BarChartVisualization, BubbleVisualization, BulletGraphVisualization, CandleStickVisualization, ChoroplethVisualization, CircularGaugeVisualization, ColumnChartVisualization, ComboChartType, ComboChartVisualization, CustomVisualization, DateAggregationType, DateDataField, DoughnutChartVisualization, FontSize, FunnelChartVisualization, GridVisualization, ImageVisualization, IndicatorDifferenceMode, KpiGoalPeriod, KpiTargetVisualization, KpiTimePeriod, KpiTimeVisualization, LabelDisplayMode, LineChartVisualization, LinearGaugeVisualization, MapColorMode, MapColorStyle, MapLabelStyle, Maps, NumberDataField, OHLCVisualization, PieChartVisualization, PivotVisualization, RadialVisualization, RdashDocument, RestDataSourceItem, ScatterMapVisualization, ScatterVisualization, ShapeType, SparklineAggregationType, SparklineVisualization, SplineAreaChartVisualization, SplineChartVisualization, StackedAreaChartVisualization, StackedBarChartVisualization, StackedColumnChartVisualization, StepAreaChartVisualization, StepLineChartVisualization, TextBoxVisualization, TextViewVisualization, TextVisualization, Theme, TimeSeriesVisualization, TreeMapVisualization, ValueComparisonType } from "@revealbi/dom";
 import { DataSourceFactory } from "./DataSourceFactory";
+import { DashboardCreator } from "./IDashboardCreator";
 
 
-export class CustomDashboard {
-
-    static createDashboard(): RdashDocument {
+export class CustomDashboard implements DashboardCreator {
+    name: string = "Custom Dashboard";
+    
+    createDashboard() : RdashDocument {
 
         const excelDataSourceItem = DataSourceFactory.getMarketingDataSourceItem();
 
