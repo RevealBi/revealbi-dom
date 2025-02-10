@@ -33,4 +33,12 @@ export class SnowflakeDataSource extends ProcessDataSource {
     set warehouse(value: string) {
         this.properties["Warehouse"] = value;
     }
+
+    get schema(): string {
+        return this.properties["Schema"];
+    }
+
+    set schema(value: string) {
+        this.properties["Schema"] = value;
+    }
 }
