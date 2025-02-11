@@ -1,7 +1,7 @@
 import { DataSourceProvider } from "../../Core/Constants/DataSourceProvider";
-import { ProcessDataSource } from "../ProcessDataSource";
+import { SchemaDataSource } from "../SchemaDataSource";
 
-export class SnowflakeDataSource extends ProcessDataSource {
+export class SnowflakeDataSource extends SchemaDataSource {
     constructor()
     constructor(title: string)
     constructor(title: string, subtitle: string)
@@ -32,13 +32,5 @@ export class SnowflakeDataSource extends ProcessDataSource {
 
     set warehouse(value: string) {
         this.properties["Warehouse"] = value;
-    }
-
-    get schema(): string {
-        return this.properties["Schema"];
-    }
-
-    set schema(value: string) {
-        this.properties["Schema"] = value;
     }
 }
