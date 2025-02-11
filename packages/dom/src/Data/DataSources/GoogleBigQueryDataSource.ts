@@ -11,10 +11,10 @@ export class GoogleBigQueryDataSource extends DatabaseDataSource {
     }
 
     get projectId(): string {
-        return this.properties["ProjectId"];
+        return this.properties["projectId"];
     }
 
     set projectId(value: string) {
-        this.properties["ProjectId"] = value;
+        this.properties["projectId"] = value;
     }
 }

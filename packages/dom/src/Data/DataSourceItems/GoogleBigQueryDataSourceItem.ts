@@ -1,28 +1,36 @@
 import { DataSource } from "../DataSource";
+import { DataSourceItem } from "../DataSourceItem";
 import { GoogleBigQueryDataSource } from "../DataSources";
-import { TableDataSourceItem } from "../TableDataSourceItem";
 
 
-export class GoogleBigQueryDataSourceItem extends TableDataSourceItem {
+export class GoogleBigQueryDataSourceItem extends DataSourceItem {
     constructor(title: string, dataSource: DataSource) {
         super(title, dataSource);
     }
 
     get dataSetId(): string {
-        return this.properties["DataSetId"];
+        return this.properties["datasetId"];
     }
 
     set dataSetId(value: string) {
-        this.properties["DataSetId"] = value;
+        this.properties["datasetId"] = value;
     }
 
     get projectId(): string {
-        return this.properties["ProjectId"];
+        return this.properties["projectId"];
     }
 
     set projectId(value: string) {
-        this.properties["ProjectId"] = value;
+        this.properties["projectId"] = value;
     }
+
+    get table(): string {
+      return this.properties["tableId"];
+  }
+
+  set table(value: string) {
+      this.properties["tableId"] = value;
+  }
 
     protected override createDataSourceInstance(dataSource: DataSource): DataSource {
         return this.create(GoogleBigQueryDataSource, dataSource);
