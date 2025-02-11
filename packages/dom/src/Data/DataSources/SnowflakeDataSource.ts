@@ -1,7 +1,7 @@
 import { DataSourceProvider } from "../../Core/Constants/DataSourceProvider";
-import { ProcessDataSource } from "../ProcessDataSource";
+import { SchemaDataSource } from "../SchemaDataSource";
 
-export class SnowflakeDataSource extends ProcessDataSource {
+export class SnowflakeDataSource extends SchemaDataSource {
     constructor()
     constructor(title: string)
     constructor(title: string, subtitle: string)
