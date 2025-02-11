@@ -5,6 +5,7 @@ import { RestDataSourceDashboards } from "./dashboards/RestDataSourceDashboards"
 import { CustomDashboard } from "./dashboards/CustomDashboard";
 import { MySqlDataSourceDashboards } from "./dashboards/MySQLDataSourceDashboard";
 import { SalesDashboard } from "./dashboards/SalesDashboard";
+import { AmazonRedshiftDataSourceDashboards } from "./dashboards/AmazonRedShiftDashboard";
 
 declare const $: any;
 
@@ -14,6 +15,7 @@ $.ig.RevealSdkSettings.setBaseUrl("https://samples.revealbi.io/upmedia-backend/r
 const loadDashboard = async () => {
     // List all Dashboard Creators that implement DashboardCreator interface here
     const dashboardCreators = [
+        new AmazonRedshiftDataSourceDashboards(),
         new SalesDashboard(),
         new RestDataSourceDashboards(),
         new MySqlDataSourceDashboards()
