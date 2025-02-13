@@ -4,4 +4,5 @@ export abstract class DataSourceIds
     static readonly Excel = "__EXCEL";
     static readonly JSON = "__JSON";
     static readonly LOCALFILE = "__LOCAL";
+    static readonly GSHEET = "__Gsheet";
 }

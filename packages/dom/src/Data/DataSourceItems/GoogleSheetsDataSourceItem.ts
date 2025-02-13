@@ -1,46 +1,69 @@
 import { DataSource } from "../DataSource";
 import { DataSourceItem } from "../DataSourceItem";
 import { GoogleSheetsDataSource } from "../DataSources";
+import { GoogleDriveDataSource } from "../DataSources/GoogleDriveDataSource";
+import { GoogleDriveDataSourceItem } from "./GoogleDriveDataSourceItem";
 
 
 export class GoogleSheetsDataSourceItem extends DataSourceItem {
-    constructor(title: string, dataSource: DataSource) {
-        super(title, dataSource);
-    }
+  constructor(title: string, identifierOrDataSource?: DataSource | string) {
+    const ds = identifierOrDataSource instanceof DataSource ? identifierOrDataSource : undefined;
 
-    get firstRowContainsLabels(): boolean {
-        return this.properties["FirstRowContainsLabels"];
-    }
+    super(title, ds);
 
-    set firstRowContainsLabels(value: boolean) {
-        this.properties["FirstRowContainsLabels"] = value;
-    }
+    const identifier = identifierOrDataSource instanceof DataSource ? undefined : identifierOrDataSource;
 
-    get namedRange(): string {
-        return this.properties["NamedRange"];
-    }
+    this.initializeResourceItem(title, identifier);
+  }
 
-    set namedRange(value: string) {
-        this.properties["NamedRange"] = value;
-    }
+  get firstRowContainsLabels(): boolean {
+    return this.parameters["TITLES_IN_FIRST_ROW"];
+  }
 
-    get pivotTable(): string {
-        return this.properties["PivotTable"];
-    }
+  set firstRowContainsLabels(value: boolean) {
+    this.properties["TITLES_IN_FIRST_ROW"] = value;
+  }
 
-    set pivotTable(value: string) {
-        this.properties["PivotTable"] = value;
-    }
+  get namedRange(): string {
+    return this.properties["NamedRange"];
+  }
 
-    get sheet(): string {
-        return this.properties["Sheet"];
-    }
+  set namedRange(value: string) {
+    this.properties["NamedRange"] = value;
+  }
 
-    set sheet(value: string) {
-        this.properties["Sheet"] = value;
-    }
+  get pivotTable(): string {
+    return this.properties["PivotTable"];
+  }
 
-    protected override createDataSourceInstance(dataSource: DataSource): DataSource {
-        return this.create(GoogleSheetsDataSource, dataSource);
-    }
+  set pivotTable(value: string) {
+    this.properties["PivotTable"] = value;
+  }
+
+  get sheet(): string {
+    return this.properties["Sheet"];
+  }
+
+  set sheet(value: string) {
+    this.properties["Sheet"] = value;
+  }
+
+  get identifier(): string {
+    return this.resourceItem!.properties["Identifier"];
+  }
+
+  set identifier(value: string) {
+    this.resourceItem!.properties["Identifier"] = value;
+  }
+
+  protected override createDataSourceInstance(dataSource: DataSource): DataSource {
+    return this.create(GoogleSheetsDataSource, dataSource);
+  }
+
+
+  protected initializeResourceItem(title: string, identifier?: string) {
+    this.resourceItemDataSource = new GoogleDriveDataSource();
+    this.resourceItem = new GoogleDriveDataSourceItem(title, this.resourceItemDataSource);
+    (this.resourceItem as GoogleDriveDataSourceItem).identifier = identifier;
+  }
 }

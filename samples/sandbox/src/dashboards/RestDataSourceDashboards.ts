@@ -1,9 +1,11 @@
 import { DataSource, DataSourceItemFactory, Maps, NumberField, PieChartVisualization, RdashDocument, RestDataSourceItem, ScatterMapVisualization, TextField } from "@revealbi/dom";
 import { DataSourceFactory } from "./DataSourceFactory";
 import { DataSourceType } from "packages/dom/src/Data/Enums/DataSourceType";
+import { DashboardCreator } from "./IDashboardCreator";
 
-export class RestDataSourceDashboards {
-    static createDashboard() {
+export class RestDataSourceDashboards implements DashboardCreator {
+    name: string = "Rest Dashboard";
+    createDashboard() {
         const document = new RdashDocument("REST Dashboard");
 
         //json - default
@@ -43,7 +45,7 @@ export class RestDataSourceDashboards {
             });
 
         document.visualizations = [jsonChart, excelChart, csvChart];
-        
+
         return document;
     }
 }
