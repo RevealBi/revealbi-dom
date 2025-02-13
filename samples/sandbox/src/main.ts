@@ -5,18 +5,20 @@ import { RestDataSourceDashboards } from "./dashboards/RestDataSourceDashboards"
 import { CustomDashboard } from "./dashboards/CustomDashboard";
 import { MySqlDataSourceDashboards } from "./dashboards/MySQLDataSourceDashboard";
 import { SalesDashboard } from "./dashboards/SalesDashboard";
+import { GoogleSheetsDataSourceDashboard } from "./dashboards/GoogleSheetsDataSourceDashboard";
 
 declare const $: any;
 
-$.ig.RevealSdkSettings.setBaseUrl("https://samples.revealbi.io/upmedia-backend/reveal-api/");
-// $.ig.RevealSdkSettings.setBaseUrl("http://localhost:5111/");
+// $.ig.RevealSdkSettings.setBaseUrl("https://samples.revealbi.io/upmedia-backend/reveal-api/");
+$.ig.RevealSdkSettings.setBaseUrl("http://localhost:5111/");
 
 const loadDashboard = async () => {
     // List all Dashboard Creators that implement DashboardCreator interface here
     const dashboardCreators = [
         new SalesDashboard(),
         new RestDataSourceDashboards(),
-        new MySqlDataSourceDashboards()
+        new GoogleSheetsDataSourceDashboard(),
+        new MySqlDataSourceDashboards(),
     ]
     const viewer = document.getElementById('viewer');
     const header = document.getElementById('header');
