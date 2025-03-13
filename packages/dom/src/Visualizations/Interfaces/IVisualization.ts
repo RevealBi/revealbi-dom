@@ -4,6 +4,7 @@ import { IDataDefinition } from "./IDataDefinition";
 
 export interface IVisualization {
     id: string;
+    backgroundColor?: string;
     get chartType(): ChartType;
     title?: string;
     isTitleVisible: boolean;
