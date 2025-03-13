@@ -22,6 +22,9 @@ export abstract class VisualizationBase implements IVisualization {
     @JsonProperty("Id")
     id: string = Guid.newGuid();
 
+    @JsonProperty("CustomBackgroundColor")
+    backgroundColor?: string;
+
     @JsonProperty("Title")
     title?: string;
 
