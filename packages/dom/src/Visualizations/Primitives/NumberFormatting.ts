@@ -28,4 +28,7 @@ export class NumberFormatting extends FormattingBase {
 
     @JsonProperty("ShowGroupingSeparator")
     showGroupingSeparator: boolean = false;
+
+    @JsonProperty("ShowDataLabelsInChart")
+    showDataLabels: boolean = true;
 }
