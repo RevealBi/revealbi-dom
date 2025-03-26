@@ -1,9 +1,8 @@
-export enum LargeNumberFormat
-{
-	None = "none",
-	Auto = "auto",
+export enum LargeNumberFormat {
+    None = "none",
+    Auto = "auto",
     T = "T",
-	B = "B",
+    B = "B",
     M = "M",
     K = "K"
 }
