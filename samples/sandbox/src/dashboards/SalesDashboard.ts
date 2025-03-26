@@ -1,9 +1,11 @@
 import { AggregationType, BarChartVisualization, Bound, BulletGraphVisualization, ColumnChartVisualization, DashboardDataFilter, DashboardDateFilter, DateAggregationType, DateDataField, FilterType, KpiTargetVisualization, KpiTimeVisualization, LargeNumberFormat, NegativeFormatType, NumberDataField, NumberFilter, NumberFormatting, NumberFormattingType, NumberRuleType, RdashDocument, SortingType, SparklineVisualization, SplineAreaChartVisualization, StackedColumnChartVisualization, ValueComparisonType } from "@revealbi/dom";
 import { DataSourceFactory } from "./DataSourceFactory";
+import { DashboardCreator } from "./IDashboardCreator";
 
-export class SalesDashboard {
+export class SalesDashboard implements DashboardCreator {
+    name: string = "Sales Dashboard";
 
-    static createDashboard(): RdashDocument {
+    createDashboard(): RdashDocument {
 
         const excelDataSourceItem = DataSourceFactory.getSalesDataSourceItem();
 
