@@ -1,4 +1,4 @@
-import { AggregationType, BarChartVisualization, Bound, BulletGraphVisualization, ColumnChartVisualization, DashboardDataFilter, DashboardDateFilter, DateAggregationType, DateDataField, FilterType, KpiTargetVisualization, KpiTimeVisualization, NegativeFormatType, NumberDataField, NumberFilter, NumberFormatting, NumberFormattingType, NumberRuleType, RdashDocument, SortingType, SparklineVisualization, SplineAreaChartVisualization, StackedColumnChartVisualization, ValueComparisonType } from "@revealbi/dom";
+import { AggregationType, BarChartVisualization, Bound, BulletGraphVisualization, ColumnChartVisualization, DashboardDataFilter, DashboardDateFilter, DateAggregationType, DateDataField, FilterType, KpiTargetVisualization, KpiTimeVisualization, LargeNumberFormat, NegativeFormatType, NumberDataField, NumberFilter, NumberFormatting, NumberFormattingType, NumberRuleType, RdashDocument, SortingType, SparklineVisualization, SplineAreaChartVisualization, StackedColumnChartVisualization, ValueComparisonType } from "@revealbi/dom";
 import { DataSourceFactory } from "./DataSourceFactory";
 
 export class SalesDashboard {
@@ -24,7 +24,7 @@ export class SalesDashboard {
         pipelineField.formatting.decimalDigits = 0;
         pipelineField.formatting.showGroupingSeparator = true;
         pipelineField.formatting.negativeFormat = NegativeFormatType.MinusSign;
-        pipelineField.formatting.applyMkFormat = true;
+        pipelineField.formatting.largeNumberFormat = LargeNumberFormat.Auto;
 
         const kpiTarget = new KpiTargetVisualization("Sales", excelDataSourceItem).setDate("Date").setValue(pipelineField).setTarget("Forecasted")
             .connectDashboardFilter(territoryFilter)
@@ -65,7 +65,7 @@ export class SalesDashboard {
         quotaField.formatting.formatType = NumberFormattingType.Percent;
         quotaField.formatting.decimalDigits = 2;
         quotaField.formatting.showGroupingSeparator = false;
-        quotaField.formatting.applyMkFormat = true;
+        quotaField.formatting.largeNumberFormat = LargeNumberFormat.Auto;
 
         const numberFilter = new NumberFilter();
         numberFilter.filterType = FilterType.FilterByRule;
