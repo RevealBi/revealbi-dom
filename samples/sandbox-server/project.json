@@ -1,0 +1,56 @@
+{
+  "name": "sandbox-server",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "samples/sandbox-server/src",
+  "projectType": "application",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/esbuild:esbuild",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "platform": "node",
+        "outputPath": "dist/samples/sandbox-server",
+        "format": ["cjs"],
+        "bundle": false,
+        "main": "samples/sandbox-server/src/main.ts",
+        "tsConfig": "samples/sandbox-server/tsconfig.app.json",
+        "assets": ["samples/sandbox-server/src/assets"],
+        "generatePackageJson": true,
+        "esbuildOptions": {
+          "sourcemap": true,
+          "outExtension": {
+            ".js": ".js"
+          }
+        }
+      },
+      "configurations": {
+        "development": {},
+        "production": {
+          "esbuildOptions": {
+            "sourcemap": false,
+            "outExtension": {
+              ".js": ".js"
+            }
+          }
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "sandbox-server:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "sandbox-server:build:development"
+        },
+        "production": {
+          "buildTarget": "sandbox-server:build:production"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,2535 @@
+{
+  "Title": "Sales",
+  "ThemeName": "rvDashboardMountainTheme",
+  "CreatedWith": "Web 1.0.312.0",
+  "SavedWith": "web 1.0.0.0",
+  "FormatVersion": 6,
+  "UseAutoLayout": false,
+  "Tags": "Sales",
+  "Widgets": [
+    {
+      "_type": "WidgetType",
+      "Id": "852a6bc4-4cf4-4e64-86cd-94eca2ed6024",
+      "RowSpan": 20,
+      "ColumnSpan": 11,
+      "IsTitleVisible": true,
+      "Title": "Sales",
+      "DataSpec": {
+        "_type": "TabularDataSpecType",
+        "DataSourceItem": {
+          "_type": "DataSourceItemType",
+          "Id": "f678350c-92b5-4fd4-b300-54b95ee2b1a5__2535__https://infragisticsinc297.sharepoint.com/Groups/marketing/_api/Web/GetFileByServerRelativePath(decodedurl='/Groups/marketing/Products/Reveal/Samples.xlsx')/Sales",
+          "Title": "Sales",
+          "DataSourceId": "__EXCEL",
+          "HasTabularData": true,
+          "HasAsset": false,
+          "Properties": {
+            "Sheet": "Sales"
+          },
+          "Parameters": {},
+          "ResourceItem": {
+            "_type": "DataSourceItemType",
+            "Id": "http://dl.infragistics.com/reportplus/reveal/samples/Samples.xlsx",
+            "Title": "Samples.xlsx",
+            "DataSourceId": "61ce395d-7a2e-4838-9f40-06e122505ad5",
+            "HasTabularData": false,
+            "HasAsset": true,
+            "Properties": {
+              "Url": "http://dl.infragistics.com/reportplus/reveal/samples/Samples.xlsx"
+            },
+            "Parameters": {}
+          }
+        },
+        "Expiration": 1440,
+        "Bindings": {
+          "Bindings": [
+            {
+              "Source": {
+                "_type": "FieldBindingSourceType",
+                "FieldName": "Territory"
+              },
+              "Operator": "Equals",
+              "Target": {
+                "_type": "DataBasedGlobalFilterBindingTargetType",
+                "GlobalFilterId": "ddf3fa65-6893-4d8b-73ad-0b28fc1af330",
+                "GlobalFilterFieldName": "Territory"
+              }
+            }
+          ]
+        },
+        "IsTransposed": false,
+        "Fields": [
+          {
+            "FieldName": "Territory",
+            "FieldType": "String",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Date",
+            "FieldType": "Date",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Quota",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Leads",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Hot Leads",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "New Seats",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "New Sales",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Renewal Seats",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Renewal Sales ",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Employee",
+            "FieldType": "String",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Pipepline",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Forecasted",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Revenue",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Total Opportunites",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Product",
+            "FieldType": "String",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "b",
+            "FieldType": "String",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "c",
+            "FieldType": "String",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "d",
+            "FieldType": "String",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "e",
+            "FieldType": "String",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "f",
+            "FieldType": "String",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          }
+        ],
+        "TransposedFields": [],
+        "QuickFilters": [],
+        "AdditionalTables": [],
+        "ServiceAdditionalTables": [],
+        "FieldListSorting": "None"
+      },
+      "VisualizationSettings": {
+        "_type": "IndicatorTargetVisualizationSettingsType",
+        "VisualizationType": "INDICATOR_TARGET",
+        "DifferenceMode": "Percentage",
+        "PositiveIsRed": false,
+        "IncludeToday": true
+      },
+      "VisualizationDataSpec": {
+        "_type": "IndicatorTargetVisualizationDataSpecType",
+        "FormatVersion": 0,
+        "AdHocExpandedElements": [],
+        "Rows": [],
+        "Date": {
+          "_type": "DimensionColumnSpecType",
+          "SummarizationField": {
+            "_type": "SummarizationDateFieldType",
+            "FieldName": "Date",
+            "DrillDownElements": [],
+            "ExpandedItems": [],
+            "DateAggregationType": "Year"
+          }
+        },
+        "Value": [
+          {
+            "_type": "MeasureColumnSpecType",
+            "SummarizationField": {
+              "_type": "SummarizationValueFieldType",
+              "FieldName": "Pipepline",
+              "FieldLabel": "Actual Sales",
+              "IsHidden": false,
+              "AggregationType": "Sum",
+              "Sorting": "None",
+              "IsCalculated": false,
+              "Formatting": {
+                "_type": "NumberFormattingSpecType",
+                "OverrideDefaultSettings": false,
+                "FormatType": "Currency",
+                "DecimalDigits": 0,
+                "ShowGroupingSeparator": true,
+                "CurrencySymbol": "$",
+                "NegativeFormat": "MinusSign",
+                "MKFormat": "Auto",
+                "ShowDataLabelsInChart": true
+              }
+            }
+          }
+        ],
+        "Target": [
+          {
+            "_type": "MeasureColumnSpecType",
+            "SummarizationField": {
+              "_type": "SummarizationValueFieldType",
+              "FieldName": "Forecasted",
+              "FieldLabel": "Forecasted",
+              "IsHidden": false,
+              "AggregationType": "Sum",
+              "Sorting": "None",
+              "IsCalculated": false
+            }
+          }
+        ],
+        "DateFilterType": "YearToDate"
+      },
+      "PostTransformations": []
+    },
+    {
+      "_type": "WidgetType",
+      "Id": "c4824b72-05e4-4d5c-8882-b29c3fb45b10",
+      "RowSpan": 39,
+      "ColumnSpan": 31,
+      "IsTitleVisible": true,
+      "Title": "New vs Renewal Sales",
+      "DataSpec": {
+        "_type": "TabularDataSpecType",
+        "DataSourceItem": {
+          "_type": "DataSourceItemType",
+          "Id": "f678350c-92b5-4fd4-b300-54b95ee2b1a5__2535__https://infragisticsinc297.sharepoint.com/Groups/marketing/_api/Web/GetFileByServerRelativePath(decodedurl='/Groups/marketing/Products/Reveal/Samples.xlsx')/Sales",
+          "Title": "Sales",
+          "DataSourceId": "__EXCEL",
+          "HasTabularData": true,
+          "HasAsset": false,
+          "Properties": {
+            "Sheet": "Sales"
+          },
+          "Parameters": {},
+          "ResourceItem": {
+            "_type": "DataSourceItemType",
+            "Id": "http://dl.infragistics.com/reportplus/reveal/samples/Samples.xlsx",
+            "Title": "Samples.xlsx",
+            "DataSourceId": "61ce395d-7a2e-4838-9f40-06e122505ad5",
+            "HasTabularData": false,
+            "HasAsset": true,
+            "Properties": {
+              "Url": "http://dl.infragistics.com/reportplus/reveal/samples/Samples.xlsx"
+            },
+            "Parameters": {}
+          }
+        },
+        "Expiration": 1440,
+        "Bindings": {
+          "Bindings": [
+            {
+              "Source": {
+                "_type": "FieldBindingSourceType",
+                "FieldName": "Date"
+              },
+              "Operator": "Between",
+              "Target": {
+                "_type": "DateGlobalFilterBindingTargetType",
+                "GlobalFilterId": "_date"
+              }
+            },
+            {
+              "Source": {
+                "_type": "FieldBindingSourceType",
+                "FieldName": "Territory"
+              },
+              "Operator": "Equals",
+              "Target": {
+                "_type": "DataBasedGlobalFilterBindingTargetType",
+                "GlobalFilterId": "ddf3fa65-6893-4d8b-73ad-0b28fc1af330",
+                "GlobalFilterFieldName": "Territory"
+              }
+            }
+          ]
+        },
+        "IsTransposed": false,
+        "Fields": [
+          {
+            "FieldName": "Territory",
+            "FieldType": "String",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Date",
+            "FieldLabel": "Date",
+            "FieldType": "Date",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None",
+            "Formatting": {
+              "_type": "DateFormattingSpecType",
+              "OverrideDefaultSettings": false,
+              "DateFormat": "dd-MMM-yyyy"
+            },
+            "Settings": {
+              "_type": "DateTimeFieldSettingsType",
+              "DateFiscalYearStartMonth": 0,
+              "DisplayInLocalTimeZone": false
+            }
+          },
+          {
+            "FieldName": "Quota",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Leads",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Hot Leads",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "New Seats",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "New Sales",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Renewal Seats",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Renewal Sales ",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Employee",
+            "FieldType": "String",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Pipepline",
+            "FieldLabel": "Pipepline",
+            "FieldType": "Number",
+            "IsHidden": false,
+            "IsCalculated": false,
+            "Sorting": "None",
+            "Settings": {
+              "_type": "DateTimeFieldSettingsType",
+              "DateFiscalYearStartMonth": 0,
+              "DisplayInLocalTimeZone": false
+            }
+          },
+          {
+            "FieldName": "Forecasted",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Revenue",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Total Opportunites",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Product",
+            "FieldType": "String",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "b",
+            "FieldType": "String",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "c",
+            "FieldType": "String",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "d",
+            "FieldType": "String",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "e",
+            "FieldType": "String",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "f",
+            "FieldType": "String",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          }
+        ],
+        "TransposedFields": [],
+        "QuickFilters": [],
+        "AdditionalTables": [],
+        "ServiceAdditionalTables": [],
+        "FieldListSorting": "None"
+      },
+      "VisualizationSettings": {
+        "_type": "ChartVisualizationSettingsType",
+        "VisualizationType": "CHART",
+        "ChartType": "SplineArea",
+        "AllSeries": false,
+        "ShowLegends": true,
+        "TrendlineType": "None",
+        "SingleAxisMode": false,
+        "Series": [],
+        "LeftAxisFields": [],
+        "RightAxisFields": [],
+        "LeftAxisLogarithmic": false,
+        "RightAxisLogarithmic": false,
+        "LabelDisplayMode": "Percentage",
+        "LeftAxisMinValue": 148000.0,
+        "BrushOffsetIndex": -1,
+        "PieStartPosition": 270,
+        "ShowTotalsInTooltip": true,
+        "CompositeChartType1": "Column",
+        "CompositeChartType2": "Column",
+        "CompositeChartTypesSwapped": false,
+        "ShowZeroValuesInLegend": false,
+        "YAxisLabelAlignment": "Inherit",
+        "UseCompactLabels": false,
+        "SyncAxisVisibleRange": false,
+        "AutomaticLabelRotation": true,
+        "OthersSliceThreshold": 3.0,
+        "ZoomPositionHorizontal": 0.0,
+        "ZoomPositionVertical": 0.0,
+        "ZoomScaleHorizontal": 1.0,
+        "ZoomScaleVertical": 1.0,
+        "ShowAxisX": true,
+        "ShowAxisY": true,
+        "CategoryAxisOverlap": -0.2,
+        "CategoryAxisGap": 0.4
+      },
+      "VisualizationDataSpec": {
+        "_type": "CategoryVisualizationDataSpecType",
+        "AdHocFields": 2,
+        "FormatVersion": 1,
+        "AdHocExpandedElements": [],
+        "Rows": [
+          {
+            "_type": "DimensionColumnSpecType",
+            "SummarizationField": {
+              "_type": "SummarizationDateFieldType",
+              "FieldName": "Date",
+              "DrillDownElements": [],
+              "ExpandedItems": [],
+              "DateAggregationType": "Month"
+            }
+          },
+          {
+            "_type": "DimensionColumnSpecType",
+            "SummarizationField": {
+              "_type": "SummarizationDateFieldType",
+              "FieldName": "Date",
+              "DrillDownElements": [],
+              "ExpandedItems": [],
+              "DateAggregationType": "Day"
+            }
+          }
+        ],
+        "Values": [
+          {
+            "_type": "MeasureColumnSpecType",
+            "SummarizationField": {
+              "_type": "SummarizationValueFieldType",
+              "FieldName": "New Sales",
+              "FieldLabel": "New Sales",
+              "IsHidden": false,
+              "AggregationType": "Sum",
+              "Sorting": "None",
+              "IsCalculated": false
+            }
+          },
+          {
+            "_type": "MeasureColumnSpecType",
+            "SummarizationField": {
+              "_type": "SummarizationValueFieldType",
+              "FieldName": "Renewal Sales ",
+              "FieldLabel": "Renewal Sales ",
+              "IsHidden": false,
+              "AggregationType": "Sum",
+              "Sorting": "None",
+              "IsCalculated": false
+            }
+          }
+        ],
+        "FixedLines": []
+      },
+      "PostTransformations": []
+    },
+    {
+      "_type": "WidgetType",
+      "Id": "b40b256e-4e25-47d7-8414-fe9bb88549d4",
+      "RowSpan": 39,
+      "ColumnSpan": 18,
+      "IsTitleVisible": true,
+      "Title": "Sales by Product",
+      "DataSpec": {
+        "_type": "TabularDataSpecType",
+        "DataSourceItem": {
+          "_type": "DataSourceItemType",
+          "Id": "f678350c-92b5-4fd4-b300-54b95ee2b1a5__2535__https://infragisticsinc297.sharepoint.com/Groups/marketing/_api/Web/GetFileByServerRelativePath(decodedurl='/Groups/marketing/Products/Reveal/Samples.xlsx')/Sales",
+          "Title": "Sales",
+          "DataSourceId": "__EXCEL",
+          "HasTabularData": true,
+          "HasAsset": false,
+          "Properties": {
+            "Sheet": "Sales"
+          },
+          "Parameters": {},
+          "ResourceItem": {
+            "_type": "DataSourceItemType",
+            "Id": "http://dl.infragistics.com/reportplus/reveal/samples/Samples.xlsx",
+            "Title": "Samples.xlsx",
+            "DataSourceId": "61ce395d-7a2e-4838-9f40-06e122505ad5",
+            "HasTabularData": false,
+            "HasAsset": true,
+            "Properties": {
+              "Url": "http://dl.infragistics.com/reportplus/reveal/samples/Samples.xlsx"
+            },
+            "Parameters": {}
+          }
+        },
+        "Expiration": 1440,
+        "Bindings": {
+          "Bindings": [
+            {
+              "Source": {
+                "_type": "FieldBindingSourceType",
+                "FieldName": "Date"
+              },
+              "Operator": "Between",
+              "Target": {
+                "_type": "DateGlobalFilterBindingTargetType",
+                "GlobalFilterFieldName": "Date Filter",
+                "GlobalFilterId": "_date"
+              }
+            },
+            {
+              "Source": {
+                "_type": "FieldBindingSourceType",
+                "FieldName": "Territory"
+              },
+              "Operator": "Equals",
+              "Target": {
+                "_type": "DataBasedGlobalFilterBindingTargetType",
+                "GlobalFilterId": "ddf3fa65-6893-4d8b-73ad-0b28fc1af330",
+                "GlobalFilterFieldName": "Territory"
+              }
+            }
+          ]
+        },
+        "IsTransposed": false,
+        "Fields": [
+          {
+            "FieldName": "Territory",
+            "FieldType": "String",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Date",
+            "FieldType": "Date",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Quota",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Leads",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Hot Leads",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "New Seats",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "New Sales",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Renewal Seats",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Renewal Sales ",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Employee",
+            "FieldType": "String",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Pipepline",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Forecasted",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Revenue",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Total Opportunites",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Product",
+            "FieldType": "String",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "b",
+            "FieldType": "String",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "c",
+            "FieldType": "String",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "d",
+            "FieldType": "String",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "e",
+            "FieldType": "String",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "f",
+            "FieldType": "String",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          }
+        ],
+        "TransposedFields": [],
+        "QuickFilters": [],
+        "AdditionalTables": [],
+        "ServiceAdditionalTables": [],
+        "FieldListSorting": "None"
+      },
+      "VisualizationSettings": {
+        "_type": "ChartVisualizationSettingsType",
+        "VisualizationType": "CHART",
+        "ChartType": "StackedColumn",
+        "AllSeries": false,
+        "ShowLegends": true,
+        "TrendlineType": "None",
+        "SingleAxisMode": false,
+        "Series": [],
+        "LeftAxisFields": [],
+        "RightAxisFields": [],
+        "LeftAxisLogarithmic": false,
+        "RightAxisLogarithmic": false,
+        "LabelDisplayMode": "Percentage",
+        "BrushOffsetIndex": -1,
+        "PieStartPosition": 270,
+        "ShowTotalsInTooltip": true,
+        "CompositeChartType1": "Column",
+        "CompositeChartType2": "Column",
+        "CompositeChartTypesSwapped": false,
+        "ShowZeroValuesInLegend": false,
+        "YAxisLabelAlignment": "Inherit",
+        "UseCompactLabels": false,
+        "SyncAxisVisibleRange": false,
+        "AutomaticLabelRotation": true,
+        "OthersSliceThreshold": 3.0,
+        "ZoomPositionHorizontal": 0.0,
+        "ZoomPositionVertical": 0.0,
+        "ZoomScaleHorizontal": 1.0,
+        "ZoomScaleVertical": 1.0,
+        "ShowAxisX": true,
+        "ShowAxisY": true,
+        "CategoryAxisOverlap": -0.2,
+        "CategoryAxisGap": 0.4
+      },
+      "VisualizationDataSpec": {
+        "_type": "CategoryVisualizationDataSpecType",
+        "FormatVersion": 0,
+        "AdHocExpandedElements": [],
+        "Rows": [
+          {
+            "_type": "DimensionColumnSpecType",
+            "SummarizationField": {
+              "_type": "SummarizationRegularFieldType",
+              "FieldName": "Product",
+              "DrillDownElements": [],
+              "ExpandedItems": []
+            }
+          }
+        ],
+        "Values": [
+          {
+            "_type": "MeasureColumnSpecType",
+            "SummarizationField": {
+              "_type": "SummarizationValueFieldType",
+              "FieldName": "New Sales",
+              "FieldLabel": "New Sales",
+              "IsHidden": false,
+              "AggregationType": "Sum",
+              "Sorting": "None",
+              "IsCalculated": false
+            }
+          },
+          {
+            "_type": "MeasureColumnSpecType",
+            "SummarizationField": {
+              "_type": "SummarizationValueFieldType",
+              "FieldName": "Renewal Sales ",
+              "FieldLabel": "Renewal Sales ",
+              "IsHidden": false,
+              "AggregationType": "Sum",
+              "Sorting": "None",
+              "IsCalculated": false
+            }
+          }
+        ],
+        "FixedLines": []
+      },
+      "PostTransformations": []
+    },
+    {
+      "_type": "WidgetType",
+      "Id": "9ea0b74d-8944-474c-5e8c-78ce2b30d16c",
+      "RowSpan": 19,
+      "ColumnSpan": 11,
+      "IsTitleVisible": true,
+      "Title": "Total Opportunities",
+      "DataSpec": {
+        "_type": "TabularDataSpecType",
+        "DataSourceItem": {
+          "_type": "DataSourceItemType",
+          "Id": "f678350c-92b5-4fd4-b300-54b95ee2b1a5__2535__https://infragisticsinc297.sharepoint.com/Groups/marketing/_api/Web/GetFileByServerRelativePath(decodedurl='/Groups/marketing/Products/Reveal/Samples.xlsx')/Sales",
+          "Title": "Sales",
+          "DataSourceId": "__EXCEL",
+          "HasTabularData": true,
+          "HasAsset": false,
+          "Properties": {
+            "Sheet": "Sales"
+          },
+          "Parameters": {},
+          "ResourceItem": {
+            "_type": "DataSourceItemType",
+            "Id": "http://dl.infragistics.com/reportplus/reveal/samples/Samples.xlsx",
+            "Title": "Samples.xlsx",
+            "DataSourceId": "61ce395d-7a2e-4838-9f40-06e122505ad5",
+            "HasTabularData": false,
+            "HasAsset": true,
+            "Properties": {
+              "Url": "http://dl.infragistics.com/reportplus/reveal/samples/Samples.xlsx"
+            },
+            "Parameters": {}
+          }
+        },
+        "Expiration": 1440,
+        "Bindings": {
+          "Bindings": [
+            {
+              "Source": {
+                "_type": "FieldBindingSourceType",
+                "FieldName": "Territory"
+              },
+              "Operator": "Equals",
+              "Target": {
+                "_type": "DataBasedGlobalFilterBindingTargetType",
+                "GlobalFilterId": "ddf3fa65-6893-4d8b-73ad-0b28fc1af330",
+                "GlobalFilterFieldName": "Territory"
+              }
+            }
+          ]
+        },
+        "IsTransposed": false,
+        "Fields": [
+          {
+            "FieldName": "Territory",
+            "FieldType": "String",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Date",
+            "FieldType": "Date",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Quota",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Leads",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Hot Leads",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "New Seats",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "New Sales",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Renewal Seats",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Renewal Sales ",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Employee",
+            "FieldType": "String",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Pipepline",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Forecasted",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Revenue",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Total Opportunites",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Product",
+            "FieldType": "String",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "b",
+            "FieldType": "String",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "c",
+            "FieldType": "String",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "d",
+            "FieldType": "String",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "e",
+            "FieldType": "String",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "f",
+            "FieldType": "String",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          }
+        ],
+        "TransposedFields": [],
+        "QuickFilters": [],
+        "AdditionalTables": [],
+        "ServiceAdditionalTables": [],
+        "FieldListSorting": "None"
+      },
+      "VisualizationSettings": {
+        "_type": "IndicatorVisualizationSettingsType",
+        "VisualizationType": "INDICATOR",
+        "DifferenceMode": "Percentage",
+        "PositiveIsRed": false,
+        "IncludeToday": true
+      },
+      "VisualizationDataSpec": {
+        "_type": "IndicatorVisualizationDataSpecType",
+        "FormatVersion": 0,
+        "AdHocExpandedElements": [],
+        "Rows": [],
+        "Date": {
+          "_type": "DimensionColumnSpecType",
+          "SummarizationField": {
+            "_type": "SummarizationDateFieldType",
+            "FieldName": "Date",
+            "DrillDownElements": [],
+            "ExpandedItems": [],
+            "DateAggregationType": "Year"
+          }
+        },
+        "Value": [
+          {
+            "_type": "MeasureColumnSpecType",
+            "SummarizationField": {
+              "_type": "SummarizationValueFieldType",
+              "FieldName": "Total Opportunites",
+              "FieldLabel": "Total Opportunites",
+              "IsHidden": false,
+              "AggregationType": "Sum",
+              "Sorting": "None",
+              "IsCalculated": false
+            }
+          }
+        ],
+        "IndicatorType": "YearToDatePreviousYear"
+      },
+      "PostTransformations": []
+    },
+    {
+      "_type": "WidgetType",
+      "Id": "7c50f5c3-3b7a-4f6a-aeae-78581998433b",
+      "RowSpan": 30,
+      "ColumnSpan": 31,
+      "IsTitleVisible": true,
+      "Title": "New Seats by Product",
+      "DataSpec": {
+        "_type": "TabularDataSpecType",
+        "DataSourceItem": {
+          "_type": "DataSourceItemType",
+          "Id": "f678350c-92b5-4fd4-b300-54b95ee2b1a5__2535__https://infragisticsinc297.sharepoint.com/Groups/marketing/_api/Web/GetFileByServerRelativePath(decodedurl='/Groups/marketing/Products/Reveal/Samples.xlsx')/Sales",
+          "Title": "Sales",
+          "DataSourceId": "__EXCEL",
+          "HasTabularData": true,
+          "HasAsset": false,
+          "Properties": {
+            "Sheet": "Sales"
+          },
+          "Parameters": {},
+          "ResourceItem": {
+            "_type": "DataSourceItemType",
+            "Id": "http://dl.infragistics.com/reportplus/reveal/samples/Samples.xlsx",
+            "Title": "Samples.xlsx",
+            "DataSourceId": "61ce395d-7a2e-4838-9f40-06e122505ad5",
+            "HasTabularData": false,
+            "HasAsset": true,
+            "Properties": {
+              "Url": "http://dl.infragistics.com/reportplus/reveal/samples/Samples.xlsx"
+            },
+            "Parameters": {}
+          }
+        },
+        "Expiration": 1440,
+        "Bindings": {
+          "Bindings": [
+            {
+              "Source": {
+                "_type": "FieldBindingSourceType",
+                "FieldName": "Date"
+              },
+              "Operator": "Between",
+              "Target": {
+                "_type": "DateGlobalFilterBindingTargetType",
+                "GlobalFilterFieldName": "Date Filter",
+                "GlobalFilterId": "_date"
+              }
+            },
+            {
+              "Source": {
+                "_type": "FieldBindingSourceType",
+                "FieldName": "Territory"
+              },
+              "Operator": "Equals",
+              "Target": {
+                "_type": "DataBasedGlobalFilterBindingTargetType",
+                "GlobalFilterId": "ddf3fa65-6893-4d8b-73ad-0b28fc1af330",
+                "GlobalFilterFieldName": "Territory"
+              }
+            }
+          ]
+        },
+        "IsTransposed": false,
+        "Fields": [
+          {
+            "FieldName": "Territory",
+            "FieldType": "String",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Date",
+            "FieldType": "Date",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Quota",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Leads",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Hot Leads",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "New Seats",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "New Sales",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Renewal Seats",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Renewal Sales ",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Employee",
+            "FieldType": "String",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Pipepline",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Forecasted",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Revenue",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Total Opportunites",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Product",
+            "FieldType": "String",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "b",
+            "FieldType": "String",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "c",
+            "FieldType": "String",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "d",
+            "FieldType": "String",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "e",
+            "FieldType": "String",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "f",
+            "FieldType": "String",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          }
+        ],
+        "TransposedFields": [],
+        "QuickFilters": [],
+        "AdditionalTables": [],
+        "ServiceAdditionalTables": [],
+        "FieldListSorting": "None"
+      },
+      "VisualizationSettings": {
+        "_type": "SparklineVisualizationSettingsType",
+        "VisualizationType": "SPARKLINE",
+        "HideGrandTotals": false,
+        "FontSize": "Small",
+        "Style": {
+          "FixedLeftColumns": false,
+          "TextAlignment": "Left",
+          "NumericAlignment": "Right",
+          "DateAlignment": "Left"
+        },
+        "VisualizationColumns": [
+          {
+            "ColumnName": "Product",
+            "Width": 142.0,
+            "TextAlignment": "Inherit"
+          }
+        ],
+        "ChartType": "Line",
+        "ShowLastTwoValues": true,
+        "ShowDifference": true,
+        "PositiveIsRed": false
+      },
+      "VisualizationDataSpec": {
+        "_type": "SparklineVisualizationDataSpecType",
+        "FormatVersion": 0,
+        "AdHocExpandedElements": [],
+        "Rows": [
+          {
+            "_type": "DimensionColumnSpecType",
+            "SummarizationField": {
+              "_type": "SummarizationRegularFieldType",
+              "FieldName": "Product",
+              "DrillDownElements": [],
+              "ExpandedItems": []
+            }
+          }
+        ],
+        "Date": {
+          "_type": "DimensionColumnSpecType",
+          "SummarizationField": {
+            "_type": "SummarizationDateFieldType",
+            "FieldName": "Date",
+            "DrillDownElements": [],
+            "ExpandedItems": [],
+            "DateAggregationType": "Month"
+          }
+        },
+        "Value": [
+          {
+            "_type": "MeasureColumnSpecType",
+            "SummarizationField": {
+              "_type": "SummarizationValueFieldType",
+              "FieldName": "New Seats",
+              "FieldLabel": "New Seats",
+              "IsHidden": false,
+              "AggregationType": "Sum",
+              "Sorting": "None",
+              "IsCalculated": false,
+              "Formatting": {
+                "_type": "NumberFormattingSpecType",
+                "OverrideDefaultSettings": false,
+                "FormatType": "Number",
+                "DecimalDigits": 0,
+                "ShowGroupingSeparator": true,
+                "CurrencySymbol": "$",
+                "NegativeFormat": "MinusSign",
+                "MKFormat": "None",
+                "ShowDataLabelsInChart": true
+              }
+            }
+          }
+        ],
+        "IndicatorType": "LastMonths",
+        "NumberOfPeriods": 12,
+        "ShowIndicator": true
+      },
+      "PostTransformations": []
+    },
+    {
+      "_type": "WidgetType",
+      "Id": "104a291d-1027-4f34-89b5-282c01a3a7fb",
+      "RowSpan": 43,
+      "ColumnSpan": 29,
+      "IsTitleVisible": true,
+      "Title": "Sales",
+      "DataSpec": {
+        "_type": "TabularDataSpecType",
+        "DataSourceItem": {
+          "_type": "DataSourceItemType",
+          "Id": "f678350c-92b5-4fd4-b300-54b95ee2b1a5__2535__https://infragisticsinc297.sharepoint.com/Groups/marketing/_api/Web/GetFileByServerRelativePath(decodedurl='/Groups/marketing/Products/Reveal/Samples.xlsx')/Sales",
+          "Title": "Sales",
+          "DataSourceId": "__EXCEL",
+          "HasTabularData": true,
+          "HasAsset": false,
+          "Properties": {
+            "Sheet": "Sales"
+          },
+          "Parameters": {},
+          "ResourceItem": {
+            "_type": "DataSourceItemType",
+            "Id": "http://dl.infragistics.com/reportplus/reveal/samples/Samples.xlsx",
+            "Title": "Samples.xlsx",
+            "DataSourceId": "61ce395d-7a2e-4838-9f40-06e122505ad5",
+            "HasTabularData": false,
+            "HasAsset": true,
+            "Properties": {
+              "Url": "http://dl.infragistics.com/reportplus/reveal/samples/Samples.xlsx"
+            },
+            "Parameters": {}
+          }
+        },
+        "Expiration": 1440,
+        "Bindings": {
+          "Bindings": [
+            {
+              "Source": {
+                "_type": "FieldBindingSourceType",
+                "FieldName": "Territory"
+              },
+              "Operator": "Equals",
+              "Target": {
+                "_type": "DataBasedGlobalFilterBindingTargetType",
+                "GlobalFilterId": "ddf3fa65-6893-4d8b-73ad-0b28fc1af330",
+                "GlobalFilterFieldName": "Territory"
+              }
+            },
+            {
+              "Source": {
+                "_type": "FieldBindingSourceType",
+                "FieldName": "Date"
+              },
+              "Operator": "Between",
+              "Target": {
+                "_type": "DateGlobalFilterBindingTargetType",
+                "GlobalFilterFieldName": "Date Filter",
+                "GlobalFilterId": "_date"
+              }
+            }
+          ]
+        },
+        "IsTransposed": false,
+        "Fields": [
+          {
+            "FieldName": "Territory",
+            "FieldType": "String",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Date",
+            "FieldType": "Date",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Quota",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Leads",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Hot Leads",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "New Seats",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "New Sales",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Renewal Seats",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Renewal Sales ",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Employee",
+            "FieldType": "String",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Pipepline",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Forecasted",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Revenue",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Total Opportunites",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Product",
+            "FieldType": "String",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "b",
+            "FieldType": "String",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "c",
+            "FieldType": "String",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "d",
+            "FieldType": "String",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "e",
+            "FieldType": "String",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "f",
+            "FieldType": "String",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          }
+        ],
+        "TransposedFields": [],
+        "QuickFilters": [],
+        "AdditionalTables": [],
+        "ServiceAdditionalTables": [],
+        "FieldListSorting": "None"
+      },
+      "VisualizationSettings": {
+        "_type": "ChartVisualizationSettingsType",
+        "VisualizationType": "CHART",
+        "ChartType": "Bar",
+        "AllSeries": false,
+        "ShowLegends": true,
+        "TrendlineType": "None",
+        "SingleAxisMode": false,
+        "Series": [],
+        "LeftAxisFields": [],
+        "RightAxisFields": [],
+        "LeftAxisLogarithmic": false,
+        "RightAxisLogarithmic": false,
+        "LabelDisplayMode": "Percentage",
+        "BrushOffsetIndex": -1,
+        "PieStartPosition": 270,
+        "ShowTotalsInTooltip": true,
+        "CompositeChartType1": "Column",
+        "CompositeChartType2": "Column",
+        "CompositeChartTypesSwapped": false,
+        "ShowZeroValuesInLegend": false,
+        "YAxisLabelAlignment": "Inherit",
+        "UseCompactLabels": false,
+        "SyncAxisVisibleRange": false,
+        "AutomaticLabelRotation": true,
+        "OthersSliceThreshold": 3.0,
+        "ZoomPositionHorizontal": 0.0,
+        "ZoomPositionVertical": 0.0,
+        "ZoomScaleHorizontal": 1.0,
+        "ZoomScaleVertical": 1.0,
+        "ShowAxisX": true,
+        "ShowAxisY": true,
+        "CategoryAxisOverlap": -0.2,
+        "CategoryAxisGap": 0.4
+      },
+      "VisualizationDataSpec": {
+        "_type": "CategoryVisualizationDataSpecType",
+        "FormatVersion": 0,
+        "AdHocExpandedElements": [],
+        "Rows": [
+          {
+            "_type": "DimensionColumnSpecType",
+            "SummarizationField": {
+              "_type": "SummarizationRegularFieldType",
+              "FieldName": "Employee",
+              "DrillDownElements": [],
+              "ExpandedItems": []
+            }
+          }
+        ],
+        "Values": [
+          {
+            "_type": "MeasureColumnSpecType",
+            "SummarizationField": {
+              "_type": "SummarizationValueFieldType",
+              "FieldName": "Pipepline",
+              "FieldLabel": "Pipepline",
+              "IsHidden": false,
+              "AggregationType": "Sum",
+              "Sorting": "Asc",
+              "IsCalculated": false,
+              "Formatting": {
+                "_type": "NumberFormattingSpecType",
+                "OverrideDefaultSettings": false,
+                "FormatType": "Currency",
+                "DecimalDigits": 0,
+                "ShowGroupingSeparator": true,
+                "CurrencySymbol": "$",
+                "NegativeFormat": "MinusSign",
+                "MKFormat": "Auto",
+                "ShowDataLabelsInChart": true
+              }
+            }
+          }
+        ],
+        "FixedLines": []
+      },
+      "PostTransformations": []
+    },
+    {
+      "_type": "WidgetType",
+      "Id": "27e314d4-ae15-4c87-ae7b-905caec9467c",
+      "RowSpan": 46,
+      "ColumnSpan": 31,
+      "IsTitleVisible": true,
+      "Title": "Total Leads vs Hot Leads",
+      "DataSpec": {
+        "_type": "TabularDataSpecType",
+        "DataSourceItem": {
+          "_type": "DataSourceItemType",
+          "Id": "f678350c-92b5-4fd4-b300-54b95ee2b1a5__2535__https://infragisticsinc297.sharepoint.com/Groups/marketing/_api/Web/GetFileByServerRelativePath(decodedurl='/Groups/marketing/Products/Reveal/Samples.xlsx')/Sales",
+          "Title": "Sales",
+          "DataSourceId": "__EXCEL",
+          "HasTabularData": true,
+          "HasAsset": false,
+          "Properties": {
+            "Sheet": "Sales"
+          },
+          "Parameters": {},
+          "ResourceItem": {
+            "_type": "DataSourceItemType",
+            "Id": "http://dl.infragistics.com/reportplus/reveal/samples/Samples.xlsx",
+            "Title": "Samples.xlsx",
+            "DataSourceId": "61ce395d-7a2e-4838-9f40-06e122505ad5",
+            "HasTabularData": false,
+            "HasAsset": true,
+            "Properties": {
+              "Url": "http://dl.infragistics.com/reportplus/reveal/samples/Samples.xlsx"
+            },
+            "Parameters": {}
+          }
+        },
+        "Expiration": 1440,
+        "Bindings": {
+          "Bindings": [
+            {
+              "Source": {
+                "_type": "FieldBindingSourceType",
+                "FieldName": "Date"
+              },
+              "Operator": "Between",
+              "Target": {
+                "_type": "DateGlobalFilterBindingTargetType",
+                "GlobalFilterId": "_date"
+              }
+            },
+            {
+              "Source": {
+                "_type": "FieldBindingSourceType",
+                "FieldName": "Territory"
+              },
+              "Operator": "Equals",
+              "Target": {
+                "_type": "DataBasedGlobalFilterBindingTargetType",
+                "GlobalFilterId": "ddf3fa65-6893-4d8b-73ad-0b28fc1af330",
+                "GlobalFilterFieldName": "Territory"
+              }
+            }
+          ]
+        },
+        "IsTransposed": false,
+        "Fields": [
+          {
+            "FieldName": "Territory",
+            "FieldType": "String",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Date",
+            "FieldLabel": "Date",
+            "FieldType": "Date",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None",
+            "Formatting": {
+              "_type": "DateFormattingSpecType",
+              "OverrideDefaultSettings": false,
+              "DateFormat": "dd-MMM-yyyy"
+            },
+            "Settings": {
+              "_type": "DateTimeFieldSettingsType",
+              "DateFiscalYearStartMonth": 0,
+              "DisplayInLocalTimeZone": false
+            }
+          },
+          {
+            "FieldName": "Quota",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Leads",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Hot Leads",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "New Seats",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "New Sales",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Renewal Seats",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Renewal Sales ",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Employee",
+            "FieldType": "String",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Pipepline",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Forecasted",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Revenue",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Total Opportunites",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Product",
+            "FieldType": "String",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "b",
+            "FieldType": "String",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "c",
+            "FieldType": "String",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "d",
+            "FieldType": "String",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "e",
+            "FieldType": "String",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "f",
+            "FieldType": "String",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          }
+        ],
+        "TransposedFields": [],
+        "QuickFilters": [],
+        "AdditionalTables": [],
+        "ServiceAdditionalTables": [],
+        "FieldListSorting": "None"
+      },
+      "VisualizationSettings": {
+        "_type": "ChartVisualizationSettingsType",
+        "VisualizationType": "CHART",
+        "ChartType": "Column",
+        "AllSeries": false,
+        "ShowLegends": true,
+        "TrendlineType": "None",
+        "SingleAxisMode": false,
+        "Series": [],
+        "LeftAxisFields": [],
+        "RightAxisFields": [],
+        "LeftAxisLogarithmic": false,
+        "RightAxisLogarithmic": false,
+        "LabelDisplayMode": "Percentage",
+        "BrushOffsetIndex": -1,
+        "PieStartPosition": 270,
+        "ShowTotalsInTooltip": true,
+        "CompositeChartType1": "Column",
+        "CompositeChartType2": "Column",
+        "CompositeChartTypesSwapped": false,
+        "ShowZeroValuesInLegend": false,
+        "YAxisLabelAlignment": "Inherit",
+        "UseCompactLabels": false,
+        "SyncAxisVisibleRange": false,
+        "AutomaticLabelRotation": true,
+        "OthersSliceThreshold": 3.0,
+        "ZoomPositionHorizontal": 0.0,
+        "ZoomPositionVertical": 0.0,
+        "ZoomScaleHorizontal": 1.0,
+        "ZoomScaleVertical": 1.0,
+        "ShowAxisX": true,
+        "ShowAxisY": true,
+        "CategoryAxisOverlap": -0.2,
+        "CategoryAxisGap": 0.4
+      },
+      "VisualizationDataSpec": {
+        "_type": "CategoryVisualizationDataSpecType",
+        "AdHocFields": 2,
+        "FormatVersion": 1,
+        "AdHocExpandedElements": [],
+        "Rows": [
+          {
+            "_type": "DimensionColumnSpecType",
+            "SummarizationField": {
+              "_type": "SummarizationDateFieldType",
+              "FieldName": "Date",
+              "DrillDownElements": [],
+              "ExpandedItems": [],
+              "DateAggregationType": "Month"
+            }
+          },
+          {
+            "_type": "DimensionColumnSpecType",
+            "SummarizationField": {
+              "_type": "SummarizationDateFieldType",
+              "FieldName": "Date",
+              "DrillDownElements": [],
+              "ExpandedItems": [],
+              "DateAggregationType": "Day"
+            }
+          }
+        ],
+        "Values": [
+          {
+            "_type": "MeasureColumnSpecType",
+            "SummarizationField": {
+              "_type": "SummarizationValueFieldType",
+              "FieldName": "Leads",
+              "FieldLabel": "Leads",
+              "IsHidden": false,
+              "AggregationType": "Sum",
+              "Sorting": "None",
+              "IsCalculated": false
+            }
+          },
+          {
+            "_type": "MeasureColumnSpecType",
+            "SummarizationField": {
+              "_type": "SummarizationValueFieldType",
+              "FieldName": "Hot Leads",
+              "FieldLabel": "Hot Leads",
+              "IsHidden": false,
+              "AggregationType": "Sum",
+              "Sorting": "None",
+              "IsCalculated": false
+            }
+          }
+        ],
+        "FixedLines": []
+      },
+      "PostTransformations": []
+    },
+    {
+      "_type": "WidgetType",
+      "Id": "d5c282ce-34ae-4456-a359-104a54ab8a32",
+      "RowSpan": 33,
+      "ColumnSpan": 29,
+      "IsTitleVisible": true,
+      "Title": "Quotas by Sales Rep",
+      "DataSpec": {
+        "_type": "TabularDataSpecType",
+        "DataSourceItem": {
+          "_type": "DataSourceItemType",
+          "Id": "f678350c-92b5-4fd4-b300-54b95ee2b1a5__2535__https://infragisticsinc297.sharepoint.com/Groups/marketing/_api/Web/GetFileByServerRelativePath(decodedurl='/Groups/marketing/Products/Reveal/Samples.xlsx')/Sales",
+          "Title": "Sales",
+          "DataSourceId": "__EXCEL",
+          "HasTabularData": true,
+          "HasAsset": false,
+          "Properties": {
+            "Sheet": "Sales"
+          },
+          "Parameters": {},
+          "ResourceItem": {
+            "_type": "DataSourceItemType",
+            "Id": "http://dl.infragistics.com/reportplus/reveal/samples/Samples.xlsx",
+            "Title": "Samples.xlsx",
+            "DataSourceId": "61ce395d-7a2e-4838-9f40-06e122505ad5",
+            "HasTabularData": false,
+            "HasAsset": true,
+            "Properties": {
+              "Url": "http://dl.infragistics.com/reportplus/reveal/samples/Samples.xlsx"
+            },
+            "Parameters": {}
+          }
+        },
+        "Expiration": 1440,
+        "Bindings": {
+          "Bindings": [
+            {
+              "Source": {
+                "_type": "FieldBindingSourceType",
+                "FieldName": "Date"
+              },
+              "Operator": "Between",
+              "Target": {
+                "_type": "DateGlobalFilterBindingTargetType",
+                "GlobalFilterFieldName": "Date Filter",
+                "GlobalFilterId": "_date"
+              }
+            },
+            {
+              "Source": {
+                "_type": "FieldBindingSourceType",
+                "FieldName": "Territory"
+              },
+              "Operator": "Equals",
+              "Target": {
+                "_type": "DataBasedGlobalFilterBindingTargetType",
+                "GlobalFilterId": "ddf3fa65-6893-4d8b-73ad-0b28fc1af330",
+                "GlobalFilterFieldName": "Territory"
+              }
+            }
+          ]
+        },
+        "IsTransposed": false,
+        "Fields": [
+          {
+            "FieldName": "Territory",
+            "FieldType": "String",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Date",
+            "FieldType": "Date",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Quota",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None",
+            "Filter": {
+              "_type": "NumberFilterType",
+              "FilterType": "FilterByRule",
+              "SelectedValues": [],
+              "RuleType": "TopItems",
+              "Value": 10.0
+            }
+          },
+          {
+            "FieldName": "Leads",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Hot Leads",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "New Seats",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "New Sales",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Renewal Seats",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Renewal Sales ",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Employee",
+            "FieldType": "String",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Pipepline",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Forecasted",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Revenue",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Total Opportunites",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Product",
+            "FieldType": "String",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "b",
+            "FieldType": "String",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "c",
+            "FieldType": "String",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "d",
+            "FieldType": "String",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "e",
+            "FieldType": "String",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "f",
+            "FieldType": "String",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None"
+          }
+        ],
+        "TransposedFields": [],
+        "QuickFilters": [],
+        "AdditionalTables": [],
+        "ServiceAdditionalTables": [],
+        "FieldListSorting": "None"
+      },
+      "VisualizationSettings": {
+        "_type": "GaugeVisualizationSettingsType",
+        "VisualizationType": "GAUGE",
+        "ViewType": "BulletGraph",
+        "Minimum": {
+          "ValueType": "NumberValue",
+          "Value": 0.8
+        },
+        "Maximum": {
+          "ValueType": "NumberValue",
+          "Value": 2.0
+        },
+        "GaugeBands": [
+          {
+            "_type": "GaugeBandType",
+            "Type": "NumberValue",
+            "Color": "Green",
+            "Value": 1.0,
+            "Shape": "None"
+          },
+          {
+            "_type": "GaugeBandType",
+            "Type": "NumberValue",
+            "Color": "Yellow",
+            "Value": 0.8,
+            "Shape": "None"
+          },
+          {
+            "_type": "GaugeBandType",
+            "Type": "Percentage",
+            "Color": "Red",
+            "Shape": "None"
+          }
+        ],
+        "SingleValueFormattingEnabled": true
+      },
+      "VisualizationDataSpec": {
+        "_type": "LinearGaugeVisualizationDataSpecType",
+        "FormatVersion": 0,
+        "AdHocExpandedElements": [],
+        "Rows": [
+          {
+            "_type": "DimensionColumnSpecType",
+            "SummarizationField": {
+              "_type": "SummarizationRegularFieldType",
+              "FieldName": "Employee",
+              "DrillDownElements": [],
+              "ExpandedItems": []
+            }
+          }
+        ],
+        "Value": [
+          {
+            "_type": "MeasureColumnSpecType",
+            "SummarizationField": {
+              "_type": "SummarizationValueFieldType",
+              "FieldName": "Quota",
+              "FieldLabel": "Quota",
+              "IsHidden": false,
+              "AggregationType": "Sum",
+              "Sorting": "None",
+              "IsCalculated": false,
+              "Formatting": {
+                "_type": "NumberFormattingSpecType",
+                "OverrideDefaultSettings": false,
+                "FormatType": "Percent",
+                "DecimalDigits": 2,
+                "ShowGroupingSeparator": false,
+                "CurrencySymbol": "$",
+                "NegativeFormat": "MinusSign",
+                "MKFormat": "Auto",
+                "ShowDataLabelsInChart": true
+              }
+            }
+          }
+        ],
+        "Target": []
+      },
+      "PostTransformations": []
+    }
+  ],
+  "DataSources": [
+    {
+      "_type": "DataSourceType",
+      "Id": "__EXCEL",
+      "Provider": "EXCELLOCALFILEPROVIDER",
+      "Properties": {}
+    },
+    {
+      "_type": "DataSourceType",
+      "Id": "61ce395d-7a2e-4838-9f40-06e122505ad5",
+      "Provider": "WEBSERVICE",
+      "Description": "Reveal Sample Data",
+      "Properties": {
+        "Url": "http://dl.infragistics.com/reportplus/reveal/samples/Samples.xlsx",
+        "_rpUseAnonymousAuthentication": true
+      }
+    }
+  ],
+  "GlobalFilters": [
+    {
+      "_type": "DateGlobalFilterType",
+      "Id": "_date",
+      "Title": "Date Filter",
+      "RuleType": "LastYear",
+      "IncludeToday": true
+    },
+    {
+      "_type": "TabularGlobalFilterType",
+      "Id": "ddf3fa65-6893-4d8b-73ad-0b28fc1af330",
+      "Title": "Territory",
+      "IsDynamic": true,
+      "AllowMultipleSelection": true,
+      "AllowEmptySelection": true,
+      "SortByLabel": true,
+      "SelectedItems": [],
+      "DataSpec": {
+        "_type": "TabularDataSpecType",
+        "DataSourceItem": {
+          "_type": "DataSourceItemType",
+          "Id": "f678350c-92b5-4fd4-b300-54b95ee2b1a5__2535__https://infragisticsinc297.sharepoint.com/Groups/marketing/_api/Web/GetFileByServerRelativePath(decodedurl='/Groups/marketing/Products/Reveal/Samples.xlsx')/Sales",
+          "Title": "Sales",
+          "DataSourceId": "__EXCEL",
+          "HasTabularData": true,
+          "HasAsset": false,
+          "Properties": {
+            "Sheet": "Sales"
+          },
+          "Parameters": {},
+          "ResourceItem": {
+            "_type": "DataSourceItemType",
+            "Id": "http://dl.infragistics.com/reportplus/reveal/samples/Samples.xlsx",
+            "Title": "Samples.xlsx",
+            "DataSourceId": "61ce395d-7a2e-4838-9f40-06e122505ad5",
+            "HasTabularData": false,
+            "HasAsset": true,
+            "Properties": {
+              "Url": "http://dl.infragistics.com/reportplus/reveal/samples/Samples.xlsx"
+            },
+            "Parameters": {}
+          }
+        },
+        "Expiration": 1440,
+        "Bindings": {
+          "Bindings": []
+        },
+        "IsTransposed": false,
+        "Fields": [
+          {
+            "FieldName": "Territory",
+            "FieldType": "String",
+            "IsHidden": false,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Date",
+            "FieldType": "Date",
+            "IsHidden": false,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Quota",
+            "FieldType": "Number",
+            "IsHidden": false,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Leads",
+            "FieldType": "Number",
+            "IsHidden": false,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Hot Leads",
+            "FieldType": "Number",
+            "IsHidden": false,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "New Seats",
+            "FieldType": "Number",
+            "IsHidden": false,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "New Sales",
+            "FieldType": "Number",
+            "IsHidden": false,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Renewal Seats",
+            "FieldType": "Number",
+            "IsHidden": false,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Renewal Sales ",
+            "FieldType": "Number",
+            "IsHidden": false,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Employee",
+            "FieldType": "String",
+            "IsHidden": false,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Pipepline",
+            "FieldType": "Number",
+            "IsHidden": false,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Forecasted",
+            "FieldType": "Number",
+            "IsHidden": false,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Revenue",
+            "FieldType": "Number",
+            "IsHidden": false,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Total Opportunites",
+            "FieldType": "Number",
+            "IsHidden": false,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "Product",
+            "FieldType": "String",
+            "IsHidden": false,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "b",
+            "FieldType": "String",
+            "IsHidden": false,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "c",
+            "FieldType": "String",
+            "IsHidden": false,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "d",
+            "FieldType": "String",
+            "IsHidden": false,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "e",
+            "FieldType": "String",
+            "IsHidden": false,
+            "IsCalculated": false,
+            "Sorting": "None"
+          },
+          {
+            "FieldName": "f",
+            "FieldType": "String",
+            "IsHidden": false,
+            "IsCalculated": false,
+            "Sorting": "None"
+          }
+        ],
+        "TransposedFields": [],
+        "QuickFilters": [],
+        "AdditionalTables": [],
+        "ServiceAdditionalTables": [],
+        "FieldListSorting": "None"
+      },
+      "SelectedFieldName": "Territory"
+    }
+  ],
+  "GlobalVariables": [],
+  "IsTemplate": false
+}
