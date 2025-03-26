@@ -1,5 +1,6 @@
 import { SchemaTypeNames } from "../../Core/Constants/SchemaTypeNames";
 import { JsonProperty } from "../../Core/Serialization/Decorators/JsonProperty";
+import { LargeNumberFormat } from "../Enums";
 import { NegativeFormatType } from "../Enums/NegativeFormatType";
 import { NumberFormattingType } from "../Enums/NumberFormattingType";
 import { FormattingBase } from "./FormattingBase";
@@ -11,9 +12,6 @@ export class NumberFormatting extends FormattingBase {
         this.schemaTypeName = SchemaTypeNames.NumberFormattingSpecType;
     }
 
-    @JsonProperty("ApplyMkFormat")
-    applyMkFormat: boolean = false;
-
     @JsonProperty("CurrencySymbol")
     currencySymbol: string = "$";
 
@@ -22,6 +20,9 @@ export class NumberFormatting extends FormattingBase {
 
     @JsonProperty("FormatType")
     formatType: NumberFormattingType = NumberFormattingType.Number;
+
+    @JsonProperty("MKFormat")
+    largeNumberFormat: LargeNumberFormat = LargeNumberFormat.None;
 
     @JsonProperty("NegativeFormat")
     negativeFormat: NegativeFormatType = NegativeFormatType.MinusSign;

@@ -15,6 +15,7 @@ export { IndicatorVisualizationType } from './IndicatorVisualizationType';
 export { KpiGoalPeriod } from './KpiGoalPeriod';
 export { KpiTimePeriod } from './KpiTimePeriod';
 export { LabelDisplayMode } from "./LabelDisplayMode";
+export { LargeNumberFormat } from './LargeNumberFormat';
 export { LinkFilterType } from './LinkFilterType';
 export { LinkTriggerType } from './LinkTriggerType';
 export { LinkType } from './LinkType';
