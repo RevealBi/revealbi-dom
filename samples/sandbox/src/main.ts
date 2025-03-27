@@ -57,10 +57,6 @@ const loadDashboard = async () => {
             return args.url ;
         };  
         revealView.dashboard = dashboard;
-
-
-
-        //console.log(document);
     }
 
 }
