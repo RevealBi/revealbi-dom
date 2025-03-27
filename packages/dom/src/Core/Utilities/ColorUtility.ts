@@ -1,6 +1,10 @@
 export class ColorUtility {
     /**
      * Converts a color string to an integer.
+     * Accepts:
+     * - Hex strings: #RRGGBB or #RRGGBBAA
+     * - RGB(A) strings: rgb(r, g, b) or rgba(r, g, b, a)
+     * 
      * @param color The color string to convert.
      * @returns The integer representation of the color.
      */
@@ -21,7 +25,7 @@ export class ColorUtility {
     /**
      * Converts an integer to a hex color string.
      * @param argb The integer to convert.
-     * @returns The hex color string representation of the color.
+     * @returns The hex color string representation of the color in the format `#RRGGBB` if fully opaque, or `#RRGGBBAA` if alpha is less than 255.
      */
     static intToHexColorString(argb: number): string {
         const uint = argb >>> 0;
@@ -43,6 +47,7 @@ export class ColorUtility {
 
     /**
      * Converts a hex color string to an integer.
+     * Accepts: #RRGGBB or #RRGGBBAA
      * @param hex The hex color string to convert.
      * @returns The integer representation of the color. 
      */
