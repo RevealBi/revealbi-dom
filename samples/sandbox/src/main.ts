@@ -4,6 +4,7 @@ import { SqlServerDataSourceDashboard } from "./dashboards/SqlServerDataSourceDa
 import { RestDataSourceDashboards } from "./dashboards/RestDataSourceDashboards";
 import { CustomDashboard } from "./dashboards/CustomDashboard";
 import { SalesDashboard } from "./dashboards/SalesDashboard";
+import { FixedLinesDashboard } from "./dashboards/features/FixedLines";
 
 declare const $: any;
 
@@ -17,9 +18,9 @@ const loadDashboard = async () => {
 
         //const dashboard = await $.ig.RVDashboard.loadDashboard("TEST");
 
-        const document = await RdashDocument.load("TEST");
+        //const document = await RdashDocument.load("TEST");
         //console.log(document);
-        const dashboard = await document.toRVDashboard();
+        //const dashboard = await document.toRVDashboard();
 
         // const document = await SalesDashboard.createDashboard()
         // const dashboard = await document.toRVDashboard();
@@ -46,8 +47,18 @@ const loadDashboard = async () => {
         //const dashboard = await newDocument.toRVDashboard();
         //console.log(newDocument);
 
-        const revealView = new $.ig.RevealView(viewer);        
+
+        const document = await FixedLinesDashboard.createDashboard()
+        const dashboard = await document.toRVDashboard();
+
+        const revealView: any = new $.ig.RevealView(viewer); 
+        revealView.onUrlLinkRequested = (args: any) => {
+            console.log(args);
+            return args.url ;
+        };  
         revealView.dashboard = dashboard;
+
+
 
         //console.log(document);
     }
