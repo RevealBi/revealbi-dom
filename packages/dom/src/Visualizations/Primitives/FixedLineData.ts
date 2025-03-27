@@ -33,5 +33,5 @@ export class FixedLineData extends FixedLine {
   }
 
   @JsonProperty('DataField', { type: MeasureColumn })
-  private dataField!: MeasureColumn;
+  dataField!: MeasureColumn;
 }

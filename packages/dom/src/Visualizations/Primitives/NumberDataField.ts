@@ -53,7 +53,7 @@ export class NumberDataField extends DataField {
     expression?: string;
 
     @JsonProperty("Formatting", { type: NumberFormatting })
-    formatting?: NumberFormatting;
+    formatting: NumberFormatting = new NumberFormatting();
 
     @JsonProperty("ConditionalFormatting", { type: ConditionalFormatting })
     conditionalFormatting?: ConditionalFormatting;
