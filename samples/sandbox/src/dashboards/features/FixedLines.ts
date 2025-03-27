@@ -1,7 +1,6 @@
 import { AggregationType, ColumnChartVisualization, DataSource, FixedLineAverage, FixedLineData, FixedLineFixedValue, FixedLineMaximum, FixedLineMinimum, LineStyle, NumberDataField, RdashDocument, RestDataSourceItem } from "@revealbi/dom";
 import { DataSourceFactory } from "../DataSourceFactory";
 
-
 export class FixedLinesDashboard {
 
     static createDashboard(): RdashDocument {
@@ -21,7 +20,9 @@ export class FixedLinesDashboard {
         const fixedLine = new FixedLineData(spendField);
         fixedLine.lineStyle = LineStyle.Dashed;
         fixedLine.thickness = 4;
-        fixedLine.color = -1023342; //todo: use color utility
+        fixedLine.color = "#F0629255";
+
+        console.log(fixedLine.color);
 
         const chart = new ColumnChartVisualization("Column", excelDSI).setLabel("Date").setValues("Paid Traffic")
             .addFixedLine(new FixedLineAverage("My Title"))
