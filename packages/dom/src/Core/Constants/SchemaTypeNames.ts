@@ -74,6 +74,13 @@ export abstract class SchemaTypeNames {
     static readonly XmlaHierarchyType = "XmlaHierarchyType";
     static readonly XmlaSetType = "XmlaSetType";
 
+    //******************* Fixed Lines *****************
+    static readonly FixedLineAverageType = "FixedLineAverageType";
+    static readonly FixedLineDataType = "FixedLineDataType";
+    static readonly FixedLineFixedValueType = "FixedLineFixedValueType";
+    static readonly FixedLineHighestType = "FixedLineHighestType";
+    static readonly FixedLineLowestType = "FixedLineLowestType";
+
     //******* not sure how these should be classified yet *****************
     static readonly FieldBindingSourceType = "FieldBindingSourceType";
     static readonly ParameterBindingSourceType = "ParameterBindingSourceType";

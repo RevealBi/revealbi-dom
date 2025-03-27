@@ -1,5 +1,6 @@
 {
   "Title": "TEST",
+  "Description": "This is a short description of the dashboard.",
   "ThemeName": "rvDashboardMountainTheme",
   "CreatedWith": "Reveal.Sdk.Dom",
   "FormatVersion": 6,
@@ -13,6 +14,7 @@
       "ColumnSpan": 18,
       "IsTitleVisible": true,
       "Title": "Sales by Product",
+      "Description": "This is a short description",
       "DataSpec": {
         "_type": "TabularDataSpecType",
         "DataSourceItem": {
@@ -225,7 +227,7 @@
         "ShowAxisX": true,
         "ShowAxisY": true,
         "CategoryAxisOverlap": -1.0,
-        "CategoryAxisGap": 0.0,
+        "CategoryAxisGap": 0.45,
         "CenterLabelMode": "LabelValue",
         "LegendLocation": "Top",
         "LegendHorizontalAlignment": "Left",
@@ -279,9 +281,9 @@
             "Axis": {},
             "SummarizationField": {
               "_type": "SummarizationValueFieldType",
-              "FieldName": "New Sales",
-              "FieldLabel": "New Sales",
-              "IsHidden": false,
+              "FieldName": "Leads",
+              "FieldLabel": "Leads",
+              "IsHidden": true,
               "AggregationType": "Sum",
               "Sorting": "None",
               "IsCalculated": false,
@@ -290,17 +292,146 @@
                 "OverrideDefaultSettings": false,
                 "FormatType": "Number",
                 "DecimalDigits": 0,
-                "ShowGroupingSeparator": false,
+                "ShowGroupingSeparator": true,
                 "CurrencySymbol": "$",
                 "NegativeFormat": "MinusSign",
-                "MKFormat": "K",
+                "MKFormat": "None",
                 "ShowDataLabelsInChart": true
               },
-              "UserCaption": "New Sales"
+              "UserCaption": "Leads"
             }
           }
         ],
-        "FixedLines": []
+        "FixedLines": [
+          {
+            "_type": "FixedLineHighestType",
+            "Formatting": {
+              "_type": "NumberFormattingSpecType",
+              "OverrideDefaultSettings": false,
+              "FormatType": "Number",
+              "DecimalDigits": 0,
+              "ShowGroupingSeparator": true,
+              "CurrencySymbol": "$",
+              "NegativeFormat": "MinusSign",
+              "MKFormat": "None",
+              "ShowDataLabelsInChart": true
+            },
+            "LineStyle": "DashDot",
+            "Thickness": 4.0,
+            "Title": "Highest",
+            "Color": -1023342,
+            "LineType": "Highest",
+            "Identifier": "_rp_flh_"
+          },
+          {
+            "_type": "FixedLineLowestType",
+            "Formatting": {
+              "_type": "NumberFormattingSpecType",
+              "OverrideDefaultSettings": false,
+              "FormatType": "Number",
+              "DecimalDigits": 0,
+              "ShowGroupingSeparator": true,
+              "CurrencySymbol": "$",
+              "NegativeFormat": "MinusSign",
+              "MKFormat": "None",
+              "ShowDataLabelsInChart": true
+            },
+            "LineStyle": "Solid",
+            "Thickness": 2.0,
+            "Title": "Lowest",
+            "LineType": "Lowest",
+            "Identifier": "_rp_fll_"
+          },
+          {
+            "_type": "FixedLineAverageType",
+            "Formatting": {
+              "_type": "NumberFormattingSpecType",
+              "OverrideDefaultSettings": false,
+              "FormatType": "Number",
+              "DecimalDigits": 0,
+              "ShowGroupingSeparator": true,
+              "CurrencySymbol": "$",
+              "NegativeFormat": "MinusSign",
+              "MKFormat": "None",
+              "ShowDataLabelsInChart": true
+            },
+            "LineStyle": "Solid",
+            "Thickness": 2.0,
+            "Title": "Average",
+            "LineType": "Average",
+            "Identifier": "_rp_fla_"
+          },
+          {
+            "_type": "FixedLineFixedValueType",
+            "Formatting": {
+              "_type": "NumberFormattingSpecType",
+              "OverrideDefaultSettings": false,
+              "FormatType": "Number",
+              "DecimalDigits": 0,
+              "ShowGroupingSeparator": true,
+              "CurrencySymbol": "$",
+              "NegativeFormat": "MinusSign",
+              "MKFormat": "None",
+              "ShowDataLabelsInChart": true
+            },
+            "LineStyle": "Dashed",
+            "Thickness": 2.0,
+            "Title": "Fixed Value",
+            "Color": -30107,
+            "LineType": "FixedValue",
+            "Identifier": "_rp_flfv_1",
+            "Value": 15000000.0
+          },
+          {
+            "_type": "FixedLineDataType",
+            "Formatting": {
+              "_type": "NumberFormattingSpecType",
+              "OverrideDefaultSettings": false,
+              "FormatType": "Number",
+              "DecimalDigits": 2,
+              "ShowGroupingSeparator": false,
+              "CurrencySymbol": "$",
+              "NegativeFormat": "MinusSign",
+              "MKFormat": "None",
+              "ShowDataLabelsInChart": true
+            },
+            "LineStyle": "Solid",
+            "Thickness": 2.0,
+            "Title": "Revenue",
+            "Color": -5667351,
+            "LineType": "Data",
+            "Identifier": "Revenue",
+            "DataField": {
+              "_type": "MeasureColumnSpecType",
+              "Axis": {},
+              "SummarizationField": {
+                "_type": "SummarizationValueFieldType",
+                "FieldName": "Revenue",
+                "FieldLabel": "Revenue",
+                "IsHidden": false,
+                "AggregationType": "Avg",
+                "Sorting": "None",
+                "IsCalculated": false,
+                "Formatting": {
+                  "_type": "NumberFormattingSpecType",
+                  "OverrideDefaultSettings": false,
+                  "FormatType": "Number",
+                  "DecimalDigits": 0,
+                  "ShowGroupingSeparator": true,
+                  "CurrencySymbol": "$",
+                  "NegativeFormat": "MinusSign",
+                  "MKFormat": "None",
+                  "ShowDataLabelsInChart": true
+                },
+                "UserCaption": "Revenue"
+              }
+            }
+          }
+        ]
+      },
+      "ActionsModel": {
+        "Trigger": "SelectRow",
+        "Actions": []
       },
       "PostTransformations": []
     }

@@ -1,5 +1,5 @@
 import { JsonProperty } from "../Core/Serialization/Decorators/JsonProperty";
-import { NumberDataField } from "./Primitives";
+import { FixedLine, NumberDataField } from "./Primitives";
 import { DimensionColumn } from "./Primitives/DimensionColumn";
 import { DimensionDataField } from "./Primitives/DimensionDataField";
 import { MeasureColumn } from "./Primitives/MeasureColumn";
@@ -18,6 +18,13 @@ export abstract class CategoryVisualizationBase<TSettings extends VisualizationS
         }
         set category(value: DimensionColumn | undefined) {
             this.visualizationDataSpec.category = value;
+        }
+
+        get fixedLines(): FixedLine[] {
+            return this.visualizationDataSpec.fixedLines;
+        }
+        set fixedLines(value: FixedLine[]) {
+            this.visualizationDataSpec.fixedLines = value;
         }
 
         get labels() {
