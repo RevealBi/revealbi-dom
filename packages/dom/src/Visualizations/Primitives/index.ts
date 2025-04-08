@@ -2,6 +2,7 @@ export { AdditionalTable } from './AdditionalTable';
 export { AdHocExpandedElement } from './AdHocExpandedElement';
 export { Band } from './Band';
 export { Bound } from './Bound';
+export { ColumnAxis } from './ColumnAxis';
 export { ColumnBase } from './ColumnBase';
 export { ConditionalFormatting } from './ConditionalFormatting';
 export { ConditionalFormattingBand } from './ConditionalFormattingBand';

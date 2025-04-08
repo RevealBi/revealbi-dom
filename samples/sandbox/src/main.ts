@@ -18,9 +18,9 @@ const loadDashboard = async () => {
 
         //const dashboard = await $.ig.RVDashboard.loadDashboard("TEST");
 
-        //const document = await RdashDocument.load("TEST");
-        //console.log(document);
-        //const dashboard = await document.toRVDashboard();
+        const document = await RdashDocument.load("TEST");
+        console.log(document);
+        const dashboard = await document.toRVDashboard();
 
         // const document = await SalesDashboard.createDashboard()
         // const dashboard = await document.toRVDashboard();
@@ -48,8 +48,8 @@ const loadDashboard = async () => {
         //console.log(newDocument);
 
 
-        const document = await FixedLinesDashboard.createDashboard()
-        const dashboard = await document.toRVDashboard();
+        // const document = await FixedLinesDashboard.createDashboard()
+        // const dashboard = await document.toRVDashboard();
 
         const revealView: any = new $.ig.RevealView(viewer); 
         revealView.onUrlLinkRequested = (args: any) => {
