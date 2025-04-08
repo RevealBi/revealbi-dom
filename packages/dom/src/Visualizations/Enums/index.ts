@@ -1,6 +1,7 @@
 export { AggregationType } from './AggregationType';
 export { Alignment } from './Alignment';
 export { AxisDisplayMode } from './AxisDisplayMode';
+export { AxisTitleMode } from './AxisTitleMode';
 export { BandColor } from './BandColor';
 export { BoundValueType } from './BoundValueType';
 export { ChartType } from './ChartType';

@@ -147,10 +147,16 @@
           },
           {
             "FieldName": "Product",
+            "FieldLabel": "Product",
             "FieldType": "String",
             "IsHidden": false,
             "IsCalculated": false,
-            "Sorting": "None"
+            "Sorting": "None",
+            "Settings": {
+              "_type": "DateTimeFieldSettingsType",
+              "DateFiscalYearStartMonth": 0,
+              "DisplayInLocalTimeZone": false
+            }
           },
           {
             "FieldName": "b",
@@ -232,7 +238,7 @@
         "LegendLocation": "Top",
         "LegendHorizontalAlignment": "Left",
         "GridLinesMode": "None",
-        "AxisTitlesMode": "None"
+        "AxisTitlesMode": "Both"
       },
       "VisualizationDataSpec": {
         "_type": "CategoryVisualizationDataSpecType",
@@ -241,7 +247,9 @@
         "Rows": [
           {
             "_type": "DimensionColumnSpecType",
-            "Axis": {},
+            "Axis": {
+              "Title": "My X Values"
+            },
             "SummarizationField": {
               "_type": "SummarizationRegularFieldType",
               "FieldName": "Product",
@@ -253,7 +261,9 @@
         "Values": [
           {
             "_type": "MeasureColumnSpecType",
-            "Axis": {},
+            "Axis": {
+              "Title": "My Y Values"
+            },
             "SummarizationField": {
               "_type": "SummarizationValueFieldType",
               "FieldName": "Renewal Sales ",
@@ -275,159 +285,9 @@
               },
               "UserCaption": "Renewal Sales "
             }
-          },
-          {
-            "_type": "MeasureColumnSpecType",
-            "Axis": {},
-            "SummarizationField": {
-              "_type": "SummarizationValueFieldType",
-              "FieldName": "Leads",
-              "FieldLabel": "Leads",
-              "IsHidden": true,
-              "AggregationType": "Sum",
-              "Sorting": "None",
-              "IsCalculated": false,
-              "Formatting": {
-                "_type": "NumberFormattingSpecType",
-                "OverrideDefaultSettings": false,
-                "FormatType": "Number",
-                "DecimalDigits": 0,
-                "ShowGroupingSeparator": true,
-                "CurrencySymbol": "$",
-                "NegativeFormat": "MinusSign",
-                "MKFormat": "None",
-                "ShowDataLabelsInChart": true
-              },
-              "UserCaption": "Leads"
-            }
           }
         ],
-        "FixedLines": [
-          {
-            "_type": "FixedLineHighestType",
-            "Formatting": {
-              "_type": "NumberFormattingSpecType",
-              "OverrideDefaultSettings": false,
-              "FormatType": "Number",
-              "DecimalDigits": 0,
-              "ShowGroupingSeparator": true,
-              "CurrencySymbol": "$",
-              "NegativeFormat": "MinusSign",
-              "MKFormat": "None",
-              "ShowDataLabelsInChart": true
-            },
-            "LineStyle": "DashDot",
-            "Thickness": 4.0,
-            "Title": "Highest",
-            "Color": -1023342,
-            "LineType": "Highest",
-            "Identifier": "_rp_flh_"
-          },
-          {
-            "_type": "FixedLineLowestType",
-            "Formatting": {
-              "_type": "NumberFormattingSpecType",
-              "OverrideDefaultSettings": false,
-              "FormatType": "Number",
-              "DecimalDigits": 0,
-              "ShowGroupingSeparator": true,
-              "CurrencySymbol": "$",
-              "NegativeFormat": "MinusSign",
-              "MKFormat": "None",
-              "ShowDataLabelsInChart": true
-            },
-            "LineStyle": "Solid",
-            "Thickness": 2.0,
-            "Title": "Lowest",
-            "LineType": "Lowest",
-            "Identifier": "_rp_fll_"
-          },
-          {
-            "_type": "FixedLineAverageType",
-            "Formatting": {
-              "_type": "NumberFormattingSpecType",
-              "OverrideDefaultSettings": false,
-              "FormatType": "Number",
-              "DecimalDigits": 0,
-              "ShowGroupingSeparator": true,
-              "CurrencySymbol": "$",
-              "NegativeFormat": "MinusSign",
-              "MKFormat": "None",
-              "ShowDataLabelsInChart": true
-            },
-            "LineStyle": "Solid",
-            "Thickness": 2.0,
-            "Title": "Average",
-            "LineType": "Average",
-            "Identifier": "_rp_fla_"
-          },
-          {
-            "_type": "FixedLineFixedValueType",
-            "Formatting": {
-              "_type": "NumberFormattingSpecType",
-              "OverrideDefaultSettings": false,
-              "FormatType": "Number",
-              "DecimalDigits": 0,
-              "ShowGroupingSeparator": true,
-              "CurrencySymbol": "$",
-              "NegativeFormat": "MinusSign",
-              "MKFormat": "None",
-              "ShowDataLabelsInChart": true
-            },
-            "LineStyle": "Dashed",
-            "Thickness": 2.0,
-            "Title": "Fixed Value",
-            "Color": -30107,
-            "LineType": "FixedValue",
-            "Identifier": "_rp_flfv_1",
-            "Value": 15000000.0
-          },
-          {
-            "_type": "FixedLineDataType",
-            "Formatting": {
-              "_type": "NumberFormattingSpecType",
-              "OverrideDefaultSettings": false,
-              "FormatType": "Number",
-              "DecimalDigits": 2,
-              "ShowGroupingSeparator": false,
-              "CurrencySymbol": "$",
-              "NegativeFormat": "MinusSign",
-              "MKFormat": "None",
-              "ShowDataLabelsInChart": true
-            },
-            "LineStyle": "Solid",
-            "Thickness": 2.0,
-            "Title": "Revenue",
-            "Color": -5667351,
-            "LineType": "Data",
-            "Identifier": "Revenue",
-            "DataField": {
-              "_type": "MeasureColumnSpecType",
-              "Axis": {},
-              "SummarizationField": {
-                "_type": "SummarizationValueFieldType",
-                "FieldName": "Revenue",
-                "FieldLabel": "Revenue",
-                "IsHidden": false,
-                "AggregationType": "Avg",
-                "Sorting": "None",
-                "IsCalculated": false,
-                "Formatting": {
-                  "_type": "NumberFormattingSpecType",
-                  "OverrideDefaultSettings": false,
-                  "FormatType": "Number",
-                  "DecimalDigits": 0,
-                  "ShowGroupingSeparator": true,
-                  "CurrencySymbol": "$",
-                  "NegativeFormat": "MinusSign",
-                  "MKFormat": "None",
-                  "ShowDataLabelsInChart": true
-                },
-                "UserCaption": "Revenue"
-              }
-            }
-          }
-        ]
+        "FixedLines": []
       },
       "ActionsModel": {
         "Trigger": "SelectRow",
