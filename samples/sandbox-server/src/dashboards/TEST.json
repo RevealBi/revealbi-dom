@@ -9,23 +9,23 @@
   "Widgets": [
     {
       "_type": "WidgetType",
-      "Id": "ad2420b8-4fcf-40a8-b433-63b78eb6ba27",
-      "RowSpan": 39,
-      "ColumnSpan": 18,
+      "Id": "b84b683e-fbde-4cb9-845a-57e76cdd7bc0",
+      "RowSpan": 30,
+      "ColumnSpan": 30,
       "IsTitleVisible": true,
-      "Title": "Sales by Product",
-      "Description": "This is a short description",
+      "Title": "Marketing",
       "DataSpec": {
         "_type": "TabularDataSpecType",
         "DataSourceItem": {
           "_type": "DataSourceItemType",
-          "Id": "f678350c-92b5-4fd4-b300-54b95ee2b1a5__2535__https://infragisticsinc297.sharepoint.com/Groups/marketing/_api/Web/GetFileByServerRelativePath(decodedurl='/Groups/marketing/Products/Reveal/Samples.xlsx')/Sales",
-          "Title": "Sales",
+          "Id": "http://dl.infragistics.com/reportplus/reveal/samples/Samples.xlsx/Marketing",
+          "Title": "Marketing",
           "DataSourceId": "__EXCEL",
           "HasTabularData": true,
           "HasAsset": false,
           "Properties": {
-            "Sheet": "Sales"
+            "Sheet": "Marketing",
+            "ServerAggregation": false
           },
           "Parameters": {},
           "ResourceItem": {
@@ -48,150 +48,153 @@
         "IsTransposed": false,
         "Fields": [
           {
-            "FieldName": "Territory",
-            "FieldType": "String",
-            "IsHidden": false,
-            "IsCalculated": false,
-            "Sorting": "None"
-          },
-          {
             "FieldName": "Date",
             "FieldType": "Date",
             "IsHidden": false,
             "IsCalculated": false,
-            "Sorting": "None"
+            "Sorting": "None",
+            "Properties": {}
           },
           {
-            "FieldName": "Quota",
+            "FieldName": "Spend",
             "FieldType": "Number",
             "IsHidden": false,
             "IsCalculated": false,
-            "Sorting": "None"
+            "Sorting": "None",
+            "Properties": {}
           },
           {
-            "FieldName": "Leads",
+            "FieldName": "Budget",
             "FieldType": "Number",
             "IsHidden": false,
             "IsCalculated": false,
-            "Sorting": "None"
+            "Sorting": "None",
+            "Properties": {}
           },
           {
-            "FieldName": "Hot Leads",
+            "FieldName": "CTR",
             "FieldType": "Number",
             "IsHidden": false,
             "IsCalculated": false,
-            "Sorting": "None"
+            "Sorting": "None",
+            "Properties": {}
+          },
+          {
+            "FieldName": "Avg. CPC",
+            "FieldType": "Number",
+            "IsHidden": false,
+            "IsCalculated": false,
+            "Sorting": "None",
+            "Properties": {}
+          },
+          {
+            "FieldName": "Traffic",
+            "FieldLabel": "Traffic",
+            "FieldType": "Number",
+            "IsHidden": false,
+            "IsCalculated": false,
+            "Sorting": "None",
+            "Formatting": {
+              "_type": "NumberFormattingSpecType",
+              "OverrideDefaultSettings": false,
+              "FormatType": "Number",
+              "DecimalDigits": 0,
+              "ShowGroupingSeparator": false,
+              "CurrencySymbol": "$",
+              "NegativeFormat": "MinusSign",
+              "MKFormat": "None",
+              "ShowDataLabelsInChart": true
+            },
+            "UserCaption": "Traffic",
+            "Properties": {}
+          },
+          {
+            "FieldName": "Paid Traffic",
+            "FieldType": "Number",
+            "IsHidden": false,
+            "IsCalculated": false,
+            "Sorting": "None",
+            "Properties": {}
+          },
+          {
+            "FieldName": "Organic Traffic",
+            "FieldType": "Number",
+            "IsHidden": false,
+            "IsCalculated": false,
+            "Sorting": "None",
+            "Properties": {}
+          },
+          {
+            "FieldName": "Other Traffic",
+            "FieldType": "Number",
+            "IsHidden": false,
+            "IsCalculated": false,
+            "Sorting": "None",
+            "Properties": {}
+          },
+          {
+            "FieldName": "Conversions",
+            "FieldType": "Number",
+            "IsHidden": false,
+            "IsCalculated": false,
+            "Sorting": "None",
+            "Properties": {}
+          },
+          {
+            "FieldName": "Territory",
+            "FieldType": "String",
+            "IsHidden": false,
+            "IsCalculated": false,
+            "Sorting": "None",
+            "Properties": {}
+          },
+          {
+            "FieldName": "CampaignID",
+            "FieldType": "String",
+            "IsHidden": false,
+            "IsCalculated": false,
+            "Sorting": "None",
+            "Properties": {}
           },
           {
             "FieldName": "New Seats",
             "FieldType": "Number",
             "IsHidden": false,
             "IsCalculated": false,
-            "Sorting": "None"
+            "Sorting": "None",
+            "Properties": {}
           },
           {
-            "FieldName": "New Sales",
+            "FieldName": "Paid %",
             "FieldType": "Number",
-            "IsHidden": false,
-            "IsCalculated": false,
-            "Sorting": "None"
-          },
-          {
-            "FieldName": "Renewal Seats",
-            "FieldType": "Number",
-            "IsHidden": false,
-            "IsCalculated": false,
-            "Sorting": "None"
-          },
-          {
-            "FieldName": "Renewal Sales ",
-            "FieldType": "Number",
-            "IsHidden": false,
-            "IsCalculated": false,
-            "Sorting": "None"
-          },
-          {
-            "FieldName": "Employee",
-            "FieldType": "String",
-            "IsHidden": false,
-            "IsCalculated": false,
-            "Sorting": "None"
-          },
-          {
-            "FieldName": "Pipepline",
-            "FieldType": "Number",
-            "IsHidden": false,
-            "IsCalculated": false,
-            "Sorting": "None"
-          },
-          {
-            "FieldName": "Forecasted",
-            "FieldType": "Number",
-            "IsHidden": false,
-            "IsCalculated": false,
-            "Sorting": "None"
-          },
-          {
-            "FieldName": "Revenue",
-            "FieldType": "Number",
-            "IsHidden": false,
-            "IsCalculated": false,
-            "Sorting": "None"
-          },
-          {
-            "FieldName": "Total Opportunites",
-            "FieldType": "Number",
-            "IsHidden": false,
-            "IsCalculated": false,
-            "Sorting": "None"
-          },
-          {
-            "FieldName": "Product",
-            "FieldLabel": "Product",
-            "FieldType": "String",
             "IsHidden": false,
             "IsCalculated": false,
             "Sorting": "None",
-            "Settings": {
-              "_type": "DateTimeFieldSettingsType",
-              "DateFiscalYearStartMonth": 0,
-              "DisplayInLocalTimeZone": false
-            }
+            "Properties": {}
           },
           {
-            "FieldName": "b",
-            "FieldType": "String",
+            "FieldName": "Organic %",
+            "FieldType": "Number",
             "IsHidden": false,
             "IsCalculated": false,
-            "Sorting": "None"
+            "Sorting": "None",
+            "Properties": {}
           },
           {
-            "FieldName": "c",
-            "FieldType": "String",
+            "FieldName": "number",
+            "FieldType": "Number",
             "IsHidden": false,
             "IsCalculated": false,
-            "Sorting": "None"
+            "Sorting": "None",
+            "Properties": {}
           },
           {
-            "FieldName": "d",
-            "FieldType": "String",
+            "FieldName": "today",
+            "FieldType": "Date",
             "IsHidden": false,
             "IsCalculated": false,
-            "Sorting": "None"
-          },
-          {
-            "FieldName": "e",
-            "FieldType": "String",
-            "IsHidden": false,
-            "IsCalculated": false,
-            "Sorting": "None"
-          },
-          {
-            "FieldName": "f",
-            "FieldType": "String",
-            "IsHidden": false,
-            "IsCalculated": false,
-            "Sorting": "None"
+            "Sorting": "None",
+            "Properties": {}
           }
         ],
         "TransposedFields": [],
@@ -232,13 +235,13 @@
         "ZoomScaleVertical": 1.0,
         "ShowAxisX": true,
         "ShowAxisY": true,
-        "CategoryAxisOverlap": -1.0,
-        "CategoryAxisGap": 0.45,
+        "CategoryAxisOverlap": -0.2,
+        "CategoryAxisGap": 0.4,
         "CenterLabelMode": "LabelValue",
         "LegendLocation": "Top",
         "LegendHorizontalAlignment": "Left",
         "GridLinesMode": "None",
-        "AxisTitlesMode": "Both"
+        "AxisTitlesMode": "None"
       },
       "VisualizationDataSpec": {
         "_type": "CategoryVisualizationDataSpecType",
@@ -247,12 +250,10 @@
         "Rows": [
           {
             "_type": "DimensionColumnSpecType",
-            "Axis": {
-              "Title": "My X Values"
-            },
+            "Axis": {},
             "SummarizationField": {
               "_type": "SummarizationRegularFieldType",
-              "FieldName": "Product",
+              "FieldName": "Territory",
               "DrillDownElements": [],
               "ExpandedItems": []
             }
@@ -261,13 +262,11 @@
         "Values": [
           {
             "_type": "MeasureColumnSpecType",
-            "Axis": {
-              "Title": "My Y Values"
-            },
+            "Axis": {},
             "SummarizationField": {
               "_type": "SummarizationValueFieldType",
-              "FieldName": "Renewal Sales ",
-              "FieldLabel": "Renewal Sales ",
+              "FieldName": "Spend",
+              "FieldLabel": "Spend",
               "IsHidden": false,
               "AggregationType": "Sum",
               "Sorting": "None",
@@ -280,18 +279,13 @@
                 "ShowGroupingSeparator": true,
                 "CurrencySymbol": "$",
                 "NegativeFormat": "MinusSign",
-                "MKFormat": "K",
+                "MKFormat": "None",
                 "ShowDataLabelsInChart": true
-              },
-              "UserCaption": "Renewal Sales "
+              }
             }
           }
         ],
         "FixedLines": []
-      },
-      "ActionsModel": {
-        "Trigger": "SelectRow",
-        "Actions": []
       },
       "PostTransformations": []
     }
@@ -317,205 +311,7 @@
       }
     }
   ],
-  "GlobalFilters": [
-    {
-      "_type": "DateGlobalFilterType",
-      "Id": "_date",
-      "Title": "Date Filter",
-      "RuleType": "LastYear",
-      "IncludeToday": true
-    },
-    {
-      "_type": "TabularGlobalFilterType",
-      "Id": "ddf3fa65-6893-4d8b-73ad-0b28fc1af330",
-      "Title": "Territory",
-      "IsDynamic": true,
-      "AllowMultipleSelection": true,
-      "AllowEmptySelection": true,
-      "SortByLabel": true,
-      "SelectedItems": [],
-      "DataSpec": {
-        "_type": "TabularDataSpecType",
-        "DataSourceItem": {
-          "_type": "DataSourceItemType",
-          "Id": "f678350c-92b5-4fd4-b300-54b95ee2b1a5__2535__https://infragisticsinc297.sharepoint.com/Groups/marketing/_api/Web/GetFileByServerRelativePath(decodedurl='/Groups/marketing/Products/Reveal/Samples.xlsx')/Sales",
-          "Title": "Sales",
-          "DataSourceId": "__EXCEL",
-          "HasTabularData": true,
-          "HasAsset": false,
-          "Properties": {
-            "Sheet": "Sales"
-          },
-          "Parameters": {},
-          "ResourceItem": {
-            "_type": "DataSourceItemType",
-            "Id": "http://dl.infragistics.com/reportplus/reveal/samples/Samples.xlsx",
-            "Title": "Samples.xlsx",
-            "DataSourceId": "61ce395d-7a2e-4838-9f40-06e122505ad5",
-            "HasTabularData": false,
-            "HasAsset": true,
-            "Properties": {
-              "Url": "http://dl.infragistics.com/reportplus/reveal/samples/Samples.xlsx"
-            },
-            "Parameters": {}
-          }
-        },
-        "Expiration": 1440,
-        "Bindings": {
-          "Bindings": []
-        },
-        "IsTransposed": false,
-        "Fields": [
-          {
-            "FieldName": "Territory",
-            "FieldType": "String",
-            "IsHidden": false,
-            "IsCalculated": false,
-            "Sorting": "None"
-          },
-          {
-            "FieldName": "Date",
-            "FieldType": "Date",
-            "IsHidden": false,
-            "IsCalculated": false,
-            "Sorting": "None"
-          },
-          {
-            "FieldName": "Quota",
-            "FieldType": "Number",
-            "IsHidden": false,
-            "IsCalculated": false,
-            "Sorting": "None"
-          },
-          {
-            "FieldName": "Leads",
-            "FieldType": "Number",
-            "IsHidden": false,
-            "IsCalculated": false,
-            "Sorting": "None"
-          },
-          {
-            "FieldName": "Hot Leads",
-            "FieldType": "Number",
-            "IsHidden": false,
-            "IsCalculated": false,
-            "Sorting": "None"
-          },
-          {
-            "FieldName": "New Seats",
-            "FieldType": "Number",
-            "IsHidden": false,
-            "IsCalculated": false,
-            "Sorting": "None"
-          },
-          {
-            "FieldName": "New Sales",
-            "FieldType": "Number",
-            "IsHidden": false,
-            "IsCalculated": false,
-            "Sorting": "None"
-          },
-          {
-            "FieldName": "Renewal Seats",
-            "FieldType": "Number",
-            "IsHidden": false,
-            "IsCalculated": false,
-            "Sorting": "None"
-          },
-          {
-            "FieldName": "Renewal Sales ",
-            "FieldType": "Number",
-            "IsHidden": false,
-            "IsCalculated": false,
-            "Sorting": "None"
-          },
-          {
-            "FieldName": "Employee",
-            "FieldType": "String",
-            "IsHidden": false,
-            "IsCalculated": false,
-            "Sorting": "None"
-          },
-          {
-            "FieldName": "Pipepline",
-            "FieldType": "Number",
-            "IsHidden": false,
-            "IsCalculated": false,
-            "Sorting": "None"
-          },
-          {
-            "FieldName": "Forecasted",
-            "FieldType": "Number",
-            "IsHidden": false,
-            "IsCalculated": false,
-            "Sorting": "None"
-          },
-          {
-            "FieldName": "Revenue",
-            "FieldType": "Number",
-            "IsHidden": false,
-            "IsCalculated": false,
-            "Sorting": "None"
-          },
-          {
-            "FieldName": "Total Opportunites",
-            "FieldType": "Number",
-            "IsHidden": false,
-            "IsCalculated": false,
-            "Sorting": "None"
-          },
-          {
-            "FieldName": "Product",
-            "FieldType": "String",
-            "IsHidden": false,
-            "IsCalculated": false,
-            "Sorting": "None"
-          },
-          {
-            "FieldName": "b",
-            "FieldType": "String",
-            "IsHidden": false,
-            "IsCalculated": false,
-            "Sorting": "None"
-          },
-          {
-            "FieldName": "c",
-            "FieldType": "String",
-            "IsHidden": false,
-            "IsCalculated": false,
-            "Sorting": "None"
-          },
-          {
-            "FieldName": "d",
-            "FieldType": "String",
-            "IsHidden": false,
-            "IsCalculated": false,
-            "Sorting": "None"
-          },
-          {
-            "FieldName": "e",
-            "FieldType": "String",
-            "IsHidden": false,
-            "IsCalculated": false,
-            "Sorting": "None"
-          },
-          {
-            "FieldName": "f",
-            "FieldType": "String",
-            "IsHidden": false,
-            "IsCalculated": false,
-            "Sorting": "None"
-          }
-        ],
-        "TransposedFields": [],
-        "QuickFilters": [],
-        "AdditionalTables": [],
-        "ServiceAdditionalTables": [],
-        "FieldListSorting": "None"
-      },
-      "SelectedFieldName": "Territory"
-    }
-  ],
+  "GlobalFilters": [],
   "GlobalVariables": [],
   "IsTemplate": false
 }
