@@ -2,9 +2,19 @@ import { JsonProperty } from "../../Core/Serialization/Decorators/JsonProperty";
 import { Alignment } from "../Enums/Alignment";
 import { FontSize } from "../Enums/FontSize";
 import { GridVisualizationStyle } from "./Styles/GridVisualizationStyle";
+import { GridColumnFormat } from "./Styles/GridColumnFormat";
 import { VisualizationSettings } from "./VisualizationSettings";
 
 export abstract class GridVisualizationSettingsBase extends VisualizationSettings {
+
+
+    /**
+     * Gets or sets the column formats for the grid.
+     * This property is used to specify the width and text alignment of each column.
+     * If a column format is not specified for a particular column, the default format will be used.
+     */
+    @JsonProperty("VisualizationColumns", { type: GridColumnFormat })
+    public columnFormats?: GridColumnFormat[];
 
     /**
      * Gets or sets the alignment of text in a date field.
