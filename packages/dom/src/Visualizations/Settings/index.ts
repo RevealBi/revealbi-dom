@@ -1,5 +1,5 @@
 export { GridVisualizationStyle } from "./Styles/GridVisualizationStyle";
-export { VisualizationColumnStyle } from "./Styles/VisualizationColumnStyle";
+export { GridColumnFormat } from "./Styles/GridColumnFormat";
 
 export { AreaChartVisualizationSettings } from './AreaChartVisualizationSettings';
 export { AssetVisualizationSettings } from './AssetVisualizationSettings';
