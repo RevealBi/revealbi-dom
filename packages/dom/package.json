@@ -1,6 +1,6 @@
 {
   "name": "@revealbi/dom",
-  "version": "0.2.17",
+  "version": "0.2.20",
   "type": "module",
   "main": "./index.js",
   "module": "./index.mjs",
@@ -10,18 +10,17 @@
   "exports": {
     ".": {
       "types": "./index.d.ts",
-      "import": "./index.mjs",
-      "require": "./index.js",
+      "import": {
+        "types": "./index.d.ts",
+        "default": "./index.mjs"
+      },
+      "require": {
+        "types": "./index.d.ts", 
+        "default": "./index.js"
+      },
       "default": "./index.mjs"
     }
   },
-  "sideEffects": false,
-  "files": [
-    "index.js",
-    "index.mjs",
-    "index.d.ts",
-    "index.umd.js"
-  ],
   "engines": {
     "node": ">=16"
   },

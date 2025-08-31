@@ -34,7 +34,7 @@ export default defineConfig({
       // Could also be a dictionary or array of multiple entry points.
       entry: 'src/index.ts',
       name: 'dom',
-      fileName: 'index',
+      fileName: (format) => `index.${format === 'es' ? 'mjs' : format === 'umd' ? 'umd.js' : 'js'}`,
       // Change this to the formats you want to support.
       // Don't forget to update your package.json as well.
       formats: ['es', 'cjs', 'umd'],
@@ -42,6 +42,9 @@ export default defineConfig({
     rollupOptions: {
       // External packages that should not be bundled into your library.
       external: [],
+      output: {
+        preserveModules: false, // Important for bundler compatibility
+      }
     },
   },
 
