@@ -18,7 +18,7 @@ const loadDashboard = async () => {
 
         //const dashboard = await $.ig.RVDashboard.loadDashboard("TEST");
 
-        const document = await RdashDocument.load("TEST");
+        const document = await RdashDocument.load("Banking");
         console.log(document);
         const dashboard = await document.toRVDashboard();
 

@@ -11,6 +11,7 @@ export { DateTimeFilter } from './DateTimeFilter';
 export { FilterBase } from './FilterBase';
 export { FilterItem } from './FilterItem';
 export { FilterValue } from './FilterValue';
+export { DateFilterValue } from './DateFilterValue';
 export { NumberFilter } from './NumberFilter';
 export { TextFilter } from './TextFilter';
 export { TimeFilter } from './TimeFilter';
