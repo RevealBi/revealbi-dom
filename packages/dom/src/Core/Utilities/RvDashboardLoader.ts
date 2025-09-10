@@ -24,6 +24,10 @@ export class RvDashboardLoader {
             return dashboard;
         }
 
+        if (dashboard.hasOwnProperty("_dashboardModel")) {
+            return dashboard;
+        }
+
         throw new Error("Invalid Dashboard provided to DashboardLoader.load");
     }
 
