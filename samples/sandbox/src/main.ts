@@ -19,8 +19,8 @@ const loadDashboard = async () => {
         //const dashboard = await $.ig.RVDashboard.loadDashboard("TEST");
 
         const document = await RdashDocument.load("Banking");
-        console.log(document);
-        const grid = GridVisualization.from(document.visualizations[0]);
+        document.useAutoLayout = true;
+        const grid = GridVisualization.from(document.visualizations[1], { includeAllFields: true });
         document.visualizations = [grid!];
         const dashboard = await document.toRVDashboard();
 
