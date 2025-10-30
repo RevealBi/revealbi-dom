@@ -5,9 +5,13 @@ import { CategoryVisualizationBase } from "../CategoryVisualizationBase";
 import { GridVisualization } from "../GridVisualization";
 import { TabularDataDefinition } from "../DataDefinitions/TabularDataDefinition";
 
+export interface GridConversionOptions {
+    includeAllFields?: boolean;
+}
+
 export class VisualizationConverter {
     
-    static toGrid(sourceViz: IVisualization): GridVisualization | null {
+    static toGrid(sourceViz: IVisualization, options?: GridConversionOptions): GridVisualization | null {
         if (!VisualizationConverter.canConvertToGrid(sourceViz.chartType)) {
             return null;
         }
@@ -22,7 +26,10 @@ export class VisualizationConverter {
             tabularDataDef.dataSourceItem.fields = tabularDataDef.fields;
         }
 
-        const columns = VisualizationConverter.extractColumns(sourceViz);
+        const columns = options?.includeAllFields 
+            ? VisualizationConverter.extractAllFields(tabularDataDef)
+            : VisualizationConverter.extractColumns(sourceViz);
+            
         if (!columns || columns.length === 0) {
             return null;
         }
@@ -71,6 +78,21 @@ export class VisualizationConverter {
         addColumn(categoryViz.category?.dataField?.fieldName);
         categoryViz.labels?.forEach(label => addColumn(label.dataField?.fieldName));
         categoryViz.values?.forEach(value => addColumn(value.dataField?.fieldName));
+
+        return columns.length > 0 ? columns : null;
+    }
+
+    private static extractAllFields(tabularDataDef: TabularDataDefinition): TabularColumn[] | null {
+        const addedFieldNames = new Set<string>();
+        const columns: TabularColumn[] = [];
+
+        tabularDataDef.fields.forEach(field => {
+            const fieldName = field.fieldName;
+            if (fieldName && !addedFieldNames.has(fieldName)) {
+                columns.push(new TabularColumn(fieldName));
+                addedFieldNames.add(fieldName);
+            }
+        });
 
         return columns.length > 0 ? columns : null;
     }

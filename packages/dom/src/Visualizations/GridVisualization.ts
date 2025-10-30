@@ -7,7 +7,7 @@ import { Visualization } from "./Visualization";
 import { ColumnUtilities } from "./Utilities/ColumnUtilities";
 import { GridVisualizationDataSpec } from "./VisualizationSpecs/GridVisualizationDataSpec";
 import { IVisualization } from "./Interfaces/IVisualization";
-import { VisualizationConverter } from "./Converters/VisualizationConverter";
+import { VisualizationConverter, GridConversionOptions } from "./Converters/VisualizationConverter";
 
 export class GridVisualization extends Visualization<GridVisualizationSettings> {
 
@@ -17,8 +17,8 @@ export class GridVisualization extends Visualization<GridVisualizationSettings> 
         this.chartType = ChartType.Grid;
     }
 
-    static from(sourceViz: IVisualization): GridVisualization | null {
-        return VisualizationConverter.toGrid(sourceViz);
+    static from(sourceViz: IVisualization, options?: GridConversionOptions): GridVisualization | null {
+        return VisualizationConverter.toGrid(sourceViz, options);
     }
 
     @JsonProperty("VisualizationDataSpec", { type: GridVisualizationDataSpec })
