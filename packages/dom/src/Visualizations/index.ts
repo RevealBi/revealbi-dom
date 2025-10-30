@@ -3,6 +3,7 @@ export * from "./Enums";
 export * from "./Interfaces";
 export * from "./Primitives";
 export * from "./Settings";
+export { VisualizationConverter } from "./Converters/VisualizationConverter";
 
 export { AreaChartVisualization } from "./AreaChartVisualization";
 export { BarChartVisualization } from "./BarChartVisualization";
