@@ -1,5 +1,5 @@
 // import './app/app.element';
-import { RdashDocument, VisualizationFilter } from "@revealbi/dom";
+import { GridVisualization, RdashDocument, VisualizationFilter } from "@revealbi/dom";
 import { SqlServerDataSourceDashboard } from "./dashboards/SqlServerDataSourceDashboard";
 import { RestDataSourceDashboards } from "./dashboards/RestDataSourceDashboards";
 import { CustomDashboard } from "./dashboards/CustomDashboard";
@@ -19,7 +19,9 @@ const loadDashboard = async () => {
         //const dashboard = await $.ig.RVDashboard.loadDashboard("TEST");
 
         const document = await RdashDocument.load("Banking");
-        console.log(document);
+        document.useAutoLayout = true;
+        const grid = GridVisualization.from(document.visualizations[1], { includeAllFields: true });
+        document.visualizations = [grid!];
         const dashboard = await document.toRVDashboard();
 
         // const document = await SalesDashboard.createDashboard()
@@ -49,7 +51,7 @@ const loadDashboard = async () => {
 
 
         // const document = await FixedLinesDashboard.createDashboard()
-        // const dashboard = await document.toRVDashboard();
+        //const dashboard = await document.toRVDashboard();
 
         const revealView: any = new $.ig.RevealView(viewer); 
         revealView.onUrlLinkRequested = (args: any) => {
