@@ -1,6 +1,6 @@
 {
   "name": "@revealbi/dom",
-  "version": "0.2.24",
+  "version": "0.2.25",
   "type": "module",
   "main": "./index.js",
   "module": "./index.mjs",

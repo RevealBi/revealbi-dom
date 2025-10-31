@@ -1,5 +1,5 @@
 // import './app/app.element';
-import { GridVisualization, RdashDocument, VisualizationFilter } from "@revealbi/dom";
+import { DashboardDateFilter, GridVisualization, RdashDocument, VisualizationFilter } from "@revealbi/dom";
 import { SqlServerDataSourceDashboard } from "./dashboards/SqlServerDataSourceDashboard";
 import { RestDataSourceDashboards } from "./dashboards/RestDataSourceDashboards";
 import { CustomDashboard } from "./dashboards/CustomDashboard";
@@ -18,15 +18,19 @@ const loadDashboard = async () => {
 
         //const dashboard = await $.ig.RVDashboard.loadDashboard("Sales");
 
-        // const document = await RdashDocument.load("Banking");
-        // document.useAutoLayout = true;
-        // const grid = GridVisualization.from(document.visualizations[1], { includeAllFields: true });
-        // const filter = new VisualizationFilter("AccountStatus");
-        // document.visualizations = [grid!];
-        // const dashboard = await document.toRVDashboard();
+        const document = await RdashDocument.load("Banking");
+        document.useAutoLayout = true;
+        const grid = GridVisualization.from(document.visualizations[1], { includeAllFields: true });
+        if (grid) {
+            var dateFilter = document.filters.find(f => f.id === "_date") as DashboardDateFilter;
+            grid!.connectDashboardFilter(dateFilter, "date");
+            document.visualizations = [grid!];
+        }
 
-        const document = await SalesDashboard.createDashboard()
         const dashboard = await document.toRVDashboard();
+
+        // const document = await SalesDashboard.createDashboard()
+        // const dashboard = await document.toRVDashboard();
 
         //const dashboard = await CustomDashboard.createDashboard().toRVDashboard();
         //const dashboard = await SqlServerDataSourceDashboard.createDashboard().toRVDashboard();
@@ -34,7 +38,7 @@ const loadDashboard = async () => {
         //const dashboard = await SalesDashboard.createDashboard().toRVDashboard();
 
         //const document = await RdashDocument.load("TEST");
-        
+
 
         //const newDocument = new RdashDocument("TEST");
         //newDocument.import(document, undefined, { includeDashboardFilters: true });
@@ -54,11 +58,11 @@ const loadDashboard = async () => {
         // const document = await FixedLinesDashboard.createDashboard()
         //const dashboard = await document.toRVDashboard();
 
-        const revealView: any = new $.ig.RevealView(viewer); 
+        const revealView: any = new $.ig.RevealView(viewer);
         revealView.onUrlLinkRequested = (args: any) => {
             console.log(args);
-            return args.url ;
-        };  
+            return args.url;
+        };
         revealView.dashboard = dashboard;
     }
 

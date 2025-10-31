@@ -28,7 +28,13 @@ export interface GridConversionOptions {
 export class VisualizationConverter {
     
     static toGrid(sourceViz: IVisualization, options?: GridConversionOptions): GridVisualization | null {
+        if (sourceViz === undefined || sourceViz === null) {
+            console.warn("Source visualization is null or undefined.");
+            return null;
+        }
+
         if (!VisualizationConverter.canConvertToGrid(sourceViz.chartType)) {
+            console.warn(`Visualization of type ${sourceViz.chartType} cannot be converted to Grid.`);
             return null;
         }
 
@@ -61,14 +67,6 @@ export class VisualizationConverter {
         gridViz.isTitleVisible = sourceViz.isTitleVisible;
         gridViz.columnSpan = sourceViz.columnSpan;
         gridViz.rowSpan = sourceViz.rowSpan;
-
-        if (sourceViz.filters && sourceViz.filters.length > 0) {
-            gridViz.filters = sourceViz.filters;
-        }
-
-        if (sourceViz.filterBindings && sourceViz.filterBindings.length > 0) {
-            gridViz.filterBindings = sourceViz.filterBindings;
-        }
 
         return gridViz;
     }
