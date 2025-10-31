@@ -16,16 +16,17 @@ const loadDashboard = async () => {
     const viewer = document.getElementById('viewer');
     if (viewer) {
 
-        //const dashboard = await $.ig.RVDashboard.loadDashboard("TEST");
+        //const dashboard = await $.ig.RVDashboard.loadDashboard("Sales");
 
-        const document = await RdashDocument.load("Banking");
-        document.useAutoLayout = true;
-        const grid = GridVisualization.from(document.visualizations[1], { includeAllFields: true });
-        document.visualizations = [grid!];
-        const dashboard = await document.toRVDashboard();
-
-        // const document = await SalesDashboard.createDashboard()
+        // const document = await RdashDocument.load("Banking");
+        // document.useAutoLayout = true;
+        // const grid = GridVisualization.from(document.visualizations[1], { includeAllFields: true });
+        // const filter = new VisualizationFilter("AccountStatus");
+        // document.visualizations = [grid!];
         // const dashboard = await document.toRVDashboard();
+
+        const document = await SalesDashboard.createDashboard()
+        const dashboard = await document.toRVDashboard();
 
         //const dashboard = await CustomDashboard.createDashboard().toRVDashboard();
         //const dashboard = await SqlServerDataSourceDashboard.createDashboard().toRVDashboard();

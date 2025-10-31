@@ -220,6 +220,7 @@
         "Rows": [],
         "Date": {
           "_type": "DimensionColumnSpecType",
+          "Axis": {},
           "SummarizationField": {
             "_type": "SummarizationDateFieldType",
             "FieldName": "Date",
@@ -231,6 +232,7 @@
         "Value": [
           {
             "_type": "MeasureColumnSpecType",
+            "Axis": {},
             "SummarizationField": {
               "_type": "SummarizationValueFieldType",
               "FieldName": "Pipepline",
@@ -256,6 +258,7 @@
         "Target": [
           {
             "_type": "MeasureColumnSpecType",
+            "Axis": {},
             "SummarizationField": {
               "_type": "SummarizationValueFieldType",
               "FieldName": "Forecasted",
@@ -532,7 +535,12 @@
         "ShowAxisX": true,
         "ShowAxisY": true,
         "CategoryAxisOverlap": -0.2,
-        "CategoryAxisGap": 0.4
+        "CategoryAxisGap": 0.4,
+        "CenterLabelMode": "LabelValue",
+        "LegendLocation": "Top",
+        "LegendHorizontalAlignment": "Left",
+        "GridLinesMode": "None",
+        "AxisTitlesMode": "None"
       },
       "VisualizationDataSpec": {
         "_type": "CategoryVisualizationDataSpecType",
@@ -542,6 +550,7 @@
         "Rows": [
           {
             "_type": "DimensionColumnSpecType",
+            "Axis": {},
             "SummarizationField": {
               "_type": "SummarizationDateFieldType",
               "FieldName": "Date",
@@ -552,6 +561,7 @@
           },
           {
             "_type": "DimensionColumnSpecType",
+            "Axis": {},
             "SummarizationField": {
               "_type": "SummarizationDateFieldType",
               "FieldName": "Date",
@@ -564,6 +574,7 @@
         "Values": [
           {
             "_type": "MeasureColumnSpecType",
+            "Axis": {},
             "SummarizationField": {
               "_type": "SummarizationValueFieldType",
               "FieldName": "New Sales",
@@ -576,6 +587,7 @@
           },
           {
             "_type": "MeasureColumnSpecType",
+            "Axis": {},
             "SummarizationField": {
               "_type": "SummarizationValueFieldType",
               "FieldName": "Renewal Sales ",
@@ -835,7 +847,12 @@
         "ShowAxisX": true,
         "ShowAxisY": true,
         "CategoryAxisOverlap": -0.2,
-        "CategoryAxisGap": 0.4
+        "CategoryAxisGap": 0.4,
+        "CenterLabelMode": "LabelValue",
+        "LegendLocation": "Top",
+        "LegendHorizontalAlignment": "Left",
+        "GridLinesMode": "None",
+        "AxisTitlesMode": "None"
       },
       "VisualizationDataSpec": {
         "_type": "CategoryVisualizationDataSpecType",
@@ -844,6 +861,7 @@
         "Rows": [
           {
             "_type": "DimensionColumnSpecType",
+            "Axis": {},
             "SummarizationField": {
               "_type": "SummarizationRegularFieldType",
               "FieldName": "Product",
@@ -855,6 +873,7 @@
         "Values": [
           {
             "_type": "MeasureColumnSpecType",
+            "Axis": {},
             "SummarizationField": {
               "_type": "SummarizationValueFieldType",
               "FieldName": "New Sales",
@@ -867,6 +886,7 @@
           },
           {
             "_type": "MeasureColumnSpecType",
+            "Axis": {},
             "SummarizationField": {
               "_type": "SummarizationValueFieldType",
               "FieldName": "Renewal Sales ",
@@ -1095,6 +1115,7 @@
         "Rows": [],
         "Date": {
           "_type": "DimensionColumnSpecType",
+          "Axis": {},
           "SummarizationField": {
             "_type": "SummarizationDateFieldType",
             "FieldName": "Date",
@@ -1106,6 +1127,7 @@
         "Value": [
           {
             "_type": "MeasureColumnSpecType",
+            "Axis": {},
             "SummarizationField": {
               "_type": "SummarizationValueFieldType",
               "FieldName": "Total Opportunites",
@@ -1362,6 +1384,7 @@
         "Rows": [
           {
             "_type": "DimensionColumnSpecType",
+            "Axis": {},
             "SummarizationField": {
               "_type": "SummarizationRegularFieldType",
               "FieldName": "Product",
@@ -1372,6 +1395,7 @@
         ],
         "Date": {
           "_type": "DimensionColumnSpecType",
+          "Axis": {},
           "SummarizationField": {
             "_type": "SummarizationDateFieldType",
             "FieldName": "Date",
@@ -1383,6 +1407,7 @@
         "Value": [
           {
             "_type": "MeasureColumnSpecType",
+            "Axis": {},
             "SummarizationField": {
               "_type": "SummarizationValueFieldType",
               "FieldName": "New Seats",
@@ -1655,7 +1680,12 @@
         "ShowAxisX": true,
         "ShowAxisY": true,
         "CategoryAxisOverlap": -0.2,
-        "CategoryAxisGap": 0.4
+        "CategoryAxisGap": 0.4,
+        "CenterLabelMode": "LabelValue",
+        "LegendLocation": "Top",
+        "LegendHorizontalAlignment": "Left",
+        "GridLinesMode": "None",
+        "AxisTitlesMode": "None"
       },
       "VisualizationDataSpec": {
         "_type": "CategoryVisualizationDataSpecType",
@@ -1664,6 +1694,7 @@
         "Rows": [
           {
             "_type": "DimensionColumnSpecType",
+            "Axis": {},
             "SummarizationField": {
               "_type": "SummarizationRegularFieldType",
               "FieldName": "Employee",
@@ -1675,6 +1706,7 @@
         "Values": [
           {
             "_type": "MeasureColumnSpecType",
+            "Axis": {},
             "SummarizationField": {
               "_type": "SummarizationValueFieldType",
               "FieldName": "Pipepline",
@@ -1955,7 +1987,12 @@
         "ShowAxisX": true,
         "ShowAxisY": true,
         "CategoryAxisOverlap": -0.2,
-        "CategoryAxisGap": 0.4
+        "CategoryAxisGap": 0.4,
+        "CenterLabelMode": "LabelValue",
+        "LegendLocation": "Top",
+        "LegendHorizontalAlignment": "Left",
+        "GridLinesMode": "None",
+        "AxisTitlesMode": "None"
       },
       "VisualizationDataSpec": {
         "_type": "CategoryVisualizationDataSpecType",
@@ -1965,6 +2002,7 @@
         "Rows": [
           {
             "_type": "DimensionColumnSpecType",
+            "Axis": {},
             "SummarizationField": {
               "_type": "SummarizationDateFieldType",
               "FieldName": "Date",
@@ -1975,6 +2013,7 @@
           },
           {
             "_type": "DimensionColumnSpecType",
+            "Axis": {},
             "SummarizationField": {
               "_type": "SummarizationDateFieldType",
               "FieldName": "Date",
@@ -1987,6 +2026,7 @@
         "Values": [
           {
             "_type": "MeasureColumnSpecType",
+            "Axis": {},
             "SummarizationField": {
               "_type": "SummarizationValueFieldType",
               "FieldName": "Leads",
@@ -1999,6 +2039,7 @@
           },
           {
             "_type": "MeasureColumnSpecType",
+            "Axis": {},
             "SummarizationField": {
               "_type": "SummarizationValueFieldType",
               "FieldName": "Hot Leads",
@@ -2275,6 +2316,7 @@
         "Rows": [
           {
             "_type": "DimensionColumnSpecType",
+            "Axis": {},
             "SummarizationField": {
               "_type": "SummarizationRegularFieldType",
               "FieldName": "Employee",
@@ -2286,6 +2328,7 @@
         "Value": [
           {
             "_type": "MeasureColumnSpecType",
+            "Axis": {},
             "SummarizationField": {
               "_type": "SummarizationValueFieldType",
               "FieldName": "Quota",
@@ -2336,7 +2379,17 @@
       "_type": "DateGlobalFilterType",
       "Id": "_date",
       "Title": "Date Filter",
-      "RuleType": "LastYear",
+      "RuleType": "CustomRange",
+      "CustomDateRange": {
+        "From": {
+          "_type": "date",
+          "value": "2024-10-01T00:00:00Z"
+        },
+        "To": {
+          "_type": "date",
+          "value": "2025-10-31T00:00:00Z"
+        }
+      },
       "IncludeToday": true
     },
     {

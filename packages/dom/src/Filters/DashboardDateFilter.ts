@@ -16,7 +16,7 @@ export class DashboardDateFilter extends DashboardFilter
         this.title = title ?? "Date Filter";
     }
 
-    @JsonProperty("CustomDateRange")
+    @JsonProperty("CustomDateRange", { type: DateRange })
     customDateRange?: DateRange;
 
     @JsonProperty("IncludeToday")
