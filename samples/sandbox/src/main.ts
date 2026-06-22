@@ -1,22 +1,28 @@
 // import './app/app.element';
-import { DashboardDateFilter, GridVisualization, RdashDocument, VisualizationFilter } from "@revealbi/dom";
+import * as RevealSdk from "reveal-sdk";
+import { RevealSdkSettings, RevealView, RVDashboard, RevealUtility } from "reveal-sdk";
+import { DashboardDateFilter, GridVisualization, RdashDocument, VisualizationFilter, registerRevealSdk } from "@revealbi/dom";
 import { SqlServerDataSourceDashboard } from "./dashboards/SqlServerDataSourceDashboard";
 import { RestDataSourceDashboards } from "./dashboards/RestDataSourceDashboards";
 import { CustomDashboard } from "./dashboards/CustomDashboard";
 import { SalesDashboard } from "./dashboards/SalesDashboard";
 import { FixedLinesDashboard } from "./dashboards/features/FixedLines";
 
-declare const $: any;
+//RevealSdkSettings.setBaseUrl("https://samples.revealbi.io/upmedia-backend/reveal-api/");
+RevealSdkSettings.setBaseUrl("https://localhost:7064/");
 
-//$.ig.RevealSdkSettings.setBaseUrl("https://samples.revealbi.io/upmedia-backend/reveal-api/");
-$.ig.RevealSdkSettings.setBaseUrl("http://localhost:5111/");
+// Opt-in adapter: register the SDK once so @revealbi/dom's load()/toRVDashboard()
+// bridge to reveal-sdk without the DOM ever importing it directly.
+registerRevealSdk(RevealSdk);
 
 const loadDashboard = async () => {
 
     const viewer = document.getElementById('viewer');
     if (viewer) {
 
-        //const dashboard = await $.ig.RVDashboard.loadDashboard("Sales");
+        // const rvdashboard = await RVDashboard.loadDashboard("Sales"); //loads from server
+        // const document = await RdashDocument.load(rvdashboard);
+        // const dashboard = RevealUtility.createDashboardFromJsonObject(document.toJson());
 
         const document = await RdashDocument.load("Banking");
         document.useAutoLayout = true;
@@ -29,8 +35,8 @@ const loadDashboard = async () => {
 
         const dashboard = await document.toRVDashboard();
 
-        // const document = await SalesDashboard.createDashboard()
-        // const dashboard = await document.toRVDashboard();
+        //  const document = await SalesDashboard.createDashboard()
+        //  const dashboard = await document.toRVDashboard();
 
         //const dashboard = await CustomDashboard.createDashboard().toRVDashboard();
         //const dashboard = await SqlServerDataSourceDashboard.createDashboard().toRVDashboard();
@@ -58,11 +64,11 @@ const loadDashboard = async () => {
         // const document = await FixedLinesDashboard.createDashboard()
         //const dashboard = await document.toRVDashboard();
 
-        const revealView: any = new $.ig.RevealView(viewer);
-        revealView.onUrlLinkRequested = (args: any) => {
-            console.log(args);
-            return args.url;
-        };
+        const revealView: any = new RevealView(viewer);
+        // revealView.onUrlLinkRequested = (args: any) => {
+        //     console.log(args);
+        //     return args.url;
+        // };
         revealView.dashboard = dashboard;
     }
 

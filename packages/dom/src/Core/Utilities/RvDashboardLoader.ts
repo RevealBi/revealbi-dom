@@ -1,61 +1,48 @@
 import { RdashDocument } from "../../RdashDocument";
 import { RdashSerializer } from "../Serialization/RdashSerializer";
-import { isBrowserEnvironment } from "./Environment";
+import { getRevealSdkAdapter } from "./RevealSdkAdapter";
 
-declare let $: any;
-
+/**
+ * Internal bridge between `RdashDocument` and the Reveal SDK. All SDK access goes
+ * through the registered {@link RevealSdkAdapter}; this class never references the
+ * SDK directly (no `import "reveal-sdk"`, no `$.ig`/`Reveal` global).
+ */
 export class RvDashboardLoader {
 
+    /**
+     * Resolves the input to an `RVDashboard` instance, loading via the registered
+     * SDK adapter when given an id, or unzipping a Blob, as needed.
+     */
     static async load(dashboard?: string | Blob | RdashDocument | unknown): Promise<any | null> {
-
         if (!dashboard) {
             return null;
         }
 
-        if (typeof dashboard === "string" || dashboard instanceof Blob) {
-            return await this.loadRVDashboard(dashboard);
+        if (typeof dashboard === "string") {
+            return await getRevealSdkAdapter().loadDashboardById(dashboard);
+        }
+
+        if (dashboard instanceof Blob) {
+            const json = await RdashSerializer.blobToJson(dashboard);
+            return await this.loadRVDashboardFromJson(json);
         }
 
         if (dashboard instanceof RdashDocument) {
             return await dashboard.toRVDashboard();
         }
 
-        if (dashboard.constructor.name === "RVDashboard") {
-            return dashboard;
-        }
-
-        if (dashboard.hasOwnProperty("_dashboardModel")) {
-            return dashboard;
-        }
-
-        throw new Error("Invalid Dashboard provided to DashboardLoader.load");
-    }
-
-    private static async loadRVDashboard(input: string | Blob): Promise<unknown> {
-        this.ensureRevealSdkLoaded();
-        if (typeof input === 'string') {
-            return await $.ig.RVDashboard.loadDashboard(input);
-        } else {
-            const json = await RdashSerializer.blobToJson(input);
-            return await this.loadRVDashboardFromJson(json);
-        }
-    }
-
-    static async loadRVDashboardFromJson(json: string): Promise<unknown> {
-        this.ensureRevealSdkLoaded();
-        const parsedJson = JSON.parse(json);
-        const dashboard = await $.ig.RevealUtility.createDashboardFromJsonObject(parsedJson);
+        // Assume it's already an `RVDashboard` instance. Duck-typed on purpose: a
+        // `constructor.name === "RVDashboard"` check breaks under minification.
         return dashboard;
     }
 
-    private static ensureRevealSdkLoaded(): void {
-        if (!isBrowserEnvironment) {
-            throw new Error("This function must be run in a browser environment.");
-        }
-    
-        if (!(window as any).$?.ig?.RevealSdkSettings) {
-            throw new Error("Reveal SDK is not loaded. Please make sure to include the Reveal SDK in your project.");
-        }
+    /** Builds an `RVDashboard` from rdash JSON text via the registered SDK adapter. */
+    static async loadRVDashboardFromJson(json: string): Promise<unknown> {
+        return await getRevealSdkAdapter().createDashboardFromJson(JSON.parse(json));
+    }
+
+    /** Serializes an `RVDashboard` back to rdash JSON via the registered SDK adapter. */
+    static async dashboardToJson(rvDashboard: unknown): Promise<unknown> {
+        return await getRevealSdkAdapter().dashboardToJson(rvDashboard);
     }
 }
-

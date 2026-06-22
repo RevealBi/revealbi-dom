@@ -114,18 +114,16 @@ export class RdashDocument {
             throw new Error("dashboard cannot be null or undefined");
         }
 
-        let dashboardJson;
+        let dashboardJson: string | Record<string, any>;
 
         if (dashboard instanceof Blob) {
-            console.log("Loading RdashDocument from Blob");
             dashboardJson = await RdashSerializer.blobToJson(dashboard);
         } else {
             const loadedDashboard = await RvDashboardLoader.load(dashboard);
             if (!loadedDashboard) {
                 throw new Error("Could not load dashboard");
             }
-            console.log("Loading RdashDocument from RVDashboard");
-            dashboardJson = loadedDashboard._dashboardModel._dashboardModel.toJson(); //todo: improve this in SDK
+            dashboardJson = await RvDashboardLoader.dashboardToJson(loadedDashboard) as string | Record<string, any>;
         }
 
         return RdashSerializer.deserialize(dashboardJson);
