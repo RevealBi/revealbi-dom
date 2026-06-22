@@ -117,13 +117,15 @@ export class RdashDocument {
         let dashboardJson;
 
         if (dashboard instanceof Blob) {
+            console.log("Loading RdashDocument from Blob");
             dashboardJson = await RdashSerializer.blobToJson(dashboard);
         } else {
             const loadedDashboard = await RvDashboardLoader.load(dashboard);
             if (!loadedDashboard) {
                 throw new Error("Could not load dashboard");
             }
-            dashboardJson = loadedDashboard._dashboardModel.__dashboardModel.toJson(); //todo: improve this in SDK
+            console.log("Loading RdashDocument from RVDashboard");
+            dashboardJson = loadedDashboard._dashboardModel._dashboardModel.toJson(); //todo: improve this in SDK
         }
 
         return RdashSerializer.deserialize(dashboardJson);
@@ -165,6 +167,14 @@ export class RdashDocument {
      */
     toBlob(): Blob {
         return RdashSerializer.toBlob(this);
+    }
+
+    /**
+     * Converts the `RdashDocument` to a JSON object representation of the contents of the RDASH file.
+     * @returns A JSON object representation of the contents of the RDASH file. 
+     */
+    toJson(): object {
+        return JSON.parse(RdashSerializer.serialize(this));
     }
 
     /**
