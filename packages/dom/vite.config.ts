@@ -33,11 +33,13 @@ export default defineConfig({
     lib: {
       // Could also be a dictionary or array of multiple entry points.
       entry: 'src/index.ts',
-      name: 'dom',
-      fileName: (format) => `index.${format === 'es' ? 'mjs' : format === 'umd' ? 'umd.js' : 'js'}`,
-      // Change this to the formats you want to support.
-      // Don't forget to update your package.json as well.
-      formats: ['es', 'cjs', 'umd'],
+      // Global variable name for the IIFE (script-tag / CDN) build: `window.RevealDom`.
+      name: 'RevealDom',
+      fileName: (format) => `index.${format === 'es' ? 'mjs' : format === 'iife' ? 'iife.js' : 'js'}`,
+      // es -> bundlers/NPM, cjs -> Node require, iife -> browser <script> global.
+      // Dropped UMD: redundant with the dedicated es + cjs builds, and IIFE matches
+      // what reveal-sdk itself ships (global `Reveal`).
+      formats: ['es', 'cjs', 'iife'],
     },
     rollupOptions: {
       // External packages that should not be bundled into your library.

@@ -9,6 +9,7 @@
   "dependencies": {
     "express": "~4.18.1",
     "fflate": "^0.8.2",
+    "reveal-sdk": "^2.0.0",
     "reveal-sdk-node": "^1.8.1-rc.1",
     "tslib": "^2.3.0"
   },

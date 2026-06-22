@@ -114,7 +114,7 @@ export class RdashDocument {
             throw new Error("dashboard cannot be null or undefined");
         }
 
-        let dashboardJson;
+        let dashboardJson: string | Record<string, any>;
 
         if (dashboard instanceof Blob) {
             dashboardJson = await RdashSerializer.blobToJson(dashboard);
@@ -123,7 +123,7 @@ export class RdashDocument {
             if (!loadedDashboard) {
                 throw new Error("Could not load dashboard");
             }
-            dashboardJson = loadedDashboard._dashboardModel.__dashboardModel.toJson(); //todo: improve this in SDK
+            dashboardJson = await RvDashboardLoader.dashboardToJson(loadedDashboard) as string | Record<string, any>;
         }
 
         return RdashSerializer.deserialize(dashboardJson);
@@ -165,6 +165,14 @@ export class RdashDocument {
      */
     toBlob(): Blob {
         return RdashSerializer.toBlob(this);
+    }
+
+    /**
+     * Converts the `RdashDocument` to a JSON object representation of the contents of the RDASH file.
+     * @returns A JSON object representation of the contents of the RDASH file. 
+     */
+    toJson(): object {
+        return JSON.parse(RdashSerializer.serialize(this));
     }
 
     /**

@@ -1,12 +1,12 @@
 {
   "name": "@revealbi/dom",
-  "version": "0.2.25",
+  "version": "0.3.0",
   "type": "module",
   "main": "./index.js",
   "module": "./index.mjs",
   "types": "./index.d.ts",
-  "unpkg": "./index.umd.js",
-  "jsdelivr": "./index.umd.js",
+  "unpkg": "./index.iife.js",
+  "jsdelivr": "./index.iife.js",
   "exports": {
     ".": {
       "types": "./index.d.ts",
