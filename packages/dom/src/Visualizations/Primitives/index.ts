@@ -31,6 +31,7 @@ export { FixedLineMaximum } from './FixedLineMaximum';
 export { FixedLineMinimum } from './FixedLineMinimum';
 export { FormattingBase } from './FormattingBase';
 export { GaugeBand } from './GaugeBand';
+export { GridColumnSortDescription } from './GridColumnSortDescription';
 export { JoinCondition } from './JoinCondition';
 export { LinkFilter } from './LinkFilter';
 export { MapConditionalFormatting } from './MapConditionalFormatting';
