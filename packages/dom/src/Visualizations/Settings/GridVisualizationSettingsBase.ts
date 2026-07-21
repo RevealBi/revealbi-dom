@@ -3,7 +3,9 @@ import { Alignment } from "../Enums/Alignment";
 import { FontSize } from "../Enums/FontSize";
 import { GridVisualizationStyle } from "./Styles/GridVisualizationStyle";
 import { GridColumnFormat } from "./Styles/GridColumnFormat";
+import { GridColumnGroupDescription } from "../Primitives/GridColumnGroupDescription";
 import { GridColumnSortDescription } from "../Primitives/GridColumnSortDescription";
+import { GridColumnSummaryDescription } from "../Primitives/GridColumnSummaryDescription";
 import { VisualizationSettings } from "./VisualizationSettings";
 
 export abstract class GridVisualizationSettingsBase extends VisualizationSettings {
@@ -18,10 +20,22 @@ export abstract class GridVisualizationSettingsBase extends VisualizationSetting
     public columnFormats?: GridColumnFormat[];
 
     /**
+     * Gets or sets the grouping configuration for the grid's columns.
+     */
+    @JsonProperty("GroupedColumns", { type: GridColumnGroupDescription })
+    public groupedColumns?: GridColumnGroupDescription[];
+
+    /**
      * Gets or sets the sort configuration for the grid's columns.
      */
     @JsonProperty("SortedColumns", { type: GridColumnSortDescription })
     public sortedColumns?: GridColumnSortDescription[];
+
+    /**
+     * Gets or sets the summary (aggregation) configuration for the grid's columns.
+     */
+    @JsonProperty("SummarizedColumns", { type: GridColumnSummaryDescription })
+    public summarizedColumns?: GridColumnSummaryDescription[];
 
     /**
      * Gets or sets the alignment of text in a date field.

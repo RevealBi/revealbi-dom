@@ -12,6 +12,7 @@ export { DateAggregationType } from './DateAggregationType';
 export { FixedLineType } from './FixedLineType';
 export { FontSize } from './FontSize';
 export { GaugeViewType } from './GaugeViewType';
+export { GridColumnSummaryOperand } from './GridColumnSummaryOperand';
 export { IndicatorDifferenceMode } from './IndicatorDifferenceMode';
 export { IndicatorVisualizationType } from './IndicatorVisualizationType';
 export { KpiGoalPeriod } from './KpiGoalPeriod';
