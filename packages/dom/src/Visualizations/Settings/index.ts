@@ -3,6 +3,7 @@ export { GridColumnGrouping } from "./Grid/GridColumnGrouping";
 export { GridColumnHyperlink } from "./Grid/GridColumnHyperlink";
 export { GridColumnSettings } from "./Grid/GridColumnSettings";
 export { GridColumnSort } from "./Grid/GridColumnSort";
+export { GridColumnSummary } from "./Grid/GridColumnSummary";
 
 export { AreaChartVisualizationSettings } from './AreaChartVisualizationSettings';
 export { AssetVisualizationSettings } from './AssetVisualizationSettings';

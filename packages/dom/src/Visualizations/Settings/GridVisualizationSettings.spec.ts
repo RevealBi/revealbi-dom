@@ -6,6 +6,8 @@ import {
     GridColumnPinPosition,
     GridColumnSettings,
     GridColumnSort,
+    GridColumnSummary,
+    GridSummaryType,
     GridVisualizationSettings,
     JsonConvert,
     PivotVisualizationSettings,
@@ -107,11 +109,13 @@ describe("GridVisualizationSettings column settings", () => {
         expect(settings.columnSettings).toEqual([]);
         expect(settings.groupedColumns).toEqual([]);
         expect(settings.sortedColumns).toEqual([]);
+        expect(settings.summarizedColumns).toEqual([]);
 
         const json = JSON.parse(JsonConvert.serialize(settings));
         expect(json.VisualizationColumns).toEqual([]);
         expect(json.GroupedColumns).toEqual([]);
         expect(json.SortedColumns).toEqual([]);
+        expect(json.SummarizedColumns).toEqual([]);
     });
 
     it("serializes grouped columns in grouping priority order", () => {
@@ -195,13 +199,60 @@ describe("GridVisualizationSettings column settings", () => {
         expect(settings.sortedColumns[0].sortDirection).toBe(SortingType.Desc);
     });
 
+    it("serializes summarized columns independently with the correct operands", () => {
+        const settings = new GridVisualizationSettings();
+        settings.groupedColumns.push(new GridColumnGrouping("Country"));
+        settings.sortedColumns.push(new GridColumnSort("Date", SortingType.Desc));
+        settings.summarizedColumns.push(
+            new GridColumnSummary("Revenue"),
+            new GridColumnSummary("Margin", GridSummaryType.Average)
+        );
+
+        const json = JSON.parse(JsonConvert.serialize(settings));
+
+        expect(json.GroupedColumns).toHaveLength(1);
+        expect(json.SortedColumns).toHaveLength(1);
+        expect(json.SummarizedColumns).toEqual([
+            {
+                ColumnName: "Revenue",
+                Operand: "Sum"
+            },
+            {
+                ColumnName: "Margin",
+                Operand: "Average"
+            }
+        ]);
+    });
+
+    it("deserializes summarized columns into the public DOM type", () => {
+        const settings = JsonConvert.deserialize(JSON.stringify({
+            SummarizedColumns: [
+                {
+                    ColumnName: "OrderId",
+                    Operand: "Count"
+                }
+            ]
+        }), GridVisualizationSettings);
+
+        expect(settings.summarizedColumns).toHaveLength(1);
+        expect(settings.summarizedColumns[0]).toBeInstanceOf(GridColumnSummary);
+        expect(settings.summarizedColumns[0].columnName).toBe("OrderId");
+        expect(settings.summarizedColumns[0].summaryType).toBe(GridSummaryType.Count);
+    });
+
+    it("uses Sum as the default grid column summary type", () => {
+        expect(new GridColumnSummary("Revenue").summaryType).toBe(GridSummaryType.Sum);
+    });
+
     it("does not expose grid-only column collections on pivot or sparkline settings", () => {
         const pivotJson = JSON.parse(JsonConvert.serialize(new PivotVisualizationSettings()));
         const sparklineJson = JSON.parse(JsonConvert.serialize(new SparklineVisualizationSettings()));
 
         expect(pivotJson).not.toHaveProperty("GroupedColumns");
         expect(pivotJson).not.toHaveProperty("SortedColumns");
+        expect(pivotJson).not.toHaveProperty("SummarizedColumns");
         expect(sparklineJson).not.toHaveProperty("GroupedColumns");
         expect(sparklineJson).not.toHaveProperty("SortedColumns");
+        expect(sparklineJson).not.toHaveProperty("SummarizedColumns");
     });
 });
