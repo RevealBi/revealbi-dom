@@ -1,11 +1,15 @@
 import { describe, expect, it } from "vitest";
 import {
     Alignment,
+    GridColumnGrouping,
     GridColumnHyperlink,
     GridColumnPinPosition,
     GridColumnSettings,
     GridVisualizationSettings,
     JsonConvert,
+    PivotVisualizationSettings,
+    SortingType,
+    SparklineVisualizationSettings,
     UrlLink,
     UrlLinkTarget
 } from "../../index";
@@ -96,10 +100,59 @@ describe("GridVisualizationSettings column settings", () => {
         expect(column.pinPosition).toBe(GridColumnPinPosition.Inherit);
     });
 
-    it("uses an empty column settings collection by default", () => {
+    it("uses empty column collections by default", () => {
         const settings = new GridVisualizationSettings();
 
         expect(settings.columnSettings).toEqual([]);
-        expect(JSON.parse(JsonConvert.serialize(settings)).VisualizationColumns).toEqual([]);
+        expect(settings.groupedColumns).toEqual([]);
+
+        const json = JSON.parse(JsonConvert.serialize(settings));
+        expect(json.VisualizationColumns).toEqual([]);
+        expect(json.GroupedColumns).toEqual([]);
+    });
+
+    it("serializes grouped columns in grouping priority order", () => {
+        const settings = new GridVisualizationSettings();
+        settings.groupedColumns.push(
+            new GridColumnGrouping("Country"),
+            new GridColumnGrouping("State", SortingType.Desc)
+        );
+
+        const json = JSON.parse(JsonConvert.serialize(settings));
+
+        expect(json.GroupedColumns).toEqual([
+            {
+                ColumnName: "Country",
+                SortDirection: "Asc"
+            },
+            {
+                ColumnName: "State",
+                SortDirection: "Desc"
+            }
+        ]);
+    });
+
+    it("deserializes grouped columns into the public DOM type", () => {
+        const settings = JsonConvert.deserialize(JSON.stringify({
+            GroupedColumns: [
+                {
+                    ColumnName: "Region",
+                    SortDirection: "Desc"
+                }
+            ]
+        }), GridVisualizationSettings);
+
+        expect(settings.groupedColumns).toHaveLength(1);
+        expect(settings.groupedColumns[0]).toBeInstanceOf(GridColumnGrouping);
+        expect(settings.groupedColumns[0].columnName).toBe("Region");
+        expect(settings.groupedColumns[0].sortDirection).toBe(SortingType.Desc);
+    });
+
+    it("does not expose grouped columns on pivot or sparkline settings", () => {
+        const pivotJson = JSON.parse(JsonConvert.serialize(new PivotVisualizationSettings()));
+        const sparklineJson = JSON.parse(JsonConvert.serialize(new SparklineVisualizationSettings()));
+
+        expect(pivotJson).not.toHaveProperty("GroupedColumns");
+        expect(sparklineJson).not.toHaveProperty("GroupedColumns");
     });
 });

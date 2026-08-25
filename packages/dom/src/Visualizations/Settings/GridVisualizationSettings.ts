@@ -1,6 +1,7 @@
 import { SchemaTypeNames } from "../../Core/Constants/SchemaTypeNames";
 import { VisualizationTypes } from "../../Core/Constants/VisualizationTypes";
 import { JsonProperty } from "../../Core/Serialization/Decorators/JsonProperty";
+import { GridColumnGrouping } from "./Grid/GridColumnGrouping";
 import { GridVisualizationSettingsBase } from "./GridVisualizationSettingsBase";
 
 export class GridVisualizationSettings extends GridVisualizationSettingsBase {
@@ -9,6 +10,12 @@ export class GridVisualizationSettings extends GridVisualizationSettingsBase {
         this.schemaTypeName = SchemaTypeNames.GridVisualizationSettingsType;
         this.visualizationType = VisualizationTypes.GRID;
     }
+
+    /**
+     * Gets or sets the columns used to group rows, in grouping priority order.
+     */
+    @JsonProperty("GroupedColumns", { type: GridColumnGrouping })
+    groupedColumns: GridColumnGrouping[] = [];
 
     /**
      * Gets or sets whether the grid should have paging enabled.

@@ -1,4 +1,5 @@
 export { GridVisualizationStyle } from "./Grid/GridVisualizationStyle";
+export { GridColumnGrouping } from "./Grid/GridColumnGrouping";
 export { GridColumnHyperlink } from "./Grid/GridColumnHyperlink";
 export { GridColumnSettings } from "./Grid/GridColumnSettings";
 
