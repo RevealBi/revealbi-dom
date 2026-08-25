@@ -9,7 +9,9 @@ import { SalesDashboard } from "./dashboards/SalesDashboard";
 import { FixedLinesDashboard } from "./dashboards/features/FixedLines";
 
 //RevealSdkSettings.setBaseUrl("https://samples.revealbi.io/upmedia-backend/reveal-api/");
-RevealSdkSettings.setBaseUrl("https://localhost:7064/");
+RevealSdkSettings.setBaseUrl("http://localhost:5111/");
+
+RevealSdkSettings.betaFeatures.enable("newDataGrid");
 
 // Opt-in adapter: register the SDK once so @revealbi/dom's load()/toRVDashboard()
 // bridge to reveal-sdk without the DOM ever importing it directly.
