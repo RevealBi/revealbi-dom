@@ -5,6 +5,7 @@ import {
     GridColumnHyperlink,
     GridColumnPinPosition,
     GridColumnSettings,
+    GridColumnSort,
     GridVisualizationSettings,
     JsonConvert,
     PivotVisualizationSettings,
@@ -105,10 +106,12 @@ describe("GridVisualizationSettings column settings", () => {
 
         expect(settings.columnSettings).toEqual([]);
         expect(settings.groupedColumns).toEqual([]);
+        expect(settings.sortedColumns).toEqual([]);
 
         const json = JSON.parse(JsonConvert.serialize(settings));
         expect(json.VisualizationColumns).toEqual([]);
         expect(json.GroupedColumns).toEqual([]);
+        expect(json.SortedColumns).toEqual([]);
     });
 
     it("serializes grouped columns in grouping priority order", () => {
@@ -148,11 +151,57 @@ describe("GridVisualizationSettings column settings", () => {
         expect(settings.groupedColumns[0].sortDirection).toBe(SortingType.Desc);
     });
 
-    it("does not expose grouped columns on pivot or sparkline settings", () => {
+    it("serializes sorted columns independently in sorting priority order", () => {
+        const settings = new GridVisualizationSettings();
+        settings.groupedColumns.push(new GridColumnGrouping("Country"));
+        settings.sortedColumns.push(
+            new GridColumnSort("Revenue", SortingType.Desc),
+            new GridColumnSort("Date")
+        );
+
+        const json = JSON.parse(JsonConvert.serialize(settings));
+
+        expect(json.GroupedColumns).toEqual([
+            {
+                ColumnName: "Country",
+                SortDirection: "Asc"
+            }
+        ]);
+        expect(json.SortedColumns).toEqual([
+            {
+                ColumnName: "Revenue",
+                SortDirection: "Desc"
+            },
+            {
+                ColumnName: "Date",
+                SortDirection: "Asc"
+            }
+        ]);
+    });
+
+    it("deserializes sorted columns into the public DOM type", () => {
+        const settings = JsonConvert.deserialize(JSON.stringify({
+            SortedColumns: [
+                {
+                    ColumnName: "OrderDate",
+                    SortDirection: "Desc"
+                }
+            ]
+        }), GridVisualizationSettings);
+
+        expect(settings.sortedColumns).toHaveLength(1);
+        expect(settings.sortedColumns[0]).toBeInstanceOf(GridColumnSort);
+        expect(settings.sortedColumns[0].columnName).toBe("OrderDate");
+        expect(settings.sortedColumns[0].sortDirection).toBe(SortingType.Desc);
+    });
+
+    it("does not expose grid-only column collections on pivot or sparkline settings", () => {
         const pivotJson = JSON.parse(JsonConvert.serialize(new PivotVisualizationSettings()));
         const sparklineJson = JSON.parse(JsonConvert.serialize(new SparklineVisualizationSettings()));
 
         expect(pivotJson).not.toHaveProperty("GroupedColumns");
+        expect(pivotJson).not.toHaveProperty("SortedColumns");
         expect(sparklineJson).not.toHaveProperty("GroupedColumns");
+        expect(sparklineJson).not.toHaveProperty("SortedColumns");
     });
 });

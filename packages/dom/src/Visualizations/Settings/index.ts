@@ -2,6 +2,7 @@ export { GridVisualizationStyle } from "./Grid/GridVisualizationStyle";
 export { GridColumnGrouping } from "./Grid/GridColumnGrouping";
 export { GridColumnHyperlink } from "./Grid/GridColumnHyperlink";
 export { GridColumnSettings } from "./Grid/GridColumnSettings";
+export { GridColumnSort } from "./Grid/GridColumnSort";
 
 export { AreaChartVisualizationSettings } from './AreaChartVisualizationSettings';
 export { AssetVisualizationSettings } from './AssetVisualizationSettings';
