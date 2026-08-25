@@ -5,6 +5,11 @@ export { GridColumnSettings } from "./Grid/GridColumnSettings";
 export { GridColumnSort } from "./Grid/GridColumnSort";
 export { GridColumnSummary } from "./Grid/GridColumnSummary";
 
+export { ChartAnnotation } from "./Annotations/ChartAnnotation";
+export { ChartCategoryAnnotation } from "./Annotations/ChartCategoryAnnotation";
+export { ChartCategoryRangeAnnotation } from "./Annotations/ChartCategoryRangeAnnotation";
+export { ChartDataPointAnnotation } from "./Annotations/ChartDataPointAnnotation";
+
 export { AreaChartVisualizationSettings } from './AreaChartVisualizationSettings';
 export { AssetVisualizationSettings } from './AssetVisualizationSettings';
 export { BarChartVisualizationSettings } from './BarChartVisualizationSettings';

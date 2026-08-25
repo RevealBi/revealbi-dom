@@ -74,6 +74,9 @@ export abstract class SchemaTypeNames {
     static readonly XmlaHierarchyType = "XmlaHierarchyType";
     static readonly XmlaSetType = "XmlaSetType";
 
+    //******************* Chart Annotations *****************
+    static readonly ChartAnnotationType = "ChartAnnotationType";
+
     //******************* Fixed Lines *****************
     static readonly FixedLineAverageType = "FixedLineAverageType";
     static readonly FixedLineDataType = "FixedLineDataType";

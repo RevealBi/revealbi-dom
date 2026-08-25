@@ -5,6 +5,7 @@ export { AxisTitleMode } from './AxisTitleMode';
 export { BandColor } from './BandColor';
 export { BoundValueType } from './BoundValueType';
 export { ChartType } from './ChartType';
+export { ChartAnnotationType } from './ChartAnnotationType';
 export { ChoroplethMapColorType } from './ChoroplethMapColorType';
 export { ComboChartType } from './ComboChartType';
 export { ContentMode } from './ContentMode';
