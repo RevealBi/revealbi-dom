@@ -27,13 +27,13 @@ const loadDashboard = async () => {
         // const dashboard = RevealUtility.createDashboardFromJsonObject(document.toJson());
 
         const document = await RdashDocument.load("Banking");
-        document.useAutoLayout = true;
-        const grid = GridVisualization.from(document.visualizations[1], { includeAllFields: true });
-        if (grid) {
-            var dateFilter = document.filters.find(f => f.id === "_date") as DashboardDateFilter;
-            grid!.connectDashboardFilter(dateFilter, "date");
-            document.visualizations = [grid!];
-        }
+        // document.useAutoLayout = true;
+        // const grid = GridVisualization.from(document.visualizations[1], { includeAllFields: true });
+        // if (grid) {
+        //     var dateFilter = document.filters.find(f => f.id === "_date") as DashboardDateFilter;
+        //     grid!.connectDashboardFilter(dateFilter, "date");
+        //     document.visualizations = [grid!];
+        // }
 
         const dashboard = await document.toRVDashboard();
 

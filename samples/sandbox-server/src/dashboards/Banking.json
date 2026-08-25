@@ -5,14 +5,14 @@
   "CreatedWith": "wpf 1.0.2036.0",
   "SavedWith": "web 1.0.2221.0",
   "FormatVersion": 9,
-  "UseAutoLayout": true,
+  "UseAutoLayout": false,
   "Tags": "banking",
   "Widgets": [
     {
       "_type": "WidgetType",
       "Id": "2a2dec25-2fcf-4fbb-8e08-3cbc47c980a0",
-      "RowSpan": 59,
-      "ColumnSpan": 17,
+      "RowSpan": 43,
+      "ColumnSpan": 30,
       "IsTitleVisible": true,
       "Title": "Above Avg. Leaving Balance",
       "DataSpec": {
@@ -363,6 +363,266 @@
             "IsHidden": false
           }
         ]
+      },
+      "PostTransformations": []
+    },
+    {
+      "_type": "WidgetType",
+      "Id": "7f15bf23-eb36-4410-8b1c-0da594f7d9ac",
+      "RowSpan": 43,
+      "ColumnSpan": 30,
+      "IsTitleVisible": true,
+      "Title": "Banking Risk",
+      "DataSpec": {
+        "_type": "TabularDataSpecType",
+        "DataSourceItem": {
+          "_type": "DataSourceItemType",
+          "Id": "https://www.slingshotapp.io/data/Banking.xlsx/Banking Risk",
+          "Title": "Banking Risk",
+          "DataSourceId": "__EXCEL",
+          "HasTabularData": true,
+          "HasAsset": false,
+          "Properties": {
+            "Sheet": "Banking Risk",
+            "ServerAggregation": false
+          },
+          "Settings": {},
+          "Parameters": {},
+          "ResourceItem": {
+            "_type": "DataSourceItemType",
+            "Id": "https://www.slingshotapp.io/data/Banking.xlsx",
+            "Title": "Banking.xlsx",
+            "DataSourceId": "e97e10ef_465ee15d-64c9-4861-82ff-900ebc33f26e_resource",
+            "HasTabularData": false,
+            "HasAsset": true,
+            "Properties": {
+              "Url": "https://www.slingshotapp.io/data/Banking.xlsx"
+            },
+            "Settings": {},
+            "Parameters": {}
+          }
+        },
+        "Expiration": 1440,
+        "Bindings": {
+          "Bindings": []
+        },
+        "IsTransposed": false,
+        "Fields": [
+          {
+            "FieldName": "date",
+            "FieldType": "Date",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None",
+            "Properties": {
+              "UnderlyingType": "DateTime"
+            },
+            "DefaultAggregation": "Auto"
+          },
+          {
+            "FieldName": "country",
+            "FieldType": "String",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None",
+            "Properties": {
+              "UnderlyingType": "String"
+            },
+            "DefaultAggregation": "Auto"
+          },
+          {
+            "FieldName": "loan type ",
+            "FieldType": "String",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None",
+            "Properties": {
+              "UnderlyingType": "String"
+            },
+            "DefaultAggregation": "Auto"
+          },
+          {
+            "FieldName": "customers ",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None",
+            "Properties": {
+              "UnderlyingType": "Number"
+            },
+            "DefaultAggregation": "Auto"
+          },
+          {
+            "FieldName": "loans ",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None",
+            "Properties": {
+              "UnderlyingType": "Number"
+            },
+            "DefaultAggregation": "Auto"
+          },
+          {
+            "FieldName": "deposits",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None",
+            "Properties": {
+              "UnderlyingType": "Number"
+            },
+            "DefaultAggregation": "Auto"
+          },
+          {
+            "FieldName": "risk range ",
+            "FieldType": "String",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None",
+            "Properties": {
+              "UnderlyingType": "String"
+            },
+            "DefaultAggregation": "Auto"
+          },
+          {
+            "FieldName": "amount",
+            "FieldType": "Number",
+            "IsHidden": true,
+            "IsCalculated": false,
+            "Sorting": "None",
+            "Properties": {
+              "UnderlyingType": "Number"
+            },
+            "DefaultAggregation": "Auto"
+          }
+        ],
+        "TransposedFields": [],
+        "QuickFilters": [],
+        "AdditionalTables": [],
+        "FieldListSorting": "Asc"
+      },
+      "VisualizationSettings": {
+        "_type": "ChartVisualizationSettingsType",
+        "VisualizationType": "CHART",
+        "ChartType": "Column",
+        "AllSeries": false,
+        "ShowLegends": true,
+        "TrendlineType": "None",
+        "SingleAxisMode": false,
+        "Financial": {},
+        "Series": [],
+        "LeftAxisFields": [],
+        "RightAxisFields": [],
+        "LeftAxisLogarithmic": false,
+        "RightAxisLogarithmic": false,
+        "LabelDisplayMode": "Percentage",
+        "PercentageFormatFractionDigits": 1,
+        "IsPercentageDistributed": false,
+        "BrushOffsetIndex": -1,
+        "PieStartPosition": 270,
+        "ShowTotalsInTooltip": true,
+        "CompositeChartType1": "Column",
+        "CompositeChartType2": "Line",
+        "CompositeChartTypesSwapped": false,
+        "ShowZeroValuesInLegend": false,
+        "YAxisLabelAlignment": "Right",
+        "UseCompactLabels": false,
+        "SyncAxisVisibleRange": false,
+        "AutomaticLabelRotation": true,
+        "OthersSliceThreshold": 3.0,
+        "ZoomPositionHorizontal": 0.0,
+        "ZoomPositionVertical": 0.0,
+        "ZoomScaleHorizontal": 1.0,
+        "ZoomScaleVertical": 1.0,
+        "ShowAxisX": true,
+        "ShowAxisY": true,
+        "CategoryAxisOverlap": -0.2,
+        "CategoryAxisGap": 0.4,
+        "CenterLabelMode": "LabelValue",
+        "LegendLocation": "Top",
+        "LegendHorizontalAlignment": "Left",
+        "GridLinesMode": "None",
+        "AxisTitlesMode": "None",
+        "Annotations": [
+          {
+            "_type": "ChartAnnotationType",
+            "Identifier": "d1545d80-7012-4fe2-500a-67734c7174af",
+            "AnnotationType": "Point",
+            "Title": "Annotation 1",
+            "Description": "Description 1",
+            "TargetSeriesIndex": 0,
+            "TargetSeriesField": "Sum of amount",
+            "XValue": 7.119422863679701E-17,
+            "YValue": 1588598.0,
+            "StartValue": 0.0,
+            "EndValue": 0.0,
+            "MarkerColor": "#8961a9"
+          },
+          {
+            "_type": "ChartAnnotationType",
+            "Identifier": "89c3c5ef-c6ff-4065-0c45-c194170c0844",
+            "AnnotationType": "Strip",
+            "Title": "Annotation 2",
+            "Description": "Description 2",
+            "TargetSeriesIndex": 0,
+            "XValue": 0.0,
+            "YValue": 0.0,
+            "StartValue": 9.0,
+            "EndValue": 15.0,
+            "MarkerColor": "#e051a9"
+          }
+        ]
+      },
+      "VisualizationDataSpec": {
+        "_type": "CategoryVisualizationDataSpecType",
+        "FormatVersion": 2,
+        "AdHocExpandedElements": [],
+        "Rows": [
+          {
+            "_type": "DimensionColumnSpecType",
+            "Axis": {},
+            "SummarizationField": {
+              "_type": "SummarizationDateFieldType",
+              "FieldName": "date",
+              "DrillDownElements": [],
+              "DateAggregationType": "Month",
+              "DateFormatting": {
+                "_type": "DateFormattingSpecType",
+                "OverrideDefaultSettings": false,
+                "DateFormat": "MMM-yyyy"
+              }
+            }
+          }
+        ],
+        "Values": [
+          {
+            "_type": "MeasureColumnSpecType",
+            "Axis": {},
+            "SummarizationField": {
+              "_type": "SummarizationValueFieldType",
+              "FieldName": "amount",
+              "FieldLabel": "amount",
+              "IsHidden": false,
+              "AggregationType": "Sum",
+              "Sorting": "None",
+              "IsCalculated": false,
+              "Formatting": {
+                "_type": "NumberFormattingSpecType",
+                "OverrideDefaultSettings": false,
+                "FormatType": "Number",
+                "DecimalDigits": 0,
+                "ShowGroupingSeparator": true,
+                "CurrencySymbol": "$",
+                "NegativeFormat": "MinusSign",
+                "MKFormat": "None",
+                "ShowDataLabelsInChart": true
+              },
+              "IsDataModelMeasure": false
+            }
+          }
+        ],
+        "FixedLines": []
       },
       "PostTransformations": []
     }
