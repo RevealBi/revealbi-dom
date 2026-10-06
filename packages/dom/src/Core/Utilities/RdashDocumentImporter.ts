@@ -5,12 +5,12 @@ import { RdashDocument } from "../../RdashDocument";
 import { IVisualization } from "../../Visualizations";
 import { Guid } from "../Guid";
 import { CloneUtility } from "./CloneUtility";
+import { checkLegacyImport } from "./DocumentCompatibility";
 
 export class RdashDocumentImporter {
 
     static import(targetDocument: RdashDocument, sourceDocument: RdashDocument, visualization?: string | IVisualization, options?: ImportOptions): void {
-        if (targetDocument.formatVersion >= 7 && sourceDocument.formatVersion < 7)
-            throw new Error("Save the source dashboard with Reveal SDK 2.2.1 or later and reload it before importing into a modern document. Its visualizations still require SDK migration.");
+        checkLegacyImport(targetDocument, sourceDocument);
         if (!visualization) {
             sourceDocument.visualizations.forEach(viz => this.importVisualization(targetDocument, sourceDocument, viz, options));
             return;

@@ -3,17 +3,16 @@ import { JsonConvert } from "./JsonConvert";
 import { RdashDocumentValidator } from "../Utilities/RdashDocumentValidator";
 import { unzip, zipSync } from "fflate";
 import { prepareModernDocument } from "./ModernDocumentWriter";
+import { checkDateIds } from "../Utilities/DocumentCompatibility";
 
 export class RdashSerializer {
     static _rdashJsonFileName = "Dashboard.json";
 
     static deserialize(input: string | Record<string, any>): RdashDocument {
-        if (typeof input === "string") {
-            return JsonConvert.deserialize(input, RdashDocument);
-        }
-        else {
-            return JsonConvert.deserializeObject(input, RdashDocument);
-        }
+        const document = typeof input === "string" ? JsonConvert.deserialize(input, RdashDocument)
+            : JsonConvert.deserializeObject(input, RdashDocument);
+        checkDateIds(document);
+        return document;
     }
 
     static serialize(document: RdashDocument): string {

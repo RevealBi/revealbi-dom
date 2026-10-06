@@ -3,13 +3,12 @@ import { DataSourceItem } from "../../Data/DataSourceItem";
 import { RdashDocument } from "../../RdashDocument";
 import { TabularDataDefinition } from "../../Visualizations/DataDefinitions/TabularDataDefinition";
 import { DashboardDateFilter } from "../../Filters/DashboardDateFilter";
+import { checkDateIds } from "./DocumentCompatibility";
 
 export class RdashDocumentValidator {
 
     static validate(document: RdashDocument): void {
-        if (document.formatVersion < 7 && document.filters.some(f =>
-            f instanceof DashboardDateFilter && f.id !== "_date" && !f.id?.startsWith("xFiltering_")))
-            throw new Error("Save this legacy dashboard with Reveal SDK 2.2.1 or later and reload it before adding date filters. Its old format would rewrite their IDs.");
+        checkDateIds(document);
         this.fixVisualizations(document);
         this.reorderDashboardFilters(document);
     }
