@@ -47,6 +47,9 @@ function prepareHierarchy(spec: WireObject, data?: WireObject): void {
     for (const level of levels.slice(index + 1)) {
         const column = clone(first);
         column.SummarizationField.DateAggregationType = level;
+        // A deeper level needs its own formatting and drill selection.
+        column.SummarizationField.DrillDownElements = [];
+        delete column.SummarizationField.DateFormatting;
         expanded.push(column);
     }
     spec["AdHocFields"] = expanded.length;

@@ -8,7 +8,7 @@ export class RdashDocumentValidator {
 
     static validate(document: RdashDocument): void {
         if (document.formatVersion < 7 && document.filters.some(f =>
-            f instanceof DashboardDateFilter && f.id !== "_date" && !f.crossFilteringSourceWidgetId))
+            f instanceof DashboardDateFilter && f.id !== "_date" && !f.id?.startsWith("xFiltering_")))
             throw new Error("Save this legacy dashboard with Reveal SDK 2.2.1 or later and reload it before adding date filters. Its old format would rewrite their IDs.");
         this.fixVisualizations(document);
         this.reorderDashboardFilters(document);

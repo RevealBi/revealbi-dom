@@ -162,6 +162,10 @@ describe("modern date-filter identity", () => {
         const target = new RdashDocument();
         expect(() => target.import(legacy)).toThrow(/migration/);
         expect(target.visualizations).toEqual([]);
+        legacy.filters[0].crossFilteringSourceWidgetId = "widget";
+        expect(() => legacy.toJson()).toThrow(/reload/);
+        legacy.filters[0].id = "xFiltering_date";
+        expect(JSON.stringify(legacy.toJson())).toContain("xFiltering_date");
     });
     it.each([DateField, DateTimeField])("writes explicit date hierarchy levels and keeps date settings", Type => {
         const data = dataSource();
@@ -190,6 +194,21 @@ describe("modern date-filter identity", () => {
         const field = (document.toJson() as any).Widgets[0].DataSpec.Fields[0];
         expect(field.Settings).toMatchObject({ DateFiscalYearStartMonth: 4, DisplayInLocalTimeZone: true });
         expect(field.Filter.DateFiscalYearStartMonth).toBe(0);
+    });
+    it("does not reuse the first hierarchy level's formatting or drill selection", () => {
+        const document: any = { Widgets: [{ DataSpec: { Fields: [{ FieldName: "Date", FieldType: "Date" }] },
+            VisualizationDataSpec: { FormatVersion: 0, Rows: [{ SummarizationField: {
+                _type: "SummarizationDateFieldType", FieldName: "Date", DateAggregationType: "Year",
+                DateFormatting: { DateFormat: "yyyy" }, DrillDownElements: ["2026"]
+            } }] } }] };
+        prepareModernDocument(document);
+        const rows = document.Widgets[0].VisualizationDataSpec.Rows;
+        expect(rows[0].SummarizationField.DateFormatting).toEqual({ DateFormat: "yyyy" });
+        expect(rows[0].SummarizationField.DrillDownElements).toEqual(["2026"]);
+        for (const row of rows.slice(1)) {
+            expect(row.SummarizationField.DateFormatting).toBeUndefined();
+            expect(row.SummarizationField.DrillDownElements).toEqual([]);
+        }
     });
     it("carries single-value conditional formatting to the measure", () => {
         const text = new TextVisualization("Sales", dataSource()).setValue("Sales");
