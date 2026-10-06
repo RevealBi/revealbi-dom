@@ -5,12 +5,10 @@ import { RdashDocument } from "../../RdashDocument";
 import { IVisualization } from "../../Visualizations";
 import { Guid } from "../Guid";
 import { CloneUtility } from "./CloneUtility";
-import { checkLegacyImport } from "./DocumentCompatibility";
 
 export class RdashDocumentImporter {
 
     static import(targetDocument: RdashDocument, sourceDocument: RdashDocument, visualization?: string | IVisualization, options?: ImportOptions): void {
-        checkLegacyImport(targetDocument, sourceDocument);
         if (!visualization) {
             sourceDocument.visualizations.forEach(viz => this.importVisualization(targetDocument, sourceDocument, viz, options));
             return;

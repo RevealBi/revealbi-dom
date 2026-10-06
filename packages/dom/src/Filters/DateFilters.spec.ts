@@ -1,4 +1,4 @@
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it } from "vitest";
 import * as api from "../index";
 import { DashboardDateFilter, DateTimeFilter, XmlaDateFilter, DateFilterRule, PeriodType,
     JsonConvert, FilterType, RdashDocument, DashboardDateFilterBinding, DashboardDateFilterBindingTarget,
@@ -155,9 +155,7 @@ describe("modern date-filter identity", () => {
         expect((target.filters[0] as DashboardDateFilter).rule).toBeInstanceOf(DateFilterRule);
         expect((target.toJson() as any).Widgets[0].DataSpec.Bindings.Bindings[0].Target.GlobalFilterId).toBe(selected.id);
     });
-    it("warns once and continues legacy edits/imports while preserving IDs", () => {
-        const warning = vi.spyOn(console, "warn").mockImplementation(() => {});
-        try {
+    it("continues legacy edits/imports while preserving IDs", () => {
         const legacy = RdashDocument.loadFromJson('{"FormatVersion":6}');
         const filter = new DashboardDateFilter(DateFilterRule.allTime);
         legacy.filters.push(filter);
@@ -171,52 +169,40 @@ describe("modern date-filter identity", () => {
         expect(target.filters.map(f => f.id)).toEqual([filter.id]);
         expect((target.toJson() as any).FormatVersion).toBe(8);
         expect(legacy.formatVersion).toBe(6);
-        const messages = warning.mock.calls.map(call => String(call[0])).filter(message => message.startsWith("RdashCompatibility:"));
-        expect(messages).toHaveLength(2);
-        expect(messages.every(message => message.includes("SDK") && !message.includes(filter.id))).toBe(true);
-        } finally { warning.mockRestore(); }
     });
-    it.each(["_date", "xFiltering_date", "explicit-id"])("loads and retains legacy selections for %s with only relevant warnings", id => {
-        const warning = vi.spyOn(console, "warn").mockImplementation(() => {});
-        try {
-            const json = { FormatVersion: 6, GlobalFilters: [{ _type: "DateGlobalFilterType", Id: id,
-                RuleType: "Today", IncludeToday: false }] };
-            const loaded = RdashDocument.loadFromJson(JSON.stringify(json));
-            for (let i = 0; i < 3; i++) {
-                const saved: any = loaded.toJson();
-                expect(saved.FormatVersion).toBe(6);
-                expect(saved.GlobalFilters[0]).toMatchObject(json.GlobalFilters[0]);
-                expect(wire(new DateTimeFilter((loaded.filters[0] as DashboardDateFilter).rule)))
-                    .toMatchObject({ RuleType: "Today", IncludeToday: false });
-            }
-            expect(warning).toHaveBeenCalledTimes(id === "explicit-id" ? 1 : 0);
-        } finally { warning.mockRestore(); }
+    it.each(["_date", "xFiltering_date", "explicit-id"])("loads and round-trips legacy selections for %s", id => {
+        const json = { FormatVersion: 6, GlobalFilters: [{ _type: "DateGlobalFilterType", Id: id,
+            RuleType: "Today", IncludeToday: false }] };
+        const loaded = RdashDocument.loadFromJson(JSON.stringify(json));
+        const saved: any = loaded.toJson();
+        expect(saved.FormatVersion).toBe(6);
+        expect(saved.GlobalFilters[0]).toMatchObject(json.GlobalFilters[0]);
+        expect(wire(new DateTimeFilter((loaded.filters[0] as DashboardDateFilter).rule)))
+            .toMatchObject({ RuleType: "Today", IncludeToday: false });
+        expect(RdashDocument.loadFromJson(JSON.stringify(saved)).toJson()).toEqual(saved);
     });
     it("keeps legacy date-field wire values on load/save and best-effort import", () => {
-        const warning = vi.spyOn(console, "warn").mockImplementation(() => {});
-        try {
-            const original = new RdashDocument();
-            const filter = JsonConvert.deserializeObject({ RuleType: "LastMonth", IncludeToday: false }, DashboardDateFilter);
-            original.filters.push(filter);
-            const data = dataSource();
-            (data.fields[0] as DateTimeField).dataFilter = JsonConvert.deserializeObject({ RuleType: "Today", IncludeToday: false,
-                DateFiscalYearStartMonth: 4, DisplayInLocalTimeZone: true }, DateTimeFilter);
-            original.visualizations.push(new GridVisualization("Legacy", data).connectDashboardFilter(filter, "OrderedOn"));
-            const oldWire: any = JsonConvert.serializeObject(original); oldWire.FormatVersion = 6;
-            const loaded = RdashDocument.loadFromJson(JSON.stringify(oldWire));
-            const saved: any = loaded.toJson();
-            expect(saved.GlobalFilters[0]).toMatchObject({ Id: "_date", RuleType: "LastMonth", IncludeToday: false });
-            expect(saved.Widgets[0].DataSpec.Fields[0].Filter).toMatchObject({ RuleType: "Today", IncludeToday: false,
-                DateFiscalYearStartMonth: 4, DisplayInLocalTimeZone: true });
-            const modern = new RdashDocument();
-            modern.import(loaded, undefined, { includeDashboardFilters: true, includeVisualizationFilters: true });
-            const result: any = modern.toJson();
-            expect(result.FormatVersion).toBe(8);
-            expect(result.GlobalFilters[0]).toMatchObject({ Id: "_date", RuleType: "LastMonth", IncludeToday: false });
-            expect(result.Widgets[0].DataSpec.Fields[0].Filter).toMatchObject({ RuleType: "Today", IncludeToday: false });
-            expect(result.Widgets[0].DataSpec.Fields[0].Settings).toMatchObject({ DateFiscalYearStartMonth: 4, DisplayInLocalTimeZone: true });
-            expect(RdashDocument.loadFromJson(JSON.stringify(result)).visualizations).toHaveLength(1);
-        } finally { warning.mockRestore(); }
+        const original = new RdashDocument();
+        const filter = JsonConvert.deserializeObject({ RuleType: "LastMonth", IncludeToday: false }, DashboardDateFilter);
+        original.filters.push(filter);
+        const data = dataSource();
+        (data.fields[0] as DateTimeField).dataFilter = JsonConvert.deserializeObject({ RuleType: "Today", IncludeToday: false,
+            DateFiscalYearStartMonth: 4, DisplayInLocalTimeZone: true }, DateTimeFilter);
+        original.visualizations.push(new GridVisualization("Legacy", data).connectDashboardFilter(filter, "OrderedOn"));
+        const oldWire: any = JsonConvert.serializeObject(original); oldWire.FormatVersion = 6;
+        const loaded = RdashDocument.loadFromJson(JSON.stringify(oldWire));
+        const saved: any = loaded.toJson();
+        expect(saved.GlobalFilters[0]).toMatchObject({ Id: "_date", RuleType: "LastMonth", IncludeToday: false });
+        expect(saved.Widgets[0].DataSpec.Fields[0].Filter).toMatchObject({ RuleType: "Today", IncludeToday: false,
+            DateFiscalYearStartMonth: 4, DisplayInLocalTimeZone: true });
+        const modern = new RdashDocument();
+        modern.import(loaded, undefined, { includeDashboardFilters: true, includeVisualizationFilters: true });
+        const result: any = modern.toJson();
+        expect(result.FormatVersion).toBe(8);
+        expect(result.GlobalFilters[0]).toMatchObject({ Id: "_date", RuleType: "LastMonth", IncludeToday: false });
+        expect(result.Widgets[0].DataSpec.Fields[0].Filter).toMatchObject({ RuleType: "Today", IncludeToday: false });
+        expect(result.Widgets[0].DataSpec.Fields[0].Settings).toMatchObject({ DateFiscalYearStartMonth: 4, DisplayInLocalTimeZone: true });
+        expect(RdashDocument.loadFromJson(JSON.stringify(result)).visualizations).toHaveLength(1);
     });
     it("still rejects malformed JSON instead of returning an empty dashboard", () => {
         expect(() => RdashDocument.loadFromJson("{not json")).toThrow(SyntaxError);

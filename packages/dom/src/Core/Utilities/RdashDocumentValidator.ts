@@ -3,12 +3,10 @@ import { DataSourceItem } from "../../Data/DataSourceItem";
 import { RdashDocument } from "../../RdashDocument";
 import { TabularDataDefinition } from "../../Visualizations/DataDefinitions/TabularDataDefinition";
 import { DashboardDateFilter } from "../../Filters/DashboardDateFilter";
-import { checkDateIds } from "./DocumentCompatibility";
 
 export class RdashDocumentValidator {
 
     static validate(document: RdashDocument): void {
-        checkDateIds(document);
         this.fixVisualizations(document);
         this.reorderDashboardFilters(document);
     }
