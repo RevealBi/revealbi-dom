@@ -129,3 +129,37 @@ const adapter: RevealSdkAdapter = {
 };
 registerRevealSdk(adapter);
 ```
+
+## Date filter rules and IDs
+
+Date filters require an explicit selection. Use the same rule API for dashboard, tabular-field, and XMLA date filters:
+
+```ts
+import { DashboardDateFilter, DateTimeFilter, XmlaDateFilter, DateFilterRule,
+    PeriodType, DateLinkFilter } from "@revealbi/dom";
+
+const salesDate = new DashboardDateFilter("Sales Date",
+    DateFilterRule.last(90, PeriodType.Day, false));
+doc.filters.push(salesDate);
+salesDate.rule = DateFilterRule.this(PeriodType.Quarter);
+salesDate.setRule(DateFilterRule.next(7, PeriodType.Day));
+
+const fieldDate = new DateTimeFilter(DateFilterRule.previous(3, PeriodType.Month));
+const xmlaDate = new XmlaDateFilter(DateFilterRule.toDate(PeriodType.Year));
+const customDate = new DashboardDateFilter(
+    DateFilterRule.custom(new Date("2026-01-01T00:00:00Z"), null));
+
+visualization.connectDashboardFilter(salesDate, "OrderDate");
+const dateLink = new DateLinkFilter(salesDate, targetDateFilter);
+// Or: new DateLinkFilter(salesDate, targetDateFilter.id)
+```
+
+`last` is a rolling window; `previous` selects complete preceding periods. `next` starts at the beginning of the next period; `this` selects the current period in full. `toDate` selects its start through today. Weeks start on Monday. `last` and `toDate` accept `includeToday`; `false` evaluates the window as of yesterday. `custom` accepts inclusive endpoints, with null/undefined for an open endpoint. `DateFilterRule.allTime` removes the date restriction.
+
+Assigning `rule` to a field filter activates rule filtering and clears its old selected values. Raw `ruleType`, `customRule`, `customDateRange`, and `includeToday` properties are private; `DateRuleType` is no longer exported. Legacy wire values remain readable and round-trip through private serialization members. Constructors without a rule are no longer supported. Fiscal and local-time settings belong on `DateField.settings` or `DateTimeField.settings` (`DateTimeFieldSettings`), not the old filter-level properties.
+
+New documents use **format 8**, and new date filters have unique GUIDs. Bindings, imports, and links use the selected filter's actual ID; `_date` fallback defaults exist only in JSON readers. Replace `new DashboardDateFilterBinding("OrderDate")` with `new DashboardDateFilterBinding(salesDate, "OrderDate")`, or use `connectDashboardFilter`. Date links require both source and target filters/IDs.
+
+The writer emits the date hierarchies, field settings, XMLA drill members, and single-value conditional formatting required by the new format. Older dashboards load, save, and import through the normal serialization path; loaded documents keep their version and legacy date values. Malformed JSON still reports a parse error.
+
+The tested runtime baseline is **Reveal SDK 2.2.1**, not a claim about the earliest supported release. SDK 1.7.3 rewrites date IDs regardless of the declared format and is incompatible with GUID-based creation.

@@ -1,5 +1,6 @@
 ﻿export enum DateRuleType {
 	None = "None",
+    CustomRule = "CustomRule",
 	CustomRange = "CustomRange",
 	LastWeek = "LastWeek",
 	LastMonth = "LastMonth",

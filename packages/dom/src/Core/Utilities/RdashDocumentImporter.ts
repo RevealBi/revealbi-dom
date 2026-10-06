@@ -80,7 +80,7 @@ export class RdashDocumentImporter {
 
     private static getFilterId(fb: BindingBase): string | undefined {
         if (fb instanceof DashboardDateFilterBinding) {
-            return "_date";
+            return fb.target?.dashboardFilterId;
         } else if (fb instanceof DashboardDataFilterBinding) {
             return fb.target?.dashboardFilterId;
         }

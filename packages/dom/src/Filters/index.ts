@@ -22,3 +22,5 @@ export { XmlaFilterRule } from './XmlaFilterRule';
 export { XmlaNumberFilterRule } from './XmlaNumberFilterRule';
 export { XmlaRegularFilter } from './XmlaRegularFilter';
 export { XmlaStringFilterRule } from './XmlaStringFilterRule';
+
+export { DateFilterRule } from './DateFilterRule';

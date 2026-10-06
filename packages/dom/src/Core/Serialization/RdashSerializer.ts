@@ -2,22 +2,21 @@ import { RdashDocument } from "../../RdashDocument";
 import { JsonConvert } from "./JsonConvert";
 import { RdashDocumentValidator } from "../Utilities/RdashDocumentValidator";
 import { unzip, zipSync } from "fflate";
+import { prepareModernDocument } from "./ModernDocumentWriter";
 
 export class RdashSerializer {
     static _rdashJsonFileName = "Dashboard.json";
 
     static deserialize(input: string | Record<string, any>): RdashDocument {
-        if (typeof input === "string") {
-            return JsonConvert.deserialize(input, RdashDocument);
-        }
-        else {
-            return JsonConvert.deserializeObject(input, RdashDocument);
-        }
+        return typeof input === "string" ? JsonConvert.deserialize(input, RdashDocument)
+            : JsonConvert.deserializeObject(input, RdashDocument);
     }
 
     static serialize(document: RdashDocument): string {
         RdashDocumentValidator.validate(document);
-        return JsonConvert.serialize(document);
+        const json = JsonConvert.serializeObject(document);
+        if (document.formatVersion >= 7) prepareModernDocument(json);
+        return JSON.stringify(json, undefined, 4);
     }
 
     static toBlob(document: RdashDocument): Blob {
