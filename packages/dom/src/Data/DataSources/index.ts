@@ -13,11 +13,11 @@ export { MicrosoftAzureAnalysisServicesDataSource } from './MicrosoftAzureAnalys
 export { MicrosoftAzureSqlServerDataSource } from './MicrosoftAzureSqlServerDataSource';
 export { MicrosoftAzureSynapseAnalyticsDataSource } from './MicrosoftAzureSynapseAnalyticsDataSource';
 export { MicrosoftSqlServerDataSource } from './MicrosoftSqlServerDataSource';
-export { MySqlDataSource } from './MySqlDataSource';
+export { MySqlDataSource } from './MySQLDataSource';
 export { ODataDataSource } from './ODataDataSource';
 export { OracleDataSource } from './OracleDataSource';
-export { PostgreSqlDataSource } from './PostgreSqlDataSource';
+export { PostgreSqlDataSource } from './PostgreSQLDataSource';
 export { RestDataSource } from './RestDataSource';
 export { SnowflakeDataSource } from './SnowflakeDataSource';
 export { WebServiceDataSource } from './WebServiceDataSource';
-export { MongoDbDataSource } from './MongoDbDataSource';
+export { MongoDbDataSource } from './MongoDBDataSource';

@@ -1,3 +1,4 @@
+import { registerJsonFactory } from "./Core/Serialization/JsonConstruction";
 import { GlobalConstants } from "./Core/Constants/GlobalConstants";
 import { dashboardFilterConverter } from "./Core/Serialization/Converters/DashboardFilterConverter";
 import { visualizationConverter } from "./Core/Serialization/Converters/VisualizationConverter";
@@ -56,7 +57,8 @@ export class RdashDocument {
     savedWith?: string;
 
     @JsonProperty("FormatVersion")
-    formatVersion: number = 6;
+    formatVersion: number = 8;
+    static { registerJsonFactory(this, () => { const document = new RdashDocument(); document.formatVersion = 6; return document; }); }
 
     /**
      * Gets or sets whether the viewer displaying the dashboard will automatically layout visualizations, or use an absolute layout controlled by each visualization's ColumnSpan and RowSpan properties. True by default.

@@ -9,6 +9,8 @@ import { CloneUtility } from "./CloneUtility";
 export class RdashDocumentImporter {
 
     static import(targetDocument: RdashDocument, sourceDocument: RdashDocument, visualization?: string | IVisualization, options?: ImportOptions): void {
+        if (targetDocument.formatVersion >= 7 && sourceDocument.formatVersion < 7)
+            throw new Error("Save the source dashboard with Reveal SDK 2.2.1 or later and reload it before importing into a modern document. Its visualizations still require SDK migration.");
         if (!visualization) {
             sourceDocument.visualizations.forEach(viz => this.importVisualization(targetDocument, sourceDocument, viz, options));
             return;
@@ -80,7 +82,7 @@ export class RdashDocumentImporter {
 
     private static getFilterId(fb: BindingBase): string | undefined {
         if (fb instanceof DashboardDateFilterBinding) {
-            return "_date";
+            return fb.target?.dashboardFilterId;
         } else if (fb instanceof DashboardDataFilterBinding) {
             return fb.target?.dashboardFilterId;
         }

@@ -119,7 +119,7 @@ export abstract class VisualizationBase implements IVisualization {
 
     connectDashboardFilter(dashboardFilter: DashboardDateFilter | DashboardDataFilter, fieldName?: string): this {
         if (dashboardFilter instanceof DashboardDateFilter) {
-            this.filterBindings?.push(new DashboardDateFilterBinding(fieldName ?? "Date"))
+            this.filterBindings?.push(new DashboardDateFilterBinding(dashboardFilter, fieldName ?? "Date"))
         } else {
             const binding = fieldName ? new DashboardDataFilterBinding(dashboardFilter, fieldName) : new DashboardDataFilterBinding(dashboardFilter);
             this.filterBindings?.push(binding)
