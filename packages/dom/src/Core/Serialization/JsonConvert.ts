@@ -1,4 +1,5 @@
 import 'reflect-metadata';
+import { constructFromJson, JsonConstructor } from './JsonConstruction';
 import { Reflection } from "./Utilities/Reflection";
 import { JsonRecord } from "./Interfaces/JsonRecord";
 import { PrimitiveArray } from "./Interfaces/PrimitiveArray";
@@ -6,13 +7,13 @@ import { JsonPropertyOptions } from './Interfaces/JsonPropertyOptions';
 
 export class JsonConvert {
 
-    static deserialize<T>(json: string, type: new () => T | T): T {
+    static deserialize<T>(json: string, type: JsonConstructor<T>): T {
         const object = JSON.parse(json);
         return this.deserializeObject(object, type);
     }
 
-    static deserializeObject<T>(jsonObject: Record<string, any>, type: new () => T | T): T {
-        const instance: any = new type();
+    static deserializeObject<T>(jsonObject: Record<string, any>, type: JsonConstructor<T>): T {
+        const instance: any = constructFromJson(type);
         const propertyKeys = Reflection.getPropertyKeys(type.prototype);
 
         for (const key of propertyKeys) {
@@ -23,7 +24,9 @@ export class JsonConvert {
                 const propertyOptions = Reflection.getJsonPropertyOptions(instance, key);
                 let propertyType = propertyOptions && propertyOptions.type ? propertyOptions.type : type;
 
-                if (propertyType === JsonRecord) {
+                if (value === null) {
+                    instance[key] = null;
+                } else if (propertyType === JsonRecord) {
                     instance[key] = this.deserializeJsonRecord(value);
                 } else if (propertyType === PrimitiveArray) {
                     instance[key] = this.deserializePrimitiveArray(value);
@@ -48,7 +51,7 @@ export class JsonConvert {
         return Array.isArray(value) ? [...value] : value;
     }
 
-    static deserializeArray(value: any, propertyOptions: JsonPropertyOptions, type: new () => any) {
+    static deserializeArray(value: any, propertyOptions: JsonPropertyOptions, type: JsonConstructor) {
         return value.map((item: any) => {
             if (propertyOptions && propertyOptions.converter) {
                 type = propertyOptions.converter(item)
@@ -57,7 +60,7 @@ export class JsonConvert {
         });
     }
 
-    static deserializeValue(value: any, propertyOptions: JsonPropertyOptions, type: new () => any) {
+    static deserializeValue(value: any, propertyOptions: JsonPropertyOptions, type: JsonConstructor) {
         if (propertyOptions && propertyOptions.converter) {
             type = propertyOptions.converter(value)
         }

@@ -1,4 +1,4 @@
-export { DateRuleType } from './DateRuleType';
+export { PeriodType } from './PeriodType';
 export { FilterType } from './FilterType';
 export { NumberRuleType } from './NumberRuleType';
 export { StringRuleType } from './StringRuleType';

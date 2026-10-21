@@ -1,29 +1,46 @@
 import { SchemaTypeNames } from "../Core/Constants/SchemaTypeNames";
 import { JsonProperty } from "../Core/Serialization/Decorators/JsonProperty";
+import { registerJsonFactory } from "../Core/Serialization/JsonConstruction";
 import { DateRange } from "../Primitives/DateRange";
-import { DateRuleType } from "./Enums/DateRuleType";
 import { FilterBase } from "./FilterBase";
+import { DateRuleType } from "./Enums/DateRuleType";
+import { FilterType } from "./Enums/FilterType";
+import { DateFilterRule, RelativePeriod, dateRuleFromWire, dateRuleToWire } from "./DateFilterRule";
 
-export class DateTimeFilter extends FilterBase
-{
-    constructor()
-    {
-        super();
-        this.schemaTypeName = SchemaTypeNames.DateTimeFilterType;
+export class DateTimeFilter extends FilterBase {
+    constructor(rule: DateFilterRule) {
+        super(); this.schemaTypeName = SchemaTypeNames.DateTimeFilterType; this.rule = rule;
     }
-    
     @JsonProperty("DateFiscalYearStartMonth")
-    dateFiscalYearStartMonth: number = 0;
-    
+    private dateFiscalYearStartMonth = 0;
     @JsonProperty("DisplayInLocalTimeZone")
-    displayInLocalTimeZone: boolean = false;
-
+    private displayInLocalTimeZone = false;
     @JsonProperty("RuleType")
-    ruleType: DateRuleType = DateRuleType.AllTime;
-    
+    private ruleType: DateRuleType = DateRuleType.AllTime;
     @JsonProperty("CustomDateRange", { type: DateRange })
-    customDateRange?: DateRange;
-    
+    private customDateRange?: DateRange;
     @JsonProperty("IncludeToday")
-    includeToday: boolean = true;
+    private includeToday = true;
+    @JsonProperty("CustomRule", { type: RelativePeriod })
+    private customRule?: RelativePeriod;
+
+    get rule(): DateFilterRule { return dateRuleFromWire({ ruleType: this.ruleType,
+        customDateRange: this.customDateRange, customRule: this.customRule, includeToday: this.includeToday }); }
+    set rule(value: DateFilterRule) {
+        const state = dateRuleToWire(value);
+        this.ruleType = state.ruleType;
+        this.customDateRange = state.customDateRange;
+        this.customRule = state.customRule;
+        this.includeToday = state.includeToday;
+        this.filterType = FilterType.FilterByRule; this.selectedValues = undefined;
+    }
+    setRule(rule: DateFilterRule): this { this.rule = rule; return this; }
+    static {
+        registerJsonFactory(this, () => {
+            const instance = new DateTimeFilter(DateFilterRule.allTime);
+            instance.ruleType = DateRuleType.AllTime;
+            instance.filterType = FilterType.AllValues;
+            return instance;
+        });
+    }
 }

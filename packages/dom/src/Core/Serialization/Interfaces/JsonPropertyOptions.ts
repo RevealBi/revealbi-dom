@@ -1,5 +1,5 @@
 
 export interface JsonPropertyOptions {
-    type?: new () => any;
-    converter?: (json: any) => new () => any;
+    type?: new (...args: any[]) => any;
+    converter?: (json: any) => new (...args: any[]) => any;
 }
