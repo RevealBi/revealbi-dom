@@ -15,6 +15,22 @@ const wire = (filter: DateFilter): any => JsonConvert.serializeObject(filter);
 describe("DateFilterRule parity", () => {
     for (const [index, Type] of types.entries()) {
         describe(names[index], () => {
+            it("creates, round-trips, and fluently replaces Next days including today", () => {
+                const filter = new Type(DateFilterRule.next(7, PeriodType.Day, true));
+                const expected = { _type: "DateRuleType", Relation: "Next", Count: 7, Period: "Day", IncludeToday: true };
+                expect(wire(filter).CustomRule).toEqual(expected);
+                const loaded = JsonConvert.deserializeObject(wire(filter), Type);
+                expect(wire(loaded).CustomRule).toEqual(expected);
+                for (const Target of types)
+                    expect(wire(new Target(loaded.rule)).CustomRule).toEqual(expected);
+                expect(filter.setRule(DateFilterRule.next(7, PeriodType.Day, false))).toBe(filter);
+                expect(wire(filter).CustomRule).not.toHaveProperty("IncludeToday");
+            });
+            it.each(Object.values(PeriodType))("preserves the existing Next wire contract for %s", period => {
+                const expected = { _type: "DateRuleType", Relation: "Next", Count: 7, Period: period };
+                expect(wire(new Type(DateFilterRule.next(7, period))).CustomRule).toEqual(expected);
+                expect(wire(new Type(DateFilterRule.next(7, period, false))).CustomRule).toEqual(expected);
+            });
             for (const legacy of Object.values(DateRuleType).filter(rule => rule !== DateRuleType.CustomRule)) {
                 for (const includeToday of [false, true]) {
                     it(`round-trips and copies ${legacy}, includeToday=${includeToday}`, () => {
@@ -71,6 +87,29 @@ describe("DateFilterRule parity", () => {
         const result = wire(new DashboardDateFilter(rule as DateFilterRule)).CustomRule;
         expect(result).toMatchObject({ Relation: relation, Count: count, Period: period });
         expect(result.IncludeToday).toBe(includeToday);
+    });
+    it.each([PeriodType.Week, PeriodType.Month, PeriodType.Quarter, PeriodType.Year])(
+        "rejects includeToday for Next %s windows", period => {
+            expect(() => DateFilterRule.next(7, period, true)).toThrow("Only a window of days can include today.");
+        });
+    it("retains Next input validation with includeToday", () => {
+        for (const count of [0, -1, 1.5, NaN, Infinity, 2147483648]) {
+            expect(() => DateFilterRule.next(count, PeriodType.Day, true)).toThrow(/positive 32-bit integer/);
+            expect(() => DateFilterRule.next(count, PeriodType.Month, true)).toThrow(/positive 32-bit integer/);
+        }
+        expect(() => DateFilterRule.next(1, "invalid" as PeriodType, true)).toThrow("Invalid period.");
+        for (const value of [null, 0, 1, "true"])
+            expect(() => DateFilterRule.next(7, PeriodType.Day, value as unknown as boolean)).toThrow(TypeError);
+    });
+    it("round-trips a dashboard created with Next days including today", () => {
+        const document = new RdashDocument("Next days");
+        const filter = new DashboardDateFilter(DateFilterRule.next(7, PeriodType.Day, true));
+        document.filters.push(filter);
+        const loaded = RdashDocument.loadFromJson(document.toJsonString());
+        const json: any = loaded.toJson();
+        expect(json.GlobalFilters[0].Id).toBe(filter.id);
+        expect(json.GlobalFilters[0].CustomRule).toEqual({ _type: "DateRuleType", Relation: "Next",
+            Count: 7, Period: "Day", IncludeToday: true });
     });
     it("validates factories and snapshots mutable Date inputs", () => {
         for (const count of [0, -1, 1.5, NaN, Infinity, 2147483648])
