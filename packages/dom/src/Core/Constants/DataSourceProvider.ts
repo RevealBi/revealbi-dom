@@ -6,6 +6,7 @@ export enum DataSourceProvider {
     AzureCosmosDB = "AZURE_COSMOSDB",
     Box = "BOXPROVIDER",
     CSV = "CSVLOCALFILEPROVIDER",
+    Cube = "CUBE",
     ClickHouse = "CLICKHOUSE",
     Dropbox = "DROPBOXPROVIDER",
     DuckDB = "DUCKDB",

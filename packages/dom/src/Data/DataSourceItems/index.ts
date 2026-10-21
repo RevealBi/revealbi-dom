@@ -23,3 +23,4 @@ export { ClickHouseDataSourceItem } from './ClickHouseDataSourceItem';
 export { DuckDbDataSourceItem } from './DuckDbDataSourceItem';
 export { MariaDbDataSourceItem } from './MariaDbDataSourceItem';
 export { SqliteDataSourceItem } from './SqliteDataSourceItem';
+export { CubeDataSourceItem } from './CubeDataSourceItem';
