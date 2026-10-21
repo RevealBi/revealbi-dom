@@ -13,4 +13,12 @@ export abstract class TableDataSourceItem extends DataSourceItem {
     set table(value: string) {
         this.properties["Table"] = value;
     }
+
+    get customQuery(): string {
+        return this.properties["RPCustomQuery"];
+    }
+
+    set customQuery(value: string) {
+        this.properties["RPCustomQuery"] = value;
+    }
 }
