@@ -51,10 +51,7 @@ export class DateFilterRule {
     /** Complete upcoming periods. For Day only, includeToday starts the window today instead of tomorrow. */
     static next(count: number, period: PeriodType, includeToday = false): DateFilterRule {
         // Omit false: older SDKs interpret an explicit false as evaluating the window as of yesterday.
-        const rule = this.relative("Next", count, period, includeToday === false ? undefined : includeToday);
-        if (includeToday && period !== PeriodType.Day)
-            throw new RangeError("Only a window of days can include today.");
-        return rule;
+        return this.relative("Next", count, period, includeToday === false ? undefined : includeToday);
     }
     /** Complete periods immediately preceding the current period. */
     static previous(count: number, period: PeriodType): DateFilterRule {

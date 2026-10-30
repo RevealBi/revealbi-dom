@@ -4,5 +4,6 @@ export enum PeriodType {
     Week = "Week",
     Month = "Month",
     Quarter = "Quarter",
+    Semester = "Semester",
     Year = "Year"
 }
