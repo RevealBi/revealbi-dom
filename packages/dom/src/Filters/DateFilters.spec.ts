@@ -6,6 +6,7 @@ import { DashboardDateFilter, DateTimeFilter, XmlaDateFilter, DateFilterRule, Pe
     ColumnChartVisualization, DateDataField, NumberField, DateTimeFieldSettings, TextVisualization, DateField } from "../index";
 import { DateRuleType } from "./Enums/DateRuleType";
 import { prepareModernDocument } from "../Core/Serialization/ModernDocumentWriter";
+import { CloneUtility } from "../Core/Utilities/CloneUtility";
 
 type DateFilter = DashboardDateFilter | DateTimeFilter | XmlaDateFilter;
 const types: Array<new (rule: DateFilterRule) => DateFilter> = [DashboardDateFilter, DateTimeFilter, XmlaDateFilter];
@@ -18,7 +19,7 @@ const nextCases = periods.flatMap(period => ["omitted", "undefined", "false", "t
 describe("DateFilterRule parity", () => {
     for (const [index, Type] of types.entries()) {
         describe(names[index], () => {
-            it("creates, round-trips, and fluently replaces Next days including today", () => {
+            it("creates, round-trips, and replaces Next days through the rule property", () => {
                 const filter = new Type(DateFilterRule.next(7, PeriodType.Day, true));
                 const expected = { _type: "DateRuleType", Relation: "Next", Count: 7, Period: "Day", IncludeToday: true };
                 expect(wire(filter).CustomRule).toEqual(expected);
@@ -26,7 +27,7 @@ describe("DateFilterRule parity", () => {
                 expect(wire(loaded).CustomRule).toEqual(expected);
                 for (const Target of types)
                     expect(wire(new Target(loaded.rule)).CustomRule).toEqual(expected);
-                expect(filter.setRule(DateFilterRule.next(7, PeriodType.Day, false))).toBe(filter);
+                filter.rule = DateFilterRule.next(7, PeriodType.Day, false);
                 expect(wire(filter).CustomRule).not.toHaveProperty("IncludeToday");
             });
             it.each(nextCases)("matches the .NET Next %s wire contract with %s", (period, option) => {
@@ -72,11 +73,11 @@ describe("DateFilterRule parity", () => {
                     }
                 }
             }
-            it("builds relative selections, replaces state, and supports fluent assignment", () => {
+            it("builds relative selections and replaces state through the rule property", () => {
                 const filter = new Type(DateFilterRule.last(90, PeriodType.Day, false));
                 expect(wire(filter)).toMatchObject({ RuleType: "CustomRule", CustomRule: {
                     _type: "DateRuleType", Relation: "Last", Count: 90, Period: "Day", IncludeToday: false } });
-                expect(filter.setRule(DateFilterRule.custom(new Date("2026-01-01Z"), null))).toBe(filter);
+                filter.rule = DateFilterRule.custom(new Date("2026-01-01Z"), null);
                 expect(wire(filter).CustomRule).toBeUndefined();
                 filter.rule = DateFilterRule.next(7, PeriodType.Day);
                 expect(wire(filter).CustomDateRange).toBeUndefined();
@@ -172,8 +173,11 @@ describe("modern date-filter identity", () => {
         expect(new DashboardDateFilterBindingTarget().dashboardFilterId).toBeUndefined();
         expect(new RdashDocument().formatVersion).toBe(8);
     });
-    it("keeps old JSON fallback IDs exclusively in readers", () => {
-        expect(JsonConvert.deserializeObject({ RuleType: "Today" }, DashboardDateFilter).id).toBe("_date");
+    it("uses normal filter IDs while preserving separate legacy binding/link defaults", () => {
+        const missingId = JsonConvert.deserializeObject({ RuleType: "Today" }, DashboardDateFilter);
+        expect(missingId.id).toMatch(/^[0-9a-f-]{36}$/i);
+        expect(wire(missingId).RuleType).toBe("Today");
+        expect(JsonConvert.deserializeObject(wire(missingId), DashboardDateFilter).id).toBe(missingId.id);
         expect(JsonConvert.deserializeObject({}, DashboardDateFilterBindingTarget).dashboardFilterId).toBe("_date");
         expect(JsonConvert.deserializeObject({}, DateLinkFilter).value).toBe("_date.Date Filter");
         expect(RdashDocument.loadFromJson("{}").formatVersion).toBe(6);
@@ -199,10 +203,11 @@ describe("modern date-filter identity", () => {
         expect(JsonConvert.serializeObject(dateLink)).toMatchObject({ Namespace: target.id, Value: `${shipping.id}.Ship Date` });
         expect(JSON.stringify(json)).toContain(`${shipping.id}.Ship Date`);
     });
-    it("imports the bound date filter by ID, clones it, and deduplicates it", () => {
+    it.each(["_date", "82c0bd54-8ddb-4e9b-aef0-197897b8f8c0"])("imports and clones the bound filter with saved ID %s", id => {
         const source = new RdashDocument();
         const unused = new DashboardDateFilter("Unused", DateFilterRule.allTime);
         const selected = new DashboardDateFilter("Selected", DateFilterRule.next(2, PeriodType.Month));
+        selected.id = id;
         source.filters = [unused, selected];
         const grid = new GridVisualization("Dates", dataSource()).connectDashboardFilter(selected, "OrderedOn");
         source.visualizations = [grid];
@@ -230,20 +235,23 @@ describe("modern date-filter identity", () => {
         expect((target.toJson() as any).FormatVersion).toBe(8);
         expect(legacy.formatVersion).toBe(6);
     });
-    it.each(["_date", "xFiltering_date", "explicit-id"])("loads and round-trips legacy selections for %s", id => {
+    it.each(["_date", "xFiltering_date", "explicit-id", "82c0bd54-8ddb-4e9b-aef0-197897b8f8c0"])("loads, clones and round-trips saved selections for %s", id => {
         const json = { FormatVersion: 6, GlobalFilters: [{ _type: "DateGlobalFilterType", Id: id,
             RuleType: "Today", IncludeToday: false }] };
         const loaded = RdashDocument.loadFromJson(JSON.stringify(json));
         const saved: any = loaded.toJson();
         expect(saved.FormatVersion).toBe(6);
         expect(saved.GlobalFilters[0]).toMatchObject(json.GlobalFilters[0]);
+        const cloned = CloneUtility.clone(loaded.filters[0] as DashboardDateFilter);
+        expect(cloned).not.toBe(loaded.filters[0]);
+        expect(wire(cloned)).toEqual(saved.GlobalFilters[0]);
         expect(wire(new DateTimeFilter((loaded.filters[0] as DashboardDateFilter).rule)))
             .toMatchObject({ RuleType: "Today", IncludeToday: false });
         expect(RdashDocument.loadFromJson(JSON.stringify(saved)).toJson()).toEqual(saved);
     });
     it("keeps legacy date-field wire values on load/save and best-effort import", () => {
         const original = new RdashDocument();
-        const filter = JsonConvert.deserializeObject({ RuleType: "LastMonth", IncludeToday: false }, DashboardDateFilter);
+        const filter = JsonConvert.deserializeObject({ Id: "_date", RuleType: "LastMonth", IncludeToday: false }, DashboardDateFilter);
         original.filters.push(filter);
         const data = dataSource();
         (data.fields[0] as DateTimeField).dataFilter = JsonConvert.deserializeObject({ RuleType: "Today", IncludeToday: false,
@@ -355,8 +363,12 @@ function publicApiContract(): void {
     const filter = new DashboardDateFilter(DateFilterRule.allTime);
     // @ts-expect-error Defaults apply only to constructors, not rule assignments.
     filter.rule = null;
-    // @ts-expect-error Defaults apply only to constructors, not rule assignments.
-    filter.setRule(undefined);
+    // @ts-expect-error Date filters expose rule as a property, without a fluent setter.
+    filter.setRule(DateFilterRule.allTime);
+    // @ts-expect-error Date filters expose rule as a property, without a fluent setter.
+    new DateTimeFilter().setRule(DateFilterRule.allTime);
+    // @ts-expect-error Date filters expose rule as a property, without a fluent setter.
+    new XmlaDateFilter().setRule(DateFilterRule.allTime);
     // @ts-expect-error Legacy selection properties are private.
     filter.ruleType = "Today";
     // @ts-expect-error Legacy selection properties are private.

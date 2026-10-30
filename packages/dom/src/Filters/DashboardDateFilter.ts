@@ -1,10 +1,8 @@
 import { SchemaTypeNames } from "../Core/Constants/SchemaTypeNames";
 import { JsonProperty } from "../Core/Serialization/Decorators/JsonProperty";
-import { registerJsonFactory } from "../Core/Serialization/JsonConstruction";
 import { DateRange } from "../Primitives/DateRange";
 import { DashboardFilter } from "./DashboardFilter";
 import { DateRuleType } from "./Enums/DateRuleType";
-import { FilterType } from "./Enums/FilterType";
 import { DateFilterRule, RelativePeriod, dateRuleFromWire, dateRuleToWire } from "./DateFilterRule";
 
 export class DashboardDateFilter extends DashboardFilter {
@@ -15,11 +13,11 @@ export class DashboardDateFilter extends DashboardFilter {
         this.schemaTypeName = SchemaTypeNames.DateGlobalFilterType;
         this.title = typeof titleOrRule === "string" ? titleOrRule : "Date Filter";
         const selection = typeof titleOrRule === "string" ? rule : titleOrRule;
-        this.rule = selection === undefined ? DateFilterRule.allTime : selection;
+        if (selection !== undefined) this.rule = selection;
     }
 
     @JsonProperty("RuleType")
-    private ruleType: DateRuleType = DateRuleType.LastYear;
+    private ruleType: DateRuleType = DateRuleType.AllTime;
     @JsonProperty("CustomDateRange", { type: DateRange })
     private customDateRange?: DateRange;
     @JsonProperty("IncludeToday")
@@ -35,15 +33,5 @@ export class DashboardDateFilter extends DashboardFilter {
         this.customDateRange = state.customDateRange;
         this.customRule = state.customRule;
         this.includeToday = state.includeToday;
-
-    }
-    setRule(rule: DateFilterRule): this { this.rule = rule; return this; }
-    static {
-        registerJsonFactory(this, () => {
-            const instance = new DashboardDateFilter(DateFilterRule.allTime);
-            instance.ruleType = DateRuleType.LastYear;
-            instance.id = "_date";
-            return instance;
-        });
     }
 }

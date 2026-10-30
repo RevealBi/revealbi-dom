@@ -31,7 +31,6 @@ export class XmlaDateFilter extends FilterBase {
         this.includeToday = state.includeToday;
         this.filterType = FilterType.FilterByRule; this.selectedValues = undefined;
     }
-    setRule(rule: DateFilterRule): this { this.rule = rule; return this; }
     static {
         registerJsonFactory(this, () => {
             const instance = new XmlaDateFilter(DateFilterRule.allTime);

@@ -27,22 +27,22 @@ describe("default date filter rules", () => {
                     expect(wire(new Target(filter.rule)).RuleType).toBe("AllTime");
             });
             it("honors explicit rules and rejects null constructors and null/undefined mutations", () => {
+                expect(Type.prototype).not.toHaveProperty("setRule");
                 const filter = new Type(DateFilterRule.next(7, PeriodType.Day, true));
                 expect(wire(filter).CustomRule).toMatchObject({ Relation: "Next", IncludeToday: true });
                 expect(() => new Type(null as unknown as DateFilterRule)).toThrow(TypeError);
                 const before = wire(filter);
                 for (const invalid of [null, undefined]) {
                     expect(() => { filter.rule = invalid as unknown as DateFilterRule; }).toThrow(TypeError);
-                    expect(() => filter.setRule(invalid as unknown as DateFilterRule)).toThrow(TypeError);
                     expect(wire(filter)).toEqual(before);
                 }
             });
-            it("retains omitted legacy JSON defaults", () => {
+            it("uses dashboard defaults for omitted fields and retains saved field modes", () => {
                 const loaded = JsonConvert.deserializeObject({ _type: names[index] }, Type);
                 const saved = wire(loaded);
-                expect(saved.RuleType).toBe(index === 0 ? "LastYear" : "AllTime");
+                expect(saved.RuleType).toBe("AllTime");
                 expect(saved.IncludeToday).toBe(true);
-                if (index === 0) expect(saved.Id).toBe("_date");
+                if (index === 0) expect(saved.Id).toMatch(/^[0-9a-f-]{36}$/i);
                 else expect(saved.FilterType).toBe("AllValues");
                 expect(wire(JsonConvert.deserializeObject(saved, Type))).toEqual(saved);
                 expect(wire(CloneUtility.clone(loaded))).toEqual(saved);
@@ -75,7 +75,7 @@ describe("default date filter rules", () => {
         document.filters.push(new DashboardDateFilter(), new DashboardDateFilter("Orders"));
         const saved: any = document.toJson();
         expect(saved.GlobalFilters[0]).toMatchObject({ RuleType: "LastMonth", IncludeToday: false });
-        expect(saved.GlobalFilters[1].RuleType).toBe("LastYear");
+        expect(saved.GlobalFilters[1].RuleType).toBe("AllTime");
         expect(saved.GlobalFilters[2].RuleType).toBe("AllTime");
         expect(saved.GlobalFilters[3]).toMatchObject({ RuleType: "AllTime", Title: "Orders" });
         expect(RdashDocument.loadFromJson(JSON.stringify(saved)).toJson()).toEqual(saved);
