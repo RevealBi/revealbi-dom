@@ -129,3 +129,42 @@ const adapter: RevealSdkAdapter = {
 };
 registerRevealSdk(adapter);
 ```
+
+## Date filter rules and IDs
+
+New date filters default to AllTime when no rule is supplied, including title-only dashboard filters. Use the same rule API for dashboard, tabular-field, and XMLA date filters:
+
+```ts
+import { DashboardDateFilter, DateTimeFilter, XmlaDateFilter, DateFilterRule,
+    PeriodType, DateLinkFilter } from "@revealbi/dom";
+
+const allDates = new DashboardDateFilter();
+const titledDates = new DashboardDateFilter("All Dates");
+const allFieldDates = new DateTimeFilter();
+const allXmlaDates = new XmlaDateFilter();
+
+const salesDate = new DashboardDateFilter("Sales Date",
+    DateFilterRule.last(90, PeriodType.Day, false));
+doc.filters.push(salesDate);
+salesDate.rule = DateFilterRule.this(PeriodType.Quarter);
+salesDate.rule = DateFilterRule.next(7, PeriodType.Day);
+
+const fieldDate = new DateTimeFilter(DateFilterRule.previous(3, PeriodType.Month));
+const xmlaDate = new XmlaDateFilter(DateFilterRule.toDate(PeriodType.Year));
+const customDate = new DashboardDateFilter(
+    DateFilterRule.custom(new Date("2026-01-01T00:00:00Z"), null));
+
+visualization.connectDashboardFilter(salesDate, "OrderDate");
+const dateLink = new DateLinkFilter(salesDate, targetDateFilter);
+// Or: new DateLinkFilter(salesDate, targetDateFilter.id)
+```
+
+`last` is a rolling window; `previous` selects complete preceding periods. `next` starts at the beginning of the next period. For days only, `DateFilterRule.next(7, PeriodType.Day, true)` selects today and the following six days. All periods accept and serialize `includeToday: true`, matching the .NET DOM, but the option only affects day windows. Omitting it or passing `false` retains the existing behavior and omits the wire flag. Starting today requires the matching Reveal SDK release with Next-day include-today support (see [the .NET parity change](https://github.com/RevealBi/Reveal.Sdk.Dom/pull/443)); older SDKs ignore `true` and still start tomorrow. `this` selects the current period in full. `toDate` selects its start through today. Supported periods are `Day`, `Week`, `Month`, `Quarter`, `Semester`, and `Year`. Weeks start on Monday. `last` and `toDate` accept `includeToday`; `false` evaluates the window as of yesterday. `custom` accepts inclusive endpoints, with null/undefined for an open endpoint. `DateFilterRule.allTime` removes the date restriction.
+
+Assigning the public `rule` property to a field filter activates rule filtering and clears its old selected values. Omitted or `undefined` constructor rules default to AllTime; an explicit `null` rule remains invalid. Assigning `null` or `undefined` through `rule` is also invalid; use `DateFilterRule.allTime` to remove a selection. Date filters expose no `setRule` method. Raw `ruleType`, `customRule`, `customDateRange`, and `includeToday` properties are private; `DateRuleType` is no longer exported. Saved legacy wire values remain readable and round-trip through private serialization members. Fiscal and local-time settings belong on `DateField.settings` or `DateTimeField.settings` (`DateTimeFieldSettings`), not the old filter-level properties.
+
+New documents use **format 8**, and new date filters have unique GUIDs. Saved date-filter IDs, including `_date` and GUIDs, survive loading, cloning, and import. A date filter with a missing ID is incomplete input: it receives a normal generated GUID rather than being mapped to `_date`, and a missing rule defaults to AllTime. Separate legacy binding targets that omit `GlobalFilterId` still resolve to `_date`. Bindings, imports, and links use the selected filter's actual ID. Replace `new DashboardDateFilterBinding("OrderDate")` with `new DashboardDateFilterBinding(salesDate, "OrderDate")`, or use `connectDashboardFilter`. Date links require both source and target filters/IDs.
+
+The writer emits the date hierarchies, field settings, XMLA drill members, and single-value conditional formatting required by the new format. Older dashboards load, save, and import through the normal serialization path; loaded documents keep their version and legacy date values. Malformed JSON still reports a parse error.
+
+The tested runtime baseline is **Reveal SDK 2.2.1**, not a claim about the earliest supported release. SDK 1.7.3 rewrites date IDs regardless of the declared format and is incompatible with GUID-based creation.

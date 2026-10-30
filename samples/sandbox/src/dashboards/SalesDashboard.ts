@@ -1,4 +1,4 @@
-import { AggregationType, BarChartVisualization, Bound, BulletGraphVisualization, ColumnChartVisualization, DashboardDataFilter, DashboardDateFilter, DateAggregationType, DateDataField, DateRange, DateRuleType, FilterType, KpiTargetVisualization, KpiTimeVisualization, LargeNumberFormat, NegativeFormatType, NumberDataField, NumberFilter, NumberFormatting, NumberFormattingType, NumberRuleType, RdashDocument, SortingType, SparklineVisualization, SplineAreaChartVisualization, StackedColumnChartVisualization, ValueComparisonType } from "@revealbi/dom";
+import { AggregationType, BarChartVisualization, Bound, BulletGraphVisualization, ColumnChartVisualization, DashboardDataFilter, DashboardDateFilter, DateAggregationType, DateDataField, DateFilterRule, PeriodType, FilterType, KpiTargetVisualization, KpiTimeVisualization, LargeNumberFormat, NegativeFormatType, NumberDataField, NumberFilter, NumberFormatting, NumberFormattingType, NumberRuleType, RdashDocument, SortingType, SparklineVisualization, SplineAreaChartVisualization, StackedColumnChartVisualization, ValueComparisonType } from "@revealbi/dom";
 import { DataSourceFactory } from "./DataSourceFactory";
 
 export class SalesDashboard {
@@ -10,9 +10,8 @@ export class SalesDashboard {
         const document = new RdashDocument("Sales");
         document.useAutoLayout = false;
 
-        const dateFilter = new DashboardDateFilter();      
-        // dateFilter.ruleType = DateRuleType.CustomRange;  
-        // dateFilter.customDateRange = new DateRange(new Date(2022, 0, 1), new Date(2023, 11, 31));
+        const dateFilter = new DashboardDateFilter(DateFilterRule.last(1, PeriodType.Year));
+        // dateFilter.rule = DateFilterRule.custom(new Date(2022, 0, 1), new Date(2023, 11, 31));
 
         const territoryFilter = new DashboardDataFilter("Territory", excelDataSourceItem);
         document.filters = [dateFilter, territoryFilter];
