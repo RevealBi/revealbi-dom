@@ -8,13 +8,14 @@ import { FilterType } from "./Enums/FilterType";
 import { DateFilterRule, RelativePeriod, dateRuleFromWire, dateRuleToWire } from "./DateFilterRule";
 
 export class DashboardDateFilter extends DashboardFilter {
-    constructor(rule: DateFilterRule);
-    constructor(title: string, rule: DateFilterRule);
-    constructor(titleOrRule: string | DateFilterRule, rule?: DateFilterRule) {
+    constructor(rule?: DateFilterRule);
+    constructor(title: string, rule?: DateFilterRule);
+    constructor(titleOrRule?: string | DateFilterRule, rule?: DateFilterRule) {
         super();
         this.schemaTypeName = SchemaTypeNames.DateGlobalFilterType;
         this.title = typeof titleOrRule === "string" ? titleOrRule : "Date Filter";
-        this.rule = typeof titleOrRule === "string" ? rule! : titleOrRule;
+        const selection = typeof titleOrRule === "string" ? rule : titleOrRule;
+        this.rule = selection === undefined ? DateFilterRule.allTime : selection;
     }
 
     @JsonProperty("RuleType")

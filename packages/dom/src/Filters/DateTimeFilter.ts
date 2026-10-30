@@ -8,7 +8,7 @@ import { FilterType } from "./Enums/FilterType";
 import { DateFilterRule, RelativePeriod, dateRuleFromWire, dateRuleToWire } from "./DateFilterRule";
 
 export class DateTimeFilter extends FilterBase {
-    constructor(rule: DateFilterRule) {
+    constructor(rule: DateFilterRule = DateFilterRule.allTime) {
         super(); this.schemaTypeName = SchemaTypeNames.DateTimeFilterType; this.rule = rule;
     }
     @JsonProperty("DateFiscalYearStartMonth")

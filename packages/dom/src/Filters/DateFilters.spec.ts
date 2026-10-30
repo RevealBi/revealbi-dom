@@ -338,15 +338,25 @@ describe("modern date-filter identity", () => {
 
 // Compiled by tsc, never executed. Beta API breaks must be enforced in declarations as well as examples.
 function publicApiContract(): void {
-    // @ts-expect-error Constructors require a rule.
     new DashboardDateFilter();
-    // @ts-expect-error A title alone is no longer a valid selection.
     new DashboardDateFilter("Dates");
-    // @ts-expect-error Field filters require a rule.
     new DateTimeFilter();
-    // @ts-expect-error XMLA filters require a rule.
     new XmlaDateFilter();
+    new DashboardDateFilter(undefined);
+    new DashboardDateFilter("Dates", undefined);
+    // @ts-expect-error Explicit null rules remain invalid.
+    new DashboardDateFilter(null);
+    // @ts-expect-error Explicit null rules remain invalid with a title.
+    new DashboardDateFilter("Dates", null);
+    // @ts-expect-error Explicit null rules remain invalid.
+    new DateTimeFilter(null);
+    // @ts-expect-error Explicit null rules remain invalid.
+    new XmlaDateFilter(null);
     const filter = new DashboardDateFilter(DateFilterRule.allTime);
+    // @ts-expect-error Defaults apply only to constructors, not rule assignments.
+    filter.rule = null;
+    // @ts-expect-error Defaults apply only to constructors, not rule assignments.
+    filter.setRule(undefined);
     // @ts-expect-error Legacy selection properties are private.
     filter.ruleType = "Today";
     // @ts-expect-error Legacy selection properties are private.

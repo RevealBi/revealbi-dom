@@ -132,11 +132,16 @@ registerRevealSdk(adapter);
 
 ## Date filter rules and IDs
 
-Date filters require an explicit selection. Use the same rule API for dashboard, tabular-field, and XMLA date filters:
+New date filters default to AllTime when no rule is supplied, including title-only dashboard filters. Use the same rule API for dashboard, tabular-field, and XMLA date filters:
 
 ```ts
 import { DashboardDateFilter, DateTimeFilter, XmlaDateFilter, DateFilterRule,
     PeriodType, DateLinkFilter } from "@revealbi/dom";
+
+const allDates = new DashboardDateFilter();
+const titledDates = new DashboardDateFilter("All Dates");
+const allFieldDates = new DateTimeFilter();
+const allXmlaDates = new XmlaDateFilter();
 
 const salesDate = new DashboardDateFilter("Sales Date",
     DateFilterRule.last(90, PeriodType.Day, false));
@@ -156,7 +161,7 @@ const dateLink = new DateLinkFilter(salesDate, targetDateFilter);
 
 `last` is a rolling window; `previous` selects complete preceding periods. `next` starts at the beginning of the next period. For days only, `DateFilterRule.next(7, PeriodType.Day, true)` selects today and the following six days. All periods accept and serialize `includeToday: true`, matching the .NET DOM, but the option only affects day windows. Omitting it or passing `false` retains the existing behavior and omits the wire flag. Starting today requires the matching Reveal SDK release with Next-day include-today support (see [the .NET parity change](https://github.com/RevealBi/Reveal.Sdk.Dom/pull/443)); older SDKs ignore `true` and still start tomorrow. `this` selects the current period in full. `toDate` selects its start through today. Supported periods are `Day`, `Week`, `Month`, `Quarter`, `Semester`, and `Year`. Weeks start on Monday. `last` and `toDate` accept `includeToday`; `false` evaluates the window as of yesterday. `custom` accepts inclusive endpoints, with null/undefined for an open endpoint. `DateFilterRule.allTime` removes the date restriction.
 
-Assigning `rule` to a field filter activates rule filtering and clears its old selected values. Raw `ruleType`, `customRule`, `customDateRange`, and `includeToday` properties are private; `DateRuleType` is no longer exported. Legacy wire values remain readable and round-trip through private serialization members. Constructors without a rule are no longer supported. Fiscal and local-time settings belong on `DateField.settings` or `DateTimeField.settings` (`DateTimeFieldSettings`), not the old filter-level properties.
+Assigning `rule` to a field filter activates rule filtering and clears its old selected values. Omitted or `undefined` constructor rules default to AllTime; an explicit `null` rule remains invalid. Assigning `null` or `undefined` through `rule` or `setRule` is also invalid; use `DateFilterRule.allTime` to remove a selection. Raw `ruleType`, `customRule`, `customDateRange`, and `includeToday` properties are private; `DateRuleType` is no longer exported. Legacy wire values and defaults remain readable and round-trip through private serialization members. Fiscal and local-time settings belong on `DateField.settings` or `DateTimeField.settings` (`DateTimeFieldSettings`), not the old filter-level properties.
 
 New documents use **format 8**, and new date filters have unique GUIDs. Bindings, imports, and links use the selected filter's actual ID; `_date` fallback defaults exist only in JSON readers. Replace `new DashboardDateFilterBinding("OrderDate")` with `new DashboardDateFilterBinding(salesDate, "OrderDate")`, or use `connectDashboardFilter`. Date links require both source and target filters/IDs.
 
