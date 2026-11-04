@@ -12,7 +12,4 @@ export class DateTimeFieldSettings extends FieldSettings
 
     @JsonProperty("DateFiscalYearStartMonth")    
     dateFiscalYearStartMonth: number = 0;
-    
-    @JsonProperty("DisplayInLocalTimeZone")    
-    displayInLocalTimeZone: boolean = false;
 }
