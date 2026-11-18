@@ -3,7 +3,8 @@ import * as api from "../index";
 import { DashboardDateFilter, DateTimeFilter, XmlaDateFilter, DateFilterRule, PeriodType,
     JsonConvert, FilterType, RdashDocument, DashboardDateFilterBinding, DashboardDateFilterBindingTarget,
     DateLinkFilter, GridVisualization, DataSourceItem, DateTimeField, VisualizationLinker,
-    ColumnChartVisualization, DateDataField, NumberField, DateTimeFieldSettings, TextVisualization, DateField } from "../index";
+    ColumnChartVisualization, DateDataField, NumberField, DateTimeFieldSettings, TextVisualization, DateField,
+    DateFormatting } from "../index";
 import { DateRuleType } from "./Enums/DateRuleType";
 import { prepareModernDocument } from "../Core/Serialization/ModernDocumentWriter";
 import { CloneUtility } from "../Core/Utilities/CloneUtility";
@@ -317,6 +318,16 @@ describe("modern date-filter identity", () => {
             expect(row.SummarizationField.DateFormatting).toBeUndefined();
             expect(row.SummarizationField.DrillDownElements).toEqual([]);
         }
+    });
+    it("keeps a date dimension's format through a round trip", () => {
+        // The loader read DateFormatting as a DateDataField, so a saved date format lost its DateFormat.
+        const date = new DateDataField("OrderedOn");
+        date.formatting = new DateFormatting("dd-MMM-yyyy");
+        const document = new RdashDocument();
+        document.visualizations.push(new ColumnChartVisualization("Dates", dataSource()).setLabel(date).setValue("Sales"));
+        const json = document.toJsonString();
+        const formatting = (saved: any) => saved.Widgets[0].VisualizationDataSpec.Rows[0].SummarizationField.DateFormatting;
+        expect(formatting(RdashDocument.loadFromJson(json).toJson())).toEqual(formatting(JSON.parse(json)));
     });
     it("carries single-value conditional formatting to the measure", () => {
         const text = new TextVisualization("Sales", dataSource()).setValue("Sales");
