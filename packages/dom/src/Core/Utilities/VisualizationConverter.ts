@@ -2,6 +2,8 @@ import { IVisualization } from "../../Visualizations/Interfaces/IVisualization";
 import { ChartType } from "../../Visualizations/Enums";
 import { TabularColumn } from "../../Visualizations/Primitives/TabularColumn";
 import { IField } from "../../Visualizations/Interfaces/IField";
+import { FormattingBase } from "../../Visualizations/Primitives/FormattingBase";
+import { CloneUtility } from "./CloneUtility";
 import { CategoryVisualizationBase } from "../../Visualizations/CategoryVisualizationBase";
 import { GridVisualization } from "../../Visualizations/GridVisualization";
 import { TabularDataDefinition } from "../../Visualizations/DataDefinitions/TabularDataDefinition";
@@ -25,6 +27,8 @@ import { KpiTargetVisualization } from "../../Visualizations/KpiTargetVisualizat
 export interface GridConversionOptions {
     includeAllFields?: boolean;
 }
+
+type FormattedField = IField & { formatting?: FormattingBase };
 
 export class VisualizationConverter {
     
@@ -63,7 +67,7 @@ export class VisualizationConverter {
         );
 
         gridViz.columns = columns;
-        VisualizationConverter.copyHiddenFields(gridViz, tabularDataDef.fields);
+        VisualizationConverter.copyHiddenAndFormatting(gridViz, tabularDataDef.fields);
         gridViz.id = sourceViz.id;
         gridViz.backgroundColor = sourceViz.backgroundColor;
         gridViz.isTitleVisible = sourceViz.isTitleVisible;
@@ -73,14 +77,21 @@ export class VisualizationConverter {
         return gridViz;
     }
 
-    private static copyHiddenFields(gridViz: GridVisualization, sourceFields: IField[]): void {
+    private static copyHiddenAndFormatting(gridViz: GridVisualization, sourceFields: IField[]): void {
         if (!(gridViz.dataDefinition instanceof TabularDataDefinition)) {
             return;
         }
-        const hiddenFieldNames = new Set(sourceFields.filter(field => field.isHidden).map(field => field.fieldName));
+        const sourceFieldsByName = new Map(sourceFields.map(field => [field.fieldName, field as FormattedField]));
         gridViz.dataDefinition.fields.forEach(field => {
-            if (hiddenFieldNames.has(field.fieldName)) {
+            const sourceField = sourceFieldsByName.get(field.fieldName);
+            if (!sourceField) {
+                return;
+            }
+            if (sourceField.isHidden) {
                 field.isHidden = true;
+            }
+            if (sourceField.formatting && field.constructor === sourceField.constructor) {
+                (field as FormattedField).formatting = CloneUtility.clone(sourceField.formatting);
             }
         });
     }

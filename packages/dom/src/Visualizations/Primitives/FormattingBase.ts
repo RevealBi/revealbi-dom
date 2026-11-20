@@ -5,4 +5,7 @@ export abstract class FormattingBase extends SchemaType
 {
     @JsonProperty("OverrideDefaultSettings")
     overrideDefaultSettings: boolean = false;
+
+    @JsonProperty("Locale")
+    locale?: string;
 }

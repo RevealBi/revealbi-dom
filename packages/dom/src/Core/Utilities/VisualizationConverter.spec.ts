@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { AggregationType, ColumnChartVisualization, DataSource, DataSourceItem, GridVisualization, IVisualization, MicrosoftAnalysisServicesDataSource, MicrosoftAnalysisServicesDataSourceItem, NumberDataField, NumberField, PivotVisualization, RdashDocument, TextField } from "../../index";
+import { AggregationType, ColumnChartVisualization, DataSource, DataSourceItem, DateField, DateFormatting, GridVisualization, IVisualization, MicrosoftAnalysisServicesDataSource, MicrosoftAnalysisServicesDataSourceItem, NumberDataField, NumberField, PivotVisualization, RdashDocument, TextField } from "../../index";
+import { TabularDataDefinition } from "../../Visualizations/DataDefinitions/TabularDataDefinition";
 
 const dataSource = new DataSource("Orders");
 
@@ -74,6 +75,31 @@ describe("grid conversion of hidden fields", () => {
         values[1].aggregationType = AggregationType.Avg;
         const chart = new ColumnChartVisualization("Sales", data).setLabel("Region").setValues(...values);
         expect(visibility(GridVisualization.from(chart)).columns).toEqual([["Region", false], ["Sales", false]]);
+    });
+
+    it("keeps the source's field formats when the data source item already has fields", () => {
+        const data = new DataSourceItem("Orders", dataSource);
+        data.fields = [new DateField("Date"), new NumberField("Sales")];
+        const chart = new ColumnChartVisualization("Sales", data).setLabel("Date").setValue("Sales");
+        const date = (chart.dataDefinition as TabularDataDefinition).fields[0] as DateField;
+        date.formatting = new DateFormatting("dd-MMM-yyyy");
+        date.formatting.locale = "de-DE";
+        const grid = GridVisualization.from(chart)!;
+        const gridDate = (grid.dataDefinition as TabularDataDefinition).fields[0] as DateField;
+        expect(gridDate.formatting).not.toBe(date.formatting);
+        expect(gridDate.formatting).toMatchObject({ dateFormat: "dd-MMM-yyyy", locale: "de-DE" });
+        expect((data.fields[0] as DateField).formatting).toBeUndefined();
+    });
+
+    it("leaves the item's fields the source lacks or types differently alone", () => {
+        const data = new DataSourceItem("Orders", dataSource);
+        data.fields = [new TextField("Region"), new NumberField("Sales")];
+        const chart = new ColumnChartVisualization("Sales", data).setLabel("Region").setValue("Sales");
+        const region = new DateField("Region");
+        region.formatting = new DateFormatting("dd-MMM-yyyy");
+        (chart.dataDefinition as TabularDataDefinition).fields = [region];
+        const grid = GridVisualization.from(chart)!;
+        expect((grid.dataDefinition as TabularDataDefinition).fields).toEqual([new TextField("Region"), new NumberField("Sales")]);
     });
 
     it("converts cube visualizations, which have no fields to hide", () => {
