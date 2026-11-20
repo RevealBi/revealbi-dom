@@ -1,6 +1,7 @@
 import { IVisualization } from "../../Visualizations/Interfaces/IVisualization";
 import { ChartType } from "../../Visualizations/Enums";
 import { TabularColumn } from "../../Visualizations/Primitives/TabularColumn";
+import { IField } from "../../Visualizations/Interfaces/IField";
 import { CategoryVisualizationBase } from "../../Visualizations/CategoryVisualizationBase";
 import { GridVisualization } from "../../Visualizations/GridVisualization";
 import { TabularDataDefinition } from "../../Visualizations/DataDefinitions/TabularDataDefinition";
@@ -62,6 +63,7 @@ export class VisualizationConverter {
         );
 
         gridViz.columns = columns;
+        VisualizationConverter.copyHiddenFields(gridViz, tabularDataDef.fields);
         gridViz.id = sourceViz.id;
         gridViz.backgroundColor = sourceViz.backgroundColor;
         gridViz.isTitleVisible = sourceViz.isTitleVisible;
@@ -71,6 +73,18 @@ export class VisualizationConverter {
         return gridViz;
     }
 
+    private static copyHiddenFields(gridViz: GridVisualization, sourceFields: IField[]): void {
+        if (!(gridViz.dataDefinition instanceof TabularDataDefinition)) {
+            return;
+        }
+        const hiddenFieldNames = new Set(sourceFields.filter(field => field.isHidden).map(field => field.fieldName));
+        gridViz.dataDefinition.fields.forEach(field => {
+            if (hiddenFieldNames.has(field.fieldName)) {
+                field.isHidden = true;
+            }
+        });
+    }
+
     private static canConvertToGrid(chartType: ChartType): boolean {
         return chartType !== ChartType.TextBox && 
                chartType !== ChartType.Custom && 
@@ -78,14 +92,22 @@ export class VisualizationConverter {
     }
 
     private static extractColumns(sourceViz: IVisualization): TabularColumn[] | null {
-        const addedFieldNames = new Set<string>();
+        const columnsByFieldName = new Map<string, TabularColumn>();
         const columns: TabularColumn[] = [];
 
-        const addColumn = (fieldName: string | undefined) => {
-            if (fieldName && !addedFieldNames.has(fieldName)) {
-                columns.push(new TabularColumn(fieldName));
-                addedFieldNames.add(fieldName);
+        const addColumn = (fieldName: string | undefined, isHidden: boolean = false) => {
+            if (!fieldName) {
+                return;
             }
+            const added = columnsByFieldName.get(fieldName);
+            if (added) {
+                added.isHidden = added.isHidden && isHidden;
+                return;
+            }
+            const column = new TabularColumn(fieldName);
+            column.isHidden = isHidden;
+            columns.push(column);
+            columnsByFieldName.set(fieldName, column);
         };
 
         const addDimensionColumns = (dims: DimensionColumn[] | undefined) => {
@@ -93,7 +115,7 @@ export class VisualizationConverter {
         };
 
         const addMeasureColumns = (measures: MeasureColumn[] | undefined) => {
-            measures?.forEach(measure => addColumn(measure.dataField?.fieldName));
+            measures?.forEach(measure => addColumn(measure.dataField?.fieldName, measure.dataField?.isHidden));
         };
 
         // Category-based visualizations

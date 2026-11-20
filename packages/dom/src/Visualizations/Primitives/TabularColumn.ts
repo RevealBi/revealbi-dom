@@ -18,4 +18,10 @@ export class TabularColumn extends ColumnBase
      */
     @JsonProperty("FieldName")
     fieldName?: string;
+
+    /**
+     * Gets or sets whether the column is hidden.
+     */
+    @JsonProperty("IsHidden")
+    isHidden: boolean = false;
 }

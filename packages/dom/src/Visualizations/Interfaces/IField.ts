@@ -16,6 +16,11 @@ export interface IField
     fieldLabel?: string;
 
     /// <summary>
+    /// Gets or sets whether the field is hidden.
+    /// </summary>
+    isHidden: boolean;
+
+    /// <summary>
     /// Gets or sets whether this is a calucated field.
     /// </summary>
     isCalculated: boolean;
