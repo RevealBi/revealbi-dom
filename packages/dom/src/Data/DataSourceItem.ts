@@ -60,6 +60,9 @@ export class DataSourceItem extends SchemaType {
     @JsonProperty("Properties", { type: JsonRecord })
     properties: Record<string, any> = {};
 
+    @JsonProperty("Settings", { type: JsonRecord })
+    settings?: Record<string, any>;
+
     @JsonProperty("Parameters", { type: JsonRecord })
     parameters: Record<string, any> = {};
 
@@ -123,7 +126,7 @@ export class DataSourceItem extends SchemaType {
         newDataSource.id = dataSource.id;
         newDataSource.title = dataSource.title;
         newDataSource.subtitle = dataSource.subtitle;
-        newDataSource.defaultRefreshRate = dataSource.defaultRefreshRate;
+        newDataSource.copySettingsFrom(dataSource);
         return newDataSource;
     }
 }

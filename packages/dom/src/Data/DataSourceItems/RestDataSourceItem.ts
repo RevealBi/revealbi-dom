@@ -92,6 +92,7 @@ export class RestDataSourceItem extends DataSourceItem {
         this.resourceItemDataSource.id = dataSource.id;
         this.resourceItemDataSource.title = dataSource.title ?? this.resourceItem?.title;
         this.resourceItemDataSource.subtitle = dataSource.subtitle ?? this.resourceItem?.subtitle;
+        this.resourceItemDataSource.copySettingsFrom(dataSource);
         if (this.resourceItem) this.resourceItem.dataSourceId = this.resourceItemDataSource.id;
     }
 

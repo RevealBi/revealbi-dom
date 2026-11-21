@@ -49,6 +49,7 @@ export class RdashDocumentValidator {
                 const newDataSource = new DataSource();
                 Object.assign(newDataSource, dataSource);
                 newDataSource.properties = { ...(dataSource as DataSource).properties };
+                newDataSource.copySettingsFrom(dataSource as DataSource);
                 dataSources[newDataSource.id] = newDataSource;
             }
         };
