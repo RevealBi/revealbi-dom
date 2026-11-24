@@ -3,6 +3,7 @@ import { AssetVisualizationSettings } from "../../../Visualizations/Settings/Ass
 import { BarChartVisualizationSettings } from "../../../Visualizations/Settings/BarChartVisualizationSettings";
 import { BubbleVisualizationSettings } from "../../../Visualizations/Settings/BubbleVisualizationSettings";
 import { BulletGraphVisualizationSettings } from "../../../Visualizations/Settings/BulletGraphVisualizationSettings";
+import { CandleStickVisualizationSettings } from "../../../Visualizations/Settings/CandleStickVisualizationSettings";
 import { ChoroplethVisualizationSettings } from "../../../Visualizations/Settings/ChoroplethVisualizationSettings";
 import { CircularGaugeVisualizationSettings } from "../../../Visualizations/Settings/CircularGaugeVisualizationSettings";
 import { ColumnChartVisualizationSettings } from "../../../Visualizations/Settings/ColumnChartVisualizationSettings";
@@ -107,6 +108,9 @@ const getChartVisualizationType = (json: any): any => {
       break;
     case "Bubble":
       type = BubbleVisualizationSettings;
+      break;
+    case "Candlestick":
+      type = CandleStickVisualizationSettings;
       break;
     case "Column":
       type = ColumnChartVisualizationSettings;
