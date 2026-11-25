@@ -13,8 +13,6 @@ export class DateTimeFilter extends FilterBase {
     }
     @JsonProperty("DateFiscalYearStartMonth")
     private dateFiscalYearStartMonth = 0;
-    @JsonProperty("DisplayInLocalTimeZone")
-    private displayInLocalTimeZone = false;
     @JsonProperty("RuleType")
     private ruleType: DateRuleType = DateRuleType.AllTime;
     @JsonProperty("CustomDateRange", { type: DateRange })

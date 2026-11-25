@@ -255,21 +255,21 @@ describe("modern date-filter identity", () => {
         original.filters.push(filter);
         const data = dataSource();
         (data.fields[0] as DateTimeField).dataFilter = JsonConvert.deserializeObject({ RuleType: "Today", IncludeToday: false,
-            DateFiscalYearStartMonth: 4, DisplayInLocalTimeZone: true }, DateTimeFilter);
+            DateFiscalYearStartMonth: 4 }, DateTimeFilter);
         original.visualizations.push(new GridVisualization("Legacy", data).connectDashboardFilter(filter, "OrderedOn"));
         const oldWire: any = JsonConvert.serializeObject(original); oldWire.FormatVersion = 6;
         const loaded = RdashDocument.loadFromJson(JSON.stringify(oldWire));
         const saved: any = loaded.toJson();
         expect(saved.GlobalFilters[0]).toMatchObject({ Id: "_date", RuleType: "LastMonth", IncludeToday: false });
         expect(saved.Widgets[0].DataSpec.Fields[0].Filter).toMatchObject({ RuleType: "Today", IncludeToday: false,
-            DateFiscalYearStartMonth: 4, DisplayInLocalTimeZone: true });
+            DateFiscalYearStartMonth: 4 });
         const modern = new RdashDocument();
         modern.import(loaded, undefined, { includeDashboardFilters: true, includeVisualizationFilters: true });
         const result: any = modern.toJson();
         expect(result.FormatVersion).toBe(8);
         expect(result.GlobalFilters[0]).toMatchObject({ Id: "_date", RuleType: "LastMonth", IncludeToday: false });
         expect(result.Widgets[0].DataSpec.Fields[0].Filter).toMatchObject({ RuleType: "Today", IncludeToday: false });
-        expect(result.Widgets[0].DataSpec.Fields[0].Settings).toMatchObject({ DateFiscalYearStartMonth: 4, DisplayInLocalTimeZone: true });
+        expect(result.Widgets[0].DataSpec.Fields[0].Settings).toMatchObject({ DateFiscalYearStartMonth: 4 });
         expect(RdashDocument.loadFromJson(JSON.stringify(result)).visualizations).toHaveLength(1);
     });
     it("still rejects malformed JSON instead of returning an empty dashboard", () => {
@@ -295,12 +295,12 @@ describe("modern date-filter identity", () => {
     it("projects fiscal settings from legacy JSON into the date field", () => {
         const data = dataSource();
         (data.fields[0] as DateTimeField).dataFilter = JsonConvert.deserializeObject({
-            RuleType: "Today", DateFiscalYearStartMonth: 4, DisplayInLocalTimeZone: true
+            RuleType: "Today", DateFiscalYearStartMonth: 4
         }, DateTimeFilter);
         const document = new RdashDocument();
         document.visualizations.push(new GridVisualization("Dates", data));
         const field = (document.toJson() as any).Widgets[0].DataSpec.Fields[0];
-        expect(field.Settings).toMatchObject({ DateFiscalYearStartMonth: 4, DisplayInLocalTimeZone: true });
+        expect(field.Settings).toMatchObject({ DateFiscalYearStartMonth: 4 });
         expect(field.Filter.DateFiscalYearStartMonth).toBe(0);
     });
     it("does not reuse the first hierarchy level's formatting or drill selection", () => {
@@ -380,8 +380,6 @@ function publicApiContract(): void {
     const fieldFilter = new DateTimeFilter(DateFilterRule.allTime);
     // @ts-expect-error Legacy filter settings are private; use DateTimeField.settings.
     fieldFilter.dateFiscalYearStartMonth = 4;
-    // @ts-expect-error Legacy filter settings are private; use DateTimeField.settings.
-    fieldFilter.displayInLocalTimeZone = true;
     // @ts-expect-error Date links require both ends.
     new DateLinkFilter();
     // @ts-expect-error Date bindings require the actual date filter.
