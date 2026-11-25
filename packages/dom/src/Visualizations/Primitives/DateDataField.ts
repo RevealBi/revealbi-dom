@@ -17,6 +17,6 @@ export class DateDataField extends DimensionDataField
     @JsonProperty("DateAggregationType")
     aggregationType: DateAggregationType = DateAggregationType.Year;
 
-    @JsonProperty("DateFormatting")
+    @JsonProperty("DateFormatting", { type: DateFormatting })
     formatting?: DateFormatting;
 }
