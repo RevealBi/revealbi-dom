@@ -9,6 +9,9 @@ export class DashboardFilter extends SchemaType {
     @JsonProperty("Title")
     title: string = "";
 
+    @JsonProperty("IsHidden")
+    isHidden: boolean = false;
+
     @JsonProperty("CrossFilteringSourceWidgetId") //todo: figure this out
     crossFilteringSourceWidgetId?: string;
 }

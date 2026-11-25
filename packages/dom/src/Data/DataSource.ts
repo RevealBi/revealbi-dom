@@ -32,10 +32,23 @@ export class DataSource extends SchemaType {
     @JsonProperty("Properties", { type: JsonRecord })
     properties: Record<string, any> = {};
 
-    get defaultRefreshRate(): number {
-        return this.properties["DefaultRefreshRate"];
+    @JsonProperty("Settings", { type: JsonRecord })
+    settings?: Record<string, any>;
+
+    get defaultRefreshRate(): number | undefined {
+        return this.settings?.["DefaultRefreshRate"];
     }
-    set defaultRefreshRate(value: number) {
-        this.properties["DefaultRefreshRate"] = value;
+    set defaultRefreshRate(value: number | undefined) {
+        const settings: Record<string, any> = { ...this.settings, DefaultRefreshRate: value };
+        if (value === undefined) {
+            delete settings["DefaultRefreshRate"];
+        }
+        this.settings = Object.keys(settings).length > 0 ? settings : undefined;
+    }
+
+    copySettingsFrom(source: DataSource): void {
+        if (source.settings) {
+            this.settings = { ...source.settings };
+        }
     }
 }
