@@ -1,9 +1,6 @@
 import { IVisualization } from "../../Visualizations/Interfaces/IVisualization";
 import { ChartType } from "../../Visualizations/Enums";
 import { TabularColumn } from "../../Visualizations/Primitives/TabularColumn";
-import { IField } from "../../Visualizations/Interfaces/IField";
-import { FormattingBase } from "../../Visualizations/Primitives/FormattingBase";
-import { CloneUtility } from "./CloneUtility";
 import { CategoryVisualizationBase } from "../../Visualizations/CategoryVisualizationBase";
 import { GridVisualization } from "../../Visualizations/GridVisualization";
 import { TabularDataDefinition } from "../../Visualizations/DataDefinitions/TabularDataDefinition";
@@ -27,8 +24,6 @@ import { KpiTargetVisualization } from "../../Visualizations/KpiTargetVisualizat
 export interface GridConversionOptions {
     includeAllFields?: boolean;
 }
-
-type FormattedField = IField & { formatting?: FormattingBase };
 
 export class VisualizationConverter {
     
@@ -67,7 +62,6 @@ export class VisualizationConverter {
         );
 
         gridViz.columns = columns;
-        VisualizationConverter.copyHiddenAndFormatting(gridViz, tabularDataDef.fields);
         gridViz.id = sourceViz.id;
         gridViz.backgroundColor = sourceViz.backgroundColor;
         gridViz.isTitleVisible = sourceViz.isTitleVisible;
@@ -77,25 +71,6 @@ export class VisualizationConverter {
         return gridViz;
     }
 
-    private static copyHiddenAndFormatting(gridViz: GridVisualization, sourceFields: IField[]): void {
-        if (!(gridViz.dataDefinition instanceof TabularDataDefinition)) {
-            return;
-        }
-        const sourceFieldsByName = new Map(sourceFields.map(field => [field.fieldName, field as FormattedField]));
-        gridViz.dataDefinition.fields.forEach(field => {
-            const sourceField = sourceFieldsByName.get(field.fieldName);
-            if (!sourceField) {
-                return;
-            }
-            if (sourceField.isHidden) {
-                field.isHidden = true;
-            }
-            if (sourceField.formatting && field.constructor === sourceField.constructor) {
-                (field as FormattedField).formatting = CloneUtility.clone(sourceField.formatting);
-            }
-        });
-    }
-
     private static canConvertToGrid(chartType: ChartType): boolean {
         return chartType !== ChartType.TextBox && 
                chartType !== ChartType.Custom && 
@@ -103,22 +78,14 @@ export class VisualizationConverter {
     }
 
     private static extractColumns(sourceViz: IVisualization): TabularColumn[] | null {
-        const columnsByFieldName = new Map<string, TabularColumn>();
+        const addedFieldNames = new Set<string>();
         const columns: TabularColumn[] = [];
 
-        const addColumn = (fieldName: string | undefined, isHidden: boolean = false) => {
-            if (!fieldName) {
-                return;
+        const addColumn = (fieldName: string | undefined) => {
+            if (fieldName && !addedFieldNames.has(fieldName)) {
+                columns.push(new TabularColumn(fieldName));
+                addedFieldNames.add(fieldName);
             }
-            const added = columnsByFieldName.get(fieldName);
-            if (added) {
-                added.isHidden = added.isHidden && isHidden;
-                return;
-            }
-            const column = new TabularColumn(fieldName);
-            column.isHidden = isHidden;
-            columns.push(column);
-            columnsByFieldName.set(fieldName, column);
         };
 
         const addDimensionColumns = (dims: DimensionColumn[] | undefined) => {
@@ -126,7 +93,7 @@ export class VisualizationConverter {
         };
 
         const addMeasureColumns = (measures: MeasureColumn[] | undefined) => {
-            measures?.forEach(measure => addColumn(measure.dataField?.fieldName, measure.dataField?.isHidden));
+            measures?.forEach(measure => addColumn(measure.dataField?.fieldName));
         };
 
         // Category-based visualizations

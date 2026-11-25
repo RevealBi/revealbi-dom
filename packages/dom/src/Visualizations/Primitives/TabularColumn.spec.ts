@@ -45,6 +45,5 @@ describe("grid column visibility", () => {
         expect((document.visualizations[0] as GridVisualization).columns.map(column => column.isHidden)).toEqual([false, true]);
         const saved: any = document.toJson();
         expect(saved.Widgets[0].VisualizationDataSpec.Columns).toMatchObject(columns);
-        expect(saved.Widgets[0].DataSpec.Fields).toMatchObject(fields);
     });
 });

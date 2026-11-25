@@ -39,9 +39,6 @@ export abstract class FieldBase<TFilter extends IFilter> implements IField, IFie
     @JsonProperty("FieldType")
     dataType: DataType = DataType.String; //todo: in .net this is internal. maybe make it a getter only? Do we even need the IFieldDataType interface now?
 
-    @JsonProperty("IsHidden")
-    isHidden: boolean = false;
-
     @JsonProperty("IsCalculated")
     isCalculated: boolean = false;
 
