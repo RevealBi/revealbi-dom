@@ -34,8 +34,8 @@ describe("grid column visibility", () => {
 
     it("keeps a column the editor hid through load and save", () => {
         const fields = [
-            { FieldName: "Amount", FieldType: "Number", IsHidden: false, IsCalculated: false },
-            { FieldName: "Name", FieldType: "String", IsHidden: true, IsCalculated: false }
+            { FieldName: "Amount", FieldType: "Number", IsCalculated: false },
+            { FieldName: "Name", FieldType: "String", IsCalculated: false }
         ];
         const columns = [
             { _type: "TabularColumnSpecType", Axis: { Title: "" }, FieldName: "Amount", IsHidden: false },
