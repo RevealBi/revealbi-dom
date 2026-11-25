@@ -17,3 +17,10 @@ export { PostgreSqlDataSourceItem } from './PostgreSqlDataSourceItem';
 export { RestDataSourceItem } from "./RestDataSourceItem";
 export { SnowflakeDataSourceItem } from './SnowflakeDataSourceItem';
 export { WebServiceDataSourceItem } from './WebServiceDataSourceItem';
+
+export { AzureCosmosDbDataSourceItem } from './AzureCosmosDbDataSourceItem';
+export { ClickHouseDataSourceItem } from './ClickHouseDataSourceItem';
+export { DuckDbDataSourceItem } from './DuckDbDataSourceItem';
+export { MariaDbDataSourceItem } from './MariaDbDataSourceItem';
+export { SqliteDataSourceItem } from './SqliteDataSourceItem';
+export { CubeDataSourceItem } from './CubeDataSourceItem';
