@@ -14,7 +14,7 @@ export class DashboardXmlaFilter extends DashboardDataFilterBase {
         this.dataSourceItem = dataSourceItem;
     }
 
-    @JsonProperty("SataSourceItem")
+    @JsonProperty("DataSourceItem", { type: DataSourceItem })
     private dataSourceItem?: DataSourceItem;
 
     @JsonProperty("DimensionUniqueName")
