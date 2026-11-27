@@ -34,7 +34,7 @@ export class ScatterMapVisualizationSettings extends MapVisualizationSettingsBas
         @JsonProperty("UseDifferentMarkers")
         useDifferentMarkers: boolean = false;
 
-        /// Gets the zoom and position of the map.
-        @JsonProperty("ZoomRectangle")
-        zoom: MapZoomRectangle = new MapZoomRectangle();
+        /// Gets or sets the zoom and position of the map. When not set, Reveal shows the whole map.
+        @JsonProperty("ZoomRectangle", { type: MapZoomRectangle })
+        zoom?: MapZoomRectangle;
 }

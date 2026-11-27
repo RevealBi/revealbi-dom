@@ -1,4 +1,4 @@
-import { AggregationType, AreaChartVisualization, BarChartVisualization, BubbleVisualization, BulletGraphVisualization, CandleStickVisualization, ChoroplethVisualization, CircularGaugeVisualization, ColumnChartVisualization, ComboChartType, ComboChartVisualization, CustomVisualization, DateAggregationType, DateDataField, DoughnutChartVisualization, FontSize, FunnelChartVisualization, GridVisualization, ImageVisualization, IndicatorDifferenceMode, KpiGoalPeriod, KpiTargetVisualization, KpiTimePeriod, KpiTimeVisualization, LabelDisplayMode, LineChartVisualization, LinearGaugeVisualization, MapColorMode, MapColorStyle, MapLabelStyle, Maps, NumberDataField, OHLCVisualization, PieChartVisualization, PivotVisualization, RadialVisualization, RdashDocument, RestDataSourceItem, ScatterMapVisualization, ScatterVisualization, ShapeType, SparklineAggregationType, SparklineVisualization, SplineAreaChartVisualization, SplineChartVisualization, StackedAreaChartVisualization, StackedBarChartVisualization, StackedColumnChartVisualization, StepAreaChartVisualization, StepLineChartVisualization, TextBoxVisualization, TextViewVisualization, TextVisualization, Theme, TimeSeriesVisualization, TreeMapVisualization, ValueComparisonType } from "@revealbi/dom";
+import { AggregationType, AreaChartVisualization, BarChartVisualization, BubbleVisualization, BulletGraphVisualization, CandleStickVisualization, ChoroplethVisualization, CircularGaugeVisualization, ColumnChartVisualization, ComboChartType, ComboChartVisualization, CustomVisualization, DateAggregationType, DateDataField, DoughnutChartVisualization, FontSize, FunnelChartVisualization, GridVisualization, ImageVisualization, IndicatorDifferenceMode, KpiGoalPeriod, KpiTargetVisualization, KpiTimePeriod, KpiTimeVisualization, LabelDisplayMode, LineChartVisualization, LinearGaugeVisualization, MapColorMode, MapColorStyle, MapLabelStyle, MapZoomRectangle, Maps, NumberDataField, OHLCVisualization, PieChartVisualization, PivotVisualization, RadialVisualization, RdashDocument, RestDataSourceItem, ScatterMapVisualization, ScatterVisualization, ShapeType, SparklineAggregationType, SparklineVisualization, SplineAreaChartVisualization, SplineChartVisualization, StackedAreaChartVisualization, StackedBarChartVisualization, StackedColumnChartVisualization, StepAreaChartVisualization, StepLineChartVisualization, TextBoxVisualization, TextViewVisualization, TextVisualization, Theme, TimeSeriesVisualization, TreeMapVisualization, ValueComparisonType } from "@revealbi/dom";
 import { DataSourceFactory } from "./DataSourceFactory";
 
 
@@ -173,10 +173,12 @@ export class CustomDashboard {
                 settings.conditionalFormatting.upperBand.value = 90;
                 settings.conditionalFormatting.middleBand.value = 60;
 
-                settings.zoom.longitude = 1.38;
-                settings.zoom.latitude = 41.65;
-                settings.zoom.degreesLongitude = 1.04;
-                settings.zoom.degreesLatitude = 0.39;
+                const zoom = new MapZoomRectangle();
+                zoom.longitude = 1.38;
+                zoom.latitude = 41.65;
+                zoom.degreesLongitude = 1.04;
+                zoom.degreesLatitude = 0.39;
+                settings.zoom = zoom;
             });
 
         //tree map

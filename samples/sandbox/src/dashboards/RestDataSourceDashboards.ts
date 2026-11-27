@@ -1,4 +1,4 @@
-import { DataSource, DataSourceItemFactory, Maps, NumberField, PieChartVisualization, RdashDocument, RestDataSourceItem, ScatterMapVisualization, TextField } from "@revealbi/dom";
+import { DataSource, DataSourceItemFactory, MapZoomRectangle, Maps, NumberField, PieChartVisualization, RdashDocument, RestDataSourceItem, ScatterMapVisualization, TextField } from "@revealbi/dom";
 import { DataSourceFactory } from "./DataSourceFactory";
 import { DataSourceType } from "packages/dom/src/Data/Enums/DataSourceType";
 
@@ -36,10 +36,12 @@ export class RestDataSourceDashboards {
         const csvChart = new ScatterMapVisualization("Excel", csvDSI).setMap(Maps.NorthAmerica.UnitedStates.States.Illinois)
             .setLabel("School_Nm").setLongitude("X").setLatitude("Y")
             .configureSettings(settings => {
-                settings.zoom.longitude = 1.38;
-                settings.zoom.latitude = 41.65;
-                settings.zoom.degreesLongitude = 1.04;
-                settings.zoom.degreesLatitude = 0.39;
+                const zoom = new MapZoomRectangle();
+                zoom.longitude = 1.38;
+                zoom.latitude = 41.65;
+                zoom.degreesLongitude = 1.04;
+                zoom.degreesLatitude = 0.39;
+                settings.zoom = zoom;
             });
 
         document.visualizations = [jsonChart, excelChart, csvChart];
