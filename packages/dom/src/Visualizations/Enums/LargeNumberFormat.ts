@@ -1,6 +1,6 @@
 export enum LargeNumberFormat {
-    None = "none",
-    Auto = "auto",
+    None = "None",
+    Auto = "Auto",
     T = "T",
     B = "B",
     M = "M",

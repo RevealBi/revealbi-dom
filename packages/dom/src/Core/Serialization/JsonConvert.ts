@@ -5,6 +5,9 @@ import { JsonRecord } from "./Interfaces/JsonRecord";
 import { PrimitiveArray } from "./Interfaces/PrimitiveArray";
 import { JsonPropertyOptions } from './Interfaces/JsonPropertyOptions';
 
+/** A method a type can define to read wire keys it doesn't model as properties, such as legacy keys. */
+export const readUnmodeledJson = Symbol("readUnmodeledJson");
+
 export class JsonConvert {
 
     static deserialize<T>(json: string, type: JsonConstructor<T>): T {
@@ -40,6 +43,7 @@ export class JsonConvert {
             }
         }
 
+        instance[readUnmodeledJson]?.(jsonObject);
         return instance;
     }
 
