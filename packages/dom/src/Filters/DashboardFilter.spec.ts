@@ -1,5 +1,14 @@
 import { describe, expect, it } from "vitest";
-import { DashboardDataFilter, DashboardDateFilter, DashboardFilter, DashboardXmlaFilter, JsonConvert, RdashDocument } from "../index";
+import {
+    DashboardDataFilter,
+    DashboardDateFilter,
+    DashboardFilter,
+    DashboardXmlaFilter,
+    JsonConvert,
+    MicrosoftAnalysisServicesDataSource,
+    MicrosoftAnalysisServicesDataSourceItem,
+    RdashDocument
+} from "../index";
 
 const wire = (value: object): any => JsonConvert.serializeObject(value);
 
@@ -34,5 +43,36 @@ describe("dashboard filter visibility", () => {
         expect(document.filters.map(filter => filter.isHidden)).toEqual([false, true, true]);
         const saved: any = document.toJson();
         expect(saved.GlobalFilters).toMatchObject(filters.map(({ _type, Id, IsHidden }) => ({ _type, Id, IsHidden })));
+    });
+});
+
+describe("Analysis Services dashboard filter data source item", () => {
+    // The cube the filter lists its members from, as the Reveal editor writes it (#92)
+    const cube = {
+        _type: "DataSourceItemType",
+        Id: "ashttpItemId",
+        Title: "Analysis Services HTTP DSItem",
+        DataSourceId: "ashttpId",
+        HasTabularData: false,
+        Properties: { Catalog: "Adventure Works DW 2008R2", Cube: "Adventure Works" }
+    };
+
+    it("keeps the filter's data source item through load and save", () => {
+        const filter = { _type: "XmlaGlobalFilterType", Id: "calendar", Title: "Date.Calendar", SelectedItems: [], DataSourceItem: cube, DimensionUniqueName: "[Date]", HierarchyUniqueName: "[Date].[Calendar]" };
+
+        const saved: any = RdashDocument.loadFromJson(JSON.stringify({ Title: "Filters", FormatVersion: 9, GlobalFilters: [filter] })).toJson();
+
+        expect(saved.GlobalFilters[0].DataSourceItem).toMatchObject(cube);
+    });
+
+    it("writes the data source item a filter is created with", () => {
+        const item = new MicrosoftAnalysisServicesDataSourceItem("Adventure Works", new MicrosoftAnalysisServicesDataSource());
+        item.catalog = "Adventure Works DW 2008R2";
+        item.cube = "Adventure Works";
+
+        const json = wire(new DashboardXmlaFilter(item));
+
+        expect(json.DataSourceItem).toMatchObject({ Title: "Adventure Works", Properties: { Catalog: "Adventure Works DW 2008R2", Cube: "Adventure Works" } });
+        expect(json).not.toHaveProperty("SataSourceItem");
     });
 });
