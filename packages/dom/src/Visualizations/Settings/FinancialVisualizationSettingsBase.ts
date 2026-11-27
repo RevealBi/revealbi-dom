@@ -1,4 +1,5 @@
 import { JsonProperty } from "../../Core/Serialization/Decorators/JsonProperty";
+import { GridLinesMode } from "../Enums/GridLinesMode";
 import { ChartVisualizationSettingsBase } from "./ChartVisualizationSettingsBase";
 
 export class FinancialVisualizationSettingsBase extends ChartVisualizationSettingsBase {
@@ -19,4 +20,10 @@ export class FinancialVisualizationSettingsBase extends ChartVisualizationSettin
      */
     @JsonProperty("LeftAxisMaxValue")
     leftAxisMaxValue?: number;
+
+    /**
+     * Gets or sets which grid lines the chart displays. Default value is None.
+     */
+    @JsonProperty("GridLinesMode")
+    gridLinesMode: GridLinesMode = GridLinesMode.None;
 }

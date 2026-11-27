@@ -1,5 +1,5 @@
 import { JsonProperty } from "../../Core/Serialization/Decorators/JsonProperty";
-import { AxisTitleMode } from "../Enums";
+import { AxisTitleMode, GridLinesMode } from "../Enums";
 import { ChartVisualizationSettings } from "./ChartVisualizationSettings"
 
 export abstract class YAxisVisualizationSettings extends ChartVisualizationSettings
@@ -27,4 +27,10 @@ export abstract class YAxisVisualizationSettings extends ChartVisualizationSetti
      */
     @JsonProperty("AxisTitlesMode")
     axisTitleMode: AxisTitleMode = AxisTitleMode.None;
+
+    /**
+     * Gets or sets which grid lines the chart displays. Default value is None.
+     */
+    @JsonProperty("GridLinesMode")
+    gridLinesMode: GridLinesMode = GridLinesMode.None;
 }
