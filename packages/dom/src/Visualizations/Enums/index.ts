@@ -14,6 +14,7 @@ export { FixedLineType } from './FixedLineType';
 export { FontSize } from './FontSize';
 export { GaugeViewType } from './GaugeViewType';
 export { GridColumnPinPosition } from './GridColumnPinPosition';
+export { GridLinesMode } from './GridLinesMode';
 export { GridSummaryType } from './GridSummaryType';
 export { IndicatorDifferenceMode } from './IndicatorDifferenceMode';
 export { IndicatorVisualizationType } from './IndicatorVisualizationType';
