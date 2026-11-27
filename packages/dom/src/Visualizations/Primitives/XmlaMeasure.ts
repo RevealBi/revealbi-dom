@@ -1,7 +1,7 @@
 import { JsonProperty } from "../../Core/Serialization/Decorators/JsonProperty";
 import { SortingType } from "../Enums/SortingType";
 import { ConditionalFormatting } from "./ConditionalFormatting";
-import { FormattingBase } from "./FormattingBase";
+import { NumberFormatting } from "./NumberFormatting";
 
 export class XmlaMeasure {
 
@@ -29,8 +29,8 @@ export class XmlaMeasure {
     @JsonProperty("Expression")
     expression?: string;
 
-    @JsonProperty("Formatting")
-    formatting?: FormattingBase;
+    @JsonProperty("Formatting", { type: NumberFormatting })
+    formatting?: NumberFormatting;
 
     @JsonProperty("ConditionalFormatting", { type: ConditionalFormatting })
     conditionalFormatting?: ConditionalFormatting;
